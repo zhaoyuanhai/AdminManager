@@ -1,0 +1,10 @@
+﻿{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "./Scripts/",
+    "rootDir": "./",
+    "sourceMap": true,
+    "moduleResolution": "node"
+  }
+}
