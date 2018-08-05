@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<FileConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FescoFileServerConfiguration>
+    <ServerUrl>http://helofile.fesco.com.cn/index.jpg</ServerUrl>
+    <Channels>MedicalExamin,EntryInformation,EntryBackground,FundextPdf</Channels>
+  </FescoFileServerConfiguration>
+  <OSSFileConfigurations>
+  <FileConfigurations>
+  <OSSFileConfiguration>
+    <Endpoint>https://oss-cn-beijing.aliyuncs.com</Endpoint>
+    <AccessKeyId>aJNl6TNW5GFYLh1A</AccessKeyId>
+    <AccessKeySecret>SGLguAOXYMhG3uO19d8FeTJNuLuphr</AccessKeySecret>
+    <DefaultBucketName>hejin-product</DefaultBucketName>
+    <KeyPrefix>fesco/ffyw</KeyPrefix>
+    <Name>BYBHJ</Name>
+    <IsDefault>true</IsDefault> <!--只能存在一个为默认true-->
+  </OSSFileConfiguration>
+    <OSSFileConfiguration>
+      <Endpoint>https://oss-cn-beijing.aliyuncs.com</Endpoint>
+      <AccessKeyId>aJNl6TNW5GFYLh1A</AccessKeyId>
+      <AccessKeySecret>SGLguAOXYMhG3uO19d8FeTJNuLuphr</AccessKeySecret>
+      <DefaultBucketName>hejin-product</DefaultBucketName>
+      <KeyPrefix>fesco/ffyw</KeyPrefix>
+      <Name>TJ</Name>
+      <IsDefault>false</IsDefault>
+      <!--只能存在一个为默认true-->
+    </OSSFileConfiguration>
+    </FileConfigurations>
+    </OSSFileConfigurations>
+</FileConfiguration>

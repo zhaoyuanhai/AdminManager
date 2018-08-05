@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace AdminServices
 {
-    public class Class1
+    public interface IAddService<T> where T : class, new()
     {
+        void Add(T model);
+
+        void AddBatch(IEnumerable<T> models);
     }
 }

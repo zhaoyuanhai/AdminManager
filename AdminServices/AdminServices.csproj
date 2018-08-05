@@ -40,8 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IDeleteService.cs" />
+    <Compile Include="IModifyService.cs" />
+    <Compile Include="ISelectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IAddService.cs" />
+    <Compile Include="System\IAuthorityService.cs" />
+    <Compile Include="System\IGroupService.cs" />
+    <Compile Include="System\IMenuService.cs" />
+    <Compile Include="System\IOperatorLogService.cs" />
+    <Compile Include="System\IRoleService.cs" />
+    <Compile Include="System\IUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AdminDataEntity\AdminDataEntity.csproj">

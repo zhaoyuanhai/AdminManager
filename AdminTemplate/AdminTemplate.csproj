@@ -52,12 +52,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.6\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -118,15 +127,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -159,6 +159,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\Config\NewSytemSDKConfig\Logger.cs" />
+    <Compile Include="App_Data\Config\NewSytemSDKConfig\LoggerFactory.cs" />
+    <Compile Include="App_Data\Config\NewSytemSDKConfig\NewSytemSDKConfigInit.cs" />
+    <Compile Include="App_Data\Config\NewSytemSDKConfig\TokenProviderFactory.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -172,6 +176,13 @@
     <Compile Include="ViewExtends\ViewExtend.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Config\EMAILSERVERSDK.xml" />
+    <Content Include="App_Data\Config\FILESERVERSDK.xml" />
+    <Content Include="App_Data\Config\FSGlobalConfiguration.xml" />
+    <Content Include="App_Data\Config\IPANDDOMAINCOMPONENT.xml" />
+    <Content Include="App_Data\Config\MsgMobileSDK.xml" />
+    <Content Include="App_Data\Config\NewSystemSDK.xml" />
+    <Content Include="App_Data\Config\SsoConfig.xml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -209,7 +220,6 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +232,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\fonts\element-icons.woff" />
+    <Content Include="App_Data\Config\Log4Net.config" />
+    <Content Include="App_Data\Config\tasks.config" />
     <None Include="packages.config" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
@@ -235,9 +247,17 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdminEngine\AdminEngine.csproj">
+      <Project>{d6ec4828-ece1-46b2-923a-26f1ccee14f1}</Project>
+      <Name>AdminEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AdminModels\AdminModels.csproj">
       <Project>{b5fa9529-0adf-4987-bde5-1c0a6576d973}</Project>
       <Name>AdminModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdminServicesRealization\AdminServicesRealization.csproj">
+      <Project>{f4bb0698-ad82-44d2-8e14-faa8f96a3167}</Project>
+      <Name>AdminServicesRealization</Name>
     </ProjectReference>
     <ProjectReference Include="..\AdminServices\AdminServices.csproj">
       <Project>{4f64d792-5553-4483-9d2b-8eedab4c5530}</Project>

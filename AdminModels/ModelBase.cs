@@ -10,8 +10,8 @@ namespace AdminModels
     {
         public int Id { get; set; }
 
-        public DateTime _CreateDate { get; set; }
+        public DateTime _CreateDate { get; set; } = DateTime.Now;
 
-        public DateTime _UpdateDate { get; set; }
+        public DateTime? _UpdateDate { get; set; }
     }
 }

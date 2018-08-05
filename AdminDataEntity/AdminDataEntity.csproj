@@ -48,6 +48,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataEntities.cs" />
+    <Compile Include="Migrations\201808040949283_InitialCreate.cs" />
+    <Compile Include="Migrations\201808040949283_InitialCreate.Designer.cs">
+      <DependentUpon>201808040949283_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808041008060_UpdateMenu.cs" />
+    <Compile Include="Migrations\201808041008060_UpdateMenu.Designer.cs">
+      <DependentUpon>201808041008060_UpdateMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808041207143_UpdateMenu1.cs" />
+    <Compile Include="Migrations\201808041207143_UpdateMenu1.Designer.cs">
+      <DependentUpon>201808041207143_UpdateMenu1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808041630053_InitSystem.cs" />
+    <Compile Include="Migrations\201808041630053_InitSystem.Designer.cs">
+      <DependentUpon>201808041630053_InitSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808041648464_UpdateMenu2.cs" />
+    <Compile Include="Migrations\201808041648464_UpdateMenu2.Designer.cs">
+      <DependentUpon>201808041648464_UpdateMenu2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808050556013_InitUser.cs" />
+    <Compile Include="Migrations\201808050556013_InitUser.Designer.cs">
+      <DependentUpon>201808050556013_InitUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +84,26 @@
       <Project>{b5fa9529-0adf-4987-bde5-1c0a6576d973}</Project>
       <Name>AdminModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808040949283_InitialCreate.resx">
+      <DependentUpon>201808040949283_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808041008060_UpdateMenu.resx">
+      <DependentUpon>201808041008060_UpdateMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808041207143_UpdateMenu1.resx">
+      <DependentUpon>201808041207143_UpdateMenu1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808041630053_InitSystem.resx">
+      <DependentUpon>201808041630053_InitSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808041648464_UpdateMenu2.resx">
+      <DependentUpon>201808041648464_UpdateMenu2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808050556013_InitUser.resx">
+      <DependentUpon>201808050556013_InitUser.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

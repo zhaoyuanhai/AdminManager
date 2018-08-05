@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\T_Authority.cs" />
+    <Compile Include="Entities\T_Group.cs" />
     <Compile Include="Entities\T_Menu.cs" />
+    <Compile Include="Entities\T_OperatorLog.cs" />
+    <Compile Include="Entities\T_Role.cs" />
+    <Compile Include="Entities\T_User.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
