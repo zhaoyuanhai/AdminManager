@@ -1,0 +1,4 @@
+{
+  "name": "global",
+  "typings": "./index.d.ts"
+}

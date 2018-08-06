@@ -1,0 +1,3 @@
+﻿interface ResModel {
+    Success: boolean
+}

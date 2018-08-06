@@ -5,3 +5,22 @@
 #v-app {
     height: 100%;
 }
+
+[v-cloak] {
+    display: none;
+}
+
+/*框架样式*/
+.el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+}
+
+.el-aside {
+    color: #333;
+}
+
+.head-picture {
+    height: 100px;
+}

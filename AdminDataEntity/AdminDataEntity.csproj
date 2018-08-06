@@ -72,6 +72,14 @@
     <Compile Include="Migrations\201808050556013_InitUser.Designer.cs">
       <DependentUpon>201808050556013_InitUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808051543467_MenuAddIcon.cs" />
+    <Compile Include="Migrations\201808051543467_MenuAddIcon.Designer.cs">
+      <DependentUpon>201808051543467_MenuAddIcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808051623180_MenuAddOrder.cs" />
+    <Compile Include="Migrations\201808051623180_MenuAddOrder.Designer.cs">
+      <DependentUpon>201808051623180_MenuAddOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,6 +111,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808050556013_InitUser.resx">
       <DependentUpon>201808050556013_InitUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808051543467_MenuAddIcon.resx">
+      <DependentUpon>201808051543467_MenuAddIcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808051623180_MenuAddOrder.resx">
+      <DependentUpon>201808051623180_MenuAddOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

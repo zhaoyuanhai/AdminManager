@@ -26,7 +26,7 @@ namespace AdminTemplate.ViewExtends
             {
                 var vitruePath = $"/Views/{controller}/{action}.css";
                 if (File.Exists(server.MapPath("~" + vitruePath)))
-                    return new MvcHtmlString($"<script src=\"{vitruePath}\"></script>");
+                    return new MvcHtmlString($"<link href=\"{vitruePath}\" rel=\"stylesheet\" />");
             }
             else if (string.IsNullOrWhiteSpace(ext))
             {

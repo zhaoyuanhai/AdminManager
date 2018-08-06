@@ -22,6 +22,16 @@ namespace AdminModels.Entities
         public int? ParentId { get; set; }
 
         /// <summary>
+        /// 图标
+        /// </summary>
+        public string Icon { get; set; }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        public int Order { get; set; }
+
+        /// <summary>
         /// 外键
         /// </summary>
         [ForeignKey("ParentId")]

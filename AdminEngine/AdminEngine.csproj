@@ -49,6 +49,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -106,6 +107,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdminCommon\AdminCommon.csproj">
+      <Project>{fc5b0680-1c0d-4f82-82c4-c0514bb12358}</Project>
+      <Name>AdminCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AdminServicesRealization\AdminServicesRealization.csproj">
       <Project>{f4bb0698-ad82-44d2-8e14-faa8f96a3167}</Project>
       <Name>AdminServicesRealization</Name>

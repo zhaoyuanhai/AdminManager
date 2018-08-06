@@ -4,8 +4,12 @@
     var nsVue = window["Vue"];
     nsVue["default"] = window["Vue"];
 
+    var nsAxios = window["axios"];
+    nsAxios["default"] = window["axios"];
+
     var moduleDic = {
-        vue: nsVue
+        vue: nsVue,
+        axios: nsAxios
     };
 
     window["require"] = function (name) {

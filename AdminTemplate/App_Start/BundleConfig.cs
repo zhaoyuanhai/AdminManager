@@ -20,7 +20,7 @@ namespace AdminTemplate
 
             bundles.Add(new ScriptBundle("~/bundles/mainapp").Include(
                       "~/Scripts/Lib/vue.js",
-                      "~/Scripts/Lib/vue-route.js",
+                      "~/Scripts/Lib/vue-router.js",
                       "~/Scripts/Lib/vue-i18n.js",
                       "~/Scripts/Lib/axios.js",
                       "~/Scripts/Lib/elementui.js",

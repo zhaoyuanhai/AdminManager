@@ -1,0 +1,126 @@
+﻿@using AdminServices.System;
+@using AdminModels.Entities;
+
+@{
+    Layout = null;
+
+    var menuService = DependencyResolver.Current.GetService<IMenuService>();
+    var menus = menuService.Select().ToList();
+}
+
+@helper CreateMenu(T_Menu menu, List<T_Menu> menus)
+{//生成菜单
+    var childMenus = menus.Where(x => x.ParentId == menu.Id);
+    foreach (var itemMenu in childMenus.OrderBy(x => x.Order))
+    {
+        if (menus.Any(x => x.ParentId == itemMenu.Id))
+        {
+            <el-submenu index="@itemMenu.Id">
+                <template solt="title">
+                    @if (!string.IsNullOrWhiteSpace(itemMenu.Icon))
+                    {
+                        <i class="@itemMenu.Icon"></i>}
+                    @itemMenu.Title
+                </template>
+                @CreateMenu(itemMenu, menus)
+            </el-submenu>
+        }
+        else
+        {
+            <el-menu-item index="@itemMenu.Id">
+                @if (!string.IsNullOrWhiteSpace(itemMenu.Icon))
+                {<i class="@itemMenu.Icon"></i>}
+                @itemMenu.Title
+            </el-menu-item>
+        }
+
+    }
+    if (childMenus.Count() == 0)
+    {
+        <el-menu-item index="@menu.Id">
+            <i class="@menu.Icon"></i>
+            @menu.Title
+        </el-menu-item>
+    }
+}
+
+<el-menu :default-openeds="['1', '3']" :unique-opened="true">
+    @foreach (var menu in menus.Where(x => x.ParentId == null).OrderBy(x => x.Order))
+    {
+        <el-submenu index="@menu.Id">
+            <template slot="title">
+                @if (!string.IsNullOrWhiteSpace(menu.Icon))
+                {
+                    <i class="@menu.Icon"></i>
+                }
+                @menu.Title
+            </template>
+            @CreateMenu(menu, menus)
+        </el-submenu>
+    }
+    <el-submenu index="1">
+        <template slot="title">
+            <i class="el-icon-message"></i>导航一
+        </template>
+        <el-menu-item-group>
+            <template slot="title">
+                分组一
+            </template>
+            <el-menu-item index="1-1">选项1</el-menu-item>
+            <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+            <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="1-4">
+            <template slot="title">
+                选项4
+            </template>
+            <el-menu-item index="1-4-1">选项4-1</el-menu-item>
+        </el-submenu>
+    </el-submenu>
+    <el-submenu index="2">
+        <template slot="title">
+            <i class="el-icon-menu"></i>导航二
+        </template>
+        <el-menu-item-group>
+            <template slot="title">
+                分组一
+            </template>
+            <el-menu-item index="2-1">选项1</el-menu-item>
+            <el-menu-item index="2-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+            <el-menu-item index="2-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="2-4">
+            <template slot="title">
+                选项4
+            </template>
+            <el-menu-item index="2-4-1">选项4-1</el-menu-item>
+        </el-submenu>
+    </el-submenu>
+    <el-submenu index="3">
+        <template slot="title">
+            <i class="el-icon-setting"></i>导航三
+        </template>
+        <el-menu-item-group>
+            <template slot="title">
+                分组一
+            </template>
+            <el-menu-item index="31-1">选项1</el-menu-item>
+            <el-menu-item index="31-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+            <el-menu-item index="3-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="3-4">
+            <template slot="title">
+                选项4
+            </template>
+            <el-menu-item index="3-4-1">
+                <a href="http://www.baidu.com">选项4-1</a>
+            </el-menu-item>
+        </el-submenu>
+    </el-submenu>
+</el-menu>

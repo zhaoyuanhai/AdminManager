@@ -2,6 +2,7 @@
 using Autofac;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,6 +15,17 @@ namespace AdminEngine
     /// </summary>
     public class ServiceDependencyRegistrar : IDependencyRegistrar
     {
+        private string[] GetAssemblys
+        {
+            get
+            {
+                return new string[] {
+                    nameof(AdminServices),
+                    nameof(AdminServicesRealization),
+                    nameof(AdminCommon) };
+            }
+        }
+
         /// <summary>
         /// 注册服务和接口
         /// </summary>
@@ -24,10 +36,9 @@ namespace AdminEngine
         {
             var dir = System.IO.Path.GetDirectoryName(this.GetType().Assembly.CodeBase).Replace("file:\\", string.Empty);
 
-            var serviceAssembly = Assembly.LoadFrom($"{dir}/{nameof(AdminServices)}.dll");
-            var realizationAssembly = Assembly.LoadFrom($"{dir}/{nameof(AdminServicesRealization)}.dll");
+            var assemblys = GetAssemblys.Select(name => Assembly.LoadFrom($"{dir}/{name}.dll"));
 
-            builder.RegisterAssemblyTypes(serviceAssembly, realizationAssembly)
+            builder.RegisterAssemblyTypes(assemblys.ToArray())
                   .Where(w => w.Name.EndsWith("Service"))
                   .AsImplementedInterfaces().InstancePerRequest();
             //#region 服务层代码注册

@@ -13,6 +13,18 @@ namespace AdminServicesRealization.System
 {
     public class UserService : BaseService<T_User>, IUserService, ITable<T_User>
     {
-        DbSet<T_User> ITable<T_User>.Table => entities.Users;
+        public DbSet<T_User> Table => entities.Users;
+
+        public bool Login(string userName, string password)
+        {
+            var user = Table.FirstOrDefault(x => x.UserName == userName && x.Password == password);
+            if (user != null)
+            {
+                user.LoginCount++;
+                entities.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

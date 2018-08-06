@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\IValidateCodeService.cs" />
     <Compile Include="IDeleteService.cs" />
     <Compile Include="IModifyService.cs" />
     <Compile Include="ISelectService.cs" />

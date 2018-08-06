@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
+using AdminServices.Common;
+using AdminCommon;
 
 namespace AdminEngine
 {
@@ -65,6 +67,8 @@ namespace AdminEngine
             builder = new ContainerBuilder();
             var typeFinder = new WebAppTypeFinder();
             builder.RegisterInstance(this).As<IEngine>().SingleInstance();
+            //注册验证码服务
+            builder.RegisterType<ValidateCode>().As<IValidateCodeService>().SingleInstance();
             builder.RegisterType<WebAppTypeFinder>().As<ITypeFinder>().InstancePerRequest();
             builder.Update(container);
 
@@ -90,7 +94,7 @@ namespace AdminEngine
             //var config = GlobalConfiguration.Configuration;
             ////web api
             //config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            
+
             //mvc
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 

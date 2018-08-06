@@ -50,6 +50,7 @@
     <Compile Include="BaseService.cs" />
     <Compile Include="ITable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\MenuService.cs" />
     <Compile Include="System\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

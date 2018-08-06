@@ -5,32 +5,51 @@ using System.Web;
 using System.Web.Mvc;
 using AdminServices;
 using AdminServices.System;
+using AdminTemplate.Models;
+using AdminServices.Common;
+using System.Web.Security;
 
 namespace AdminTemplate.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         readonly IUserService userService;
+        readonly IValidateCodeService validateCode;
+        readonly string verCodeSeccionKey = "VerCode";
 
-        //public HomeController()
-        //{
-        //    this.userService = DependencyResolver.Current.GetService<IUserService>();
-        //}
-
-        public HomeController(IUserService userService)
+        public HomeController(IUserService userService, IValidateCodeService validateCode)
         {
             this.userService = userService;
+            this.validateCode = validateCode;
         }
 
-        public ActionResult Index()
+        #region 页面
+        public ActionResult Index() => View();
+
+        [AllowAnonymous]
+        public ActionResult Login() => View();
+        #endregion
+
+        [AllowAnonymous]
+        public ActionResult CodeImage()
         {
-            var users = this.userService.Select();
-            return View();
+            var code = validateCode.CreateValidateCode(4);
+            Session[verCodeSeccionKey] = code;
+            var stream = validateCode.CreateValidateGraphic(code);
+            return File(stream, "image/png");
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Login(LoginModel model)
         {
-            return View();
+            var result = userService.Login(model.UserName, model.Password);
+            if (result)
+            {
+                FormsAuthentication.SetAuthCookie(model.UserName, true, "/");
+                return JsonSuccess();
+            }
+            return JsonError("登陆失败，用户名或者密码错误");
         }
 
         public ActionResult Contact()
