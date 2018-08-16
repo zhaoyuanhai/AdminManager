@@ -1,12 +1,6 @@
 ﻿import Vue from 'vue';
 import Axios, { AxiosResponse } from 'axios';
 
-interface ResModel {
-    Success: boolean,
-    Code: string,
-    ErrorMsg: Array<{ Message: string, Description: string }>
-}
-
 new Vue({
     el: "#v-app",
     data: {
@@ -26,16 +20,22 @@ new Vue({
             e.target.src = e.target.getAttribute("data-src") + "?r=" + Math.random();
         },
         loginSubmit: function () {
-            this.$refs.form.validate((valid) => {
+            this.$refs.form.validate(async (valid) => {
                 if (valid) {
-                    Axios.post('/Home/Login', this.form).then(function (result: AxiosResponse<ResModel>) {
+                    Axios.post('/Home/Login', this.form).then(function (result: AxiosResponse<ResponseModel>) {
                         if (result.data.Success) {
                             location.href = "/";
                         } else {
                             alert(result.data.ErrorMsg);
                         }
                     });
-                    alert('submit!');
+
+                    //var result: AxiosResponse<ResponseModel> = await Axios.post('/Home/Login', this.form);
+                    //if (result.data.Success) {
+                    //    location.href = "/";
+                    //} else {
+                    //    alert(result.data.ErrorMsg);
+                    //}
                 } else {
                     console.log('error submit!!');
                     return false;

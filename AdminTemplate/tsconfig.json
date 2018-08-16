@@ -1,10 +1,13 @@
 ﻿{
   "compileOnSave": true,
   "compilerOptions": {
+    "lib": [ "es2015", "es5", "dom" ],
     "module": "commonjs",
     "outDir": "./Scripts/",
     "rootDir": "./",
     "sourceMap": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "types": [ "ScriptsTypes/**/*.d.ts" ],
+    "noImplicitAny": false
   }
 }

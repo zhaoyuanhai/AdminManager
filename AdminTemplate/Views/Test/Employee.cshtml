@@ -1,0 +1,38 @@
+﻿@using AdminTemplate.Models;
+@model Employee
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Emplayee</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>@Html.LabelFor(x => x.Name)</td>
+            <td>@Html.EditorFor(x => x.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(x => x.Gender)</td>
+            <td>@Html.EditorFor(x => x.Gender)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(x => x.Education)</td>
+            <td>@Html.EditorFor(x => x.Education)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(x => x.Departments)</td>
+            <td>@Html.EditorFor(x => x.Departments)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(x => x.Skills)</td>
+            <td>@Html.EditorFor(x => x.Skills)</td>
+        </tr>
+    </table>
+</body>
+</html>

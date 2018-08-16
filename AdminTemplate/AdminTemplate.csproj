@@ -170,13 +170,30 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Message\ErrorMessage.cs" />
     <Compile Include="Message\JsonMessage.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Triangle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\DefaultListProvider.cs" />
+    <Compile Include="Provider\IListProvider.cs" />
+    <Compile Include="Provider\ListControlExtensions.cs" />
+    <Compile Include="Provider\ListItem.cs" />
+    <Compile Include="Provider\ListProviders.cs" />
+    <Compile Include="TypeConvert\PointTypeConverter.cs" />
+    <Compile Include="UIAttribute\CheckBoxListAttribute.cs" />
+    <Compile Include="UIAttribute\DropdownListAttribute.cs" />
+    <Compile Include="UIAttribute\ListAttribute.cs" />
+    <Compile Include="UIAttribute\ListBoxAttribute.cs" />
+    <Compile Include="UIAttribute\MyCustomMetadataAware.cs" />
+    <Compile Include="UIAttribute\RadioButtonListAttribute.cs" />
     <Compile Include="ViewExtends\ViewExtend.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,7 +226,9 @@
     <Content Include="Scripts\Lib\vue-router.js" />
     <Content Include="Scripts\Lib\vue.js" />
     <Content Include="Views\Home\Index.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -242,12 +261,22 @@
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Home\Login.less" />
-    <Content Include="Scripts\Types\package.json" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Test\Point.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PointInfo.cshtml" />
+    <Content Include="Views\Test\Employee.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropdownList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ListBox.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RadioButtonList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CheckBoxList.cshtml" />
+    <Content Include="Views\System\Abc.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\Types\Index.d.ts" />
-    <TypeScriptCompile Include="Scripts\Types\ResModel.d.ts" />
+    <TypeScriptCompile Include="ScriptsTypes\ResModel.d.ts" />
+    <Content Include="Scripts\Lib\app-router.js" />
+    <TypeScriptCompile Include="ScriptsTypes\router.d.ts" />
     <TypeScriptCompile Include="Views\Default\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Login.ts" />

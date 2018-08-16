@@ -1,6 +1,6 @@
 ﻿import Vue from 'vue';
 
 new Vue({
-    el: "#v-app"
-});
-
+    //router: router
+    router: window.router
+}).$mount("#v-app");

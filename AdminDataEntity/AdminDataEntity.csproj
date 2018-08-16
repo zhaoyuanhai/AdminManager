@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201808051623180_MenuAddOrder.Designer.cs">
       <DependentUpon>201808051623180_MenuAddOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808160903280_empty.cs" />
+    <Compile Include="Migrations\201808160903280_empty.Designer.cs">
+      <DependentUpon>201808160903280_empty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -117,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808051623180_MenuAddOrder.resx">
       <DependentUpon>201808051623180_MenuAddOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808160903280_empty.resx">
+      <DependentUpon>201808160903280_empty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

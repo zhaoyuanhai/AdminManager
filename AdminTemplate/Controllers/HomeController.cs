@@ -52,9 +52,9 @@ namespace AdminTemplate.Controllers
             return JsonError("登陆失败，用户名或者密码错误");
         }
 
-        public ActionResult Contact()
+        public ActionResult Page(string path)
         {
-            return View();
+            return View("~/Views/" + path + ".cshtml");
         }
     }
 }

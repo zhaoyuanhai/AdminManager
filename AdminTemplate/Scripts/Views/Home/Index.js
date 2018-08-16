@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var vue_1 = require("vue");
 new vue_1["default"]({
-    el: "#v-app"
-});
+    //router: router
+    router: window.router
+}).$mount("#v-app");
 //# sourceMappingURL=Index.js.map

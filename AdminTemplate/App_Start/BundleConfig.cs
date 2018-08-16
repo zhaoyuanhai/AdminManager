@@ -24,7 +24,8 @@ namespace AdminTemplate
                       "~/Scripts/Lib/vue-i18n.js",
                       "~/Scripts/Lib/axios.js",
                       "~/Scripts/Lib/elementui.js",
-                      "~/Scripts/Lib/app.js"));
+                      "~/Scripts/Lib/app.js",
+                      "~/Scripts/Lib/app-router.js"));
         }
     }
 }
