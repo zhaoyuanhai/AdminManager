@@ -48,43 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataEntities.cs" />
-    <Compile Include="Migrations\201808040949283_InitialCreate.cs" />
-    <Compile Include="Migrations\201808040949283_InitialCreate.Designer.cs">
-      <DependentUpon>201808040949283_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201808191542501_Init.cs" />
+    <Compile Include="Migrations\201808191542501_Init.Designer.cs">
+      <DependentUpon>201808191542501_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808041008060_UpdateMenu.cs" />
-    <Compile Include="Migrations\201808041008060_UpdateMenu.Designer.cs">
-      <DependentUpon>201808041008060_UpdateMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808041207143_UpdateMenu1.cs" />
-    <Compile Include="Migrations\201808041207143_UpdateMenu1.Designer.cs">
-      <DependentUpon>201808041207143_UpdateMenu1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808041630053_InitSystem.cs" />
-    <Compile Include="Migrations\201808041630053_InitSystem.Designer.cs">
-      <DependentUpon>201808041630053_InitSystem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808041648464_UpdateMenu2.cs" />
-    <Compile Include="Migrations\201808041648464_UpdateMenu2.Designer.cs">
-      <DependentUpon>201808041648464_UpdateMenu2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808050556013_InitUser.cs" />
-    <Compile Include="Migrations\201808050556013_InitUser.Designer.cs">
-      <DependentUpon>201808050556013_InitUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808051543467_MenuAddIcon.cs" />
-    <Compile Include="Migrations\201808051543467_MenuAddIcon.Designer.cs">
-      <DependentUpon>201808051543467_MenuAddIcon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808051623180_MenuAddOrder.cs" />
-    <Compile Include="Migrations\201808051623180_MenuAddOrder.Designer.cs">
-      <DependentUpon>201808051623180_MenuAddOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808160903280_empty.cs" />
-    <Compile Include="Migrations\201808160903280_empty.Designer.cs">
-      <DependentUpon>201808160903280_empty.cs</DependentUpon>
+    <Compile Include="Migrations\201808191551000_Init-Update.cs" />
+    <Compile Include="Migrations\201808191551000_Init-Update.Designer.cs">
+      <DependentUpon>201808191551000_Init-Update.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ParameterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,32 +71,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808040949283_InitialCreate.resx">
-      <DependentUpon>201808040949283_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808191542501_Init.resx">
+      <DependentUpon>201808191542501_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808041008060_UpdateMenu.resx">
-      <DependentUpon>201808041008060_UpdateMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808041207143_UpdateMenu1.resx">
-      <DependentUpon>201808041207143_UpdateMenu1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808041630053_InitSystem.resx">
-      <DependentUpon>201808041630053_InitSystem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808041648464_UpdateMenu2.resx">
-      <DependentUpon>201808041648464_UpdateMenu2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808050556013_InitUser.resx">
-      <DependentUpon>201808050556013_InitUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808051543467_MenuAddIcon.resx">
-      <DependentUpon>201808051543467_MenuAddIcon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808051623180_MenuAddOrder.resx">
-      <DependentUpon>201808051623180_MenuAddOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808160903280_empty.resx">
-      <DependentUpon>201808160903280_empty.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808191551000_Init-Update.resx">
+      <DependentUpon>201808191551000_Init-Update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

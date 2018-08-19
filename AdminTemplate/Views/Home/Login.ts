@@ -4,6 +4,7 @@ import Axios, { AxiosResponse } from 'axios';
 new Vue({
     el: "#v-app",
     data: {
+        isLogin: false,
         form: {
             userName: "",
             password: "",
@@ -22,20 +23,14 @@ new Vue({
         loginSubmit: function () {
             this.$refs.form.validate(async (valid) => {
                 if (valid) {
-                    Axios.post('/Home/Login', this.form).then(function (result: AxiosResponse<ResponseModel>) {
-                        if (result.data.Success) {
-                            location.href = "/";
-                        } else {
-                            alert(result.data.ErrorMsg);
-                        }
-                    });
-
-                    //var result: AxiosResponse<ResponseModel> = await Axios.post('/Home/Login', this.form);
-                    //if (result.data.Success) {
-                    //    location.href = "/";
-                    //} else {
-                    //    alert(result.data.ErrorMsg);
-                    //}
+                    this.$data.isLogin = true;
+                    var result = await Axios.post<ResponseModel>('/Home/Login', this.form);
+                    if (result.data.Success) {
+                        location.href = "/";
+                    } else {
+                        alert(result.data.ErrorMsg);
+                    }
+                    this.$data.isLogin = false;
                 } else {
                     console.log('error submit!!');
                     return false;

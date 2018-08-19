@@ -15,24 +15,12 @@ namespace AdminModels.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// 父Id
-        /// </summary>
-        public int? ParentId { get; set; }
-
-        /// <summary>
-        /// 父对象
-        /// </summary>
-        [ForeignKey("ParentId")]
-        public T_Authority Authority { get; set; }
-
-        /// <summary>
-        /// 用户
-        /// </summary>
-        public virtual ICollection<T_User> Users { get; set; }
-
-        /// <summary>
         /// 角色列表
         /// </summary>
+        [ForeignKey("RoleId")]
         public virtual ICollection<T_Role> Roles { get; set; }
+
+        [ForeignKey("MenuId")]
+        public virtual ICollection<T_Menu> Menus { get; set; }
     }
 }

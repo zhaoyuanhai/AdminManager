@@ -7,13 +7,13 @@ namespace AdminDataEntity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitUser : IMigrationMetadata
+    public sealed partial class InitUpdate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitUpdate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808050556013_InitUser"; }
+            get { return "201808191551000_Init-Update"; }
         }
         
         string IMigrationMetadata.Source

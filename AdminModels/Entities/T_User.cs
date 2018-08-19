@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,21 +45,13 @@ namespace AdminModels.Entities
         /// <summary>
         /// 角色列表
         /// </summary>
+        [ForeignKey("RoleId")]
         public virtual ICollection<T_Role> Roles { get; set; }
-
-        /// <summary>
-        /// 权限列表
-        /// </summary>
-        public virtual ICollection<T_Authority> Authorities { get; set; }
 
         /// <summary>
         /// 组集合
         /// </summary>
+        [ForeignKey("GroupId")]
         public virtual ICollection<T_Group> Groups { get; set; }
-
-        /// <summary>
-        /// 菜单列表
-        /// </summary>
-        public virtual ICollection<T_Menu> Menus { get; set; }
     }
 }

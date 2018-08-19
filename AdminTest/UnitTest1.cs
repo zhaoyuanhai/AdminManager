@@ -15,5 +15,14 @@ namespace AdminTest
             DataEntities entities = new DataEntities();
             var menus = entities.Menus.ToList();
         }
+
+        [TestMethod]
+        public void TestMethod2()
+        {
+            DataEntities entities = new DataEntities();
+            var p = new { userId = 1 };
+            
+            var data = entities.ExecProcdure<int>("P_GetMenuByUserId", p);
+        }
     }
 }

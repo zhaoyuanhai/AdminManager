@@ -22,12 +22,6 @@ namespace AdminModels.Entities
         public int? ParentId { get; set; }
 
         /// <summary>
-        /// 外键
-        /// </summary>
-        [ForeignKey("ParentId")]
-        public T_Role Role { get; set; }
-
-        /// <summary>
         /// 描述
         /// </summary>
         public string Description { get; set; }
@@ -35,11 +29,16 @@ namespace AdminModels.Entities
         /// <summary>
         /// 用户
         /// </summary>
+        [ForeignKey("UserId")]
         public virtual ICollection<T_User> Users { get; set; }
 
         /// <summary>
-        /// 权限
+        /// 菜单
         /// </summary>
+        [ForeignKey("GroupId")]
+        public virtual ICollection<T_Group> Groups { get; set; }
+
+        [ForeignKey("AuthorityId")]
         public virtual ICollection<T_Authority> Authorities { get; set; }
     }
 }

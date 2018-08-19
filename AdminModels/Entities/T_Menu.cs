@@ -42,9 +42,7 @@ namespace AdminModels.Entities
         /// </summary>
         public string Url { get; set; }
 
-        /// <summary>
-        /// 用户列表
-        /// </summary>
-        public ICollection<T_User> Users { get; set; }
+        [ForeignKey("AuthorityId")]
+        public ICollection<T_Authority> Authorities { get; set; }
     }
 }

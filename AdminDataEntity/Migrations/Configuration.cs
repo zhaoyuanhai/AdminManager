@@ -16,64 +16,72 @@ namespace AdminDataEntity.Migrations
 
         protected override void Seed(AdminDataEntity.DataEntities context)
         {
-            context.Users.AddOrUpdate(new T_User()
+            //添加初始用户
+            if (!context.Users.Any(x => x.UserName == "root"))
             {
-                UserName = "root",
-                Password = "123456",
-                RealName = "超级管理员"
-            });
+                context.Users.Add(new T_User()
+                {
+                    UserName = "root",
+                    Password = "123456",
+                    RealName = "超级管理员"
+                });
+            }
 
-            var systemMenu = new T_Menu()
+            //创建初始菜单
+            if (!context.Menus.Any(x => x.Title == "系统设置"))
             {
-                Title = "系统设置",
-                Icon = "el-icon-setting",
-                Url = ""
-            };
-            context.SaveChanges();
-
-            context.Menus.AddOrUpdate(new T_Menu()
-            {
-                ParentId = systemMenu.Id,
-                ParentMenu = systemMenu,
-                Title = "菜单管理",
-                Url = "/System/MenuManager"
-            },
-            new T_Menu()
-            {
-                ParentId = systemMenu.Id,
-                ParentMenu = systemMenu,
-                Title = "用户管理",
-                Url = "/System/UserManager"
-            },
-            new T_Menu()
-            {
-                ParentId = systemMenu.Id,
-                ParentMenu = systemMenu,
-                Title = "权限管理",
-                Url = "/System/AuthorityManager"
-            },
-            new T_Menu()
-            {
-                ParentId = systemMenu.Id,
-                ParentMenu = systemMenu,
-                Title = "角色管理",
-                Url = "/System/RoleManager"
-            },
-            new T_Menu()
-            {
-                ParentId = systemMenu.Id,
-                ParentMenu = systemMenu,
-                Title = "用户组管理",
-                Url = "/System/UserGroupManager"
-            },
-            new T_Menu()
-            {
-                ParentId = systemMenu.Id,
-                ParentMenu = systemMenu,
-                Title = "操作日志",
-                Url = "/System/OperationLog"
-            });
-            context.SaveChanges();
+                var systemMenu = new T_Menu()
+                {
+                    Title = "系统设置",
+                    Icon = "el-icon-setting",
+                    Url = ""
+                };
+                context.SaveChanges();
+                context.Menus.AddOrUpdate(
+                    new T_Menu()
+                    {
+                        ParentId = systemMenu.Id,
+                        ParentMenu = systemMenu,
+                        Title = "菜单管理",
+                        Url = "/System/MenuManager"
+                    },
+                    new T_Menu()
+                    {
+                        ParentId = systemMenu.Id,
+                        ParentMenu = systemMenu,
+                        Title = "用户管理",
+                        Url = "/System/UserManager"
+                    },
+                    new T_Menu()
+                    {
+                        ParentId = systemMenu.Id,
+                        ParentMenu = systemMenu,
+                        Title = "权限管理",
+                        Url = "/System/AuthorityManager"
+                    },
+                    new T_Menu()
+                    {
+                        ParentId = systemMenu.Id,
+                        ParentMenu = systemMenu,
+                        Title = "角色管理",
+                        Url = "/System/RoleManager"
+                    },
+                    new T_Menu()
+                    {
+                        ParentId = systemMenu.Id,
+                        ParentMenu = systemMenu,
+                        Title = "用户组管理",
+                        Url = "/System/UserGroupManager"
+                    },
+                    new T_Menu()
+                    {
+                        ParentId = systemMenu.Id,
+                        ParentMenu = systemMenu,
+                        Title = "操作日志",
+                        Url = "/System/OperationLog"
+                    });
+                context.SaveChanges();
+            }
 
             //  This method will be called after migrating to the latest version.
 

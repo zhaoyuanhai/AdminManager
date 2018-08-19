@@ -181,6 +181,7 @@
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Triangle.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\DefaultListProvider.cs" />
     <Compile Include="Provider\IListProvider.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="UIAttribute\MyCustomMetadataAware.cs" />
     <Compile Include="UIAttribute\RadioButtonListAttribute.cs" />
     <Compile Include="ViewExtends\ViewExtend.cs" />
+    <Compile Include="WebValidateUserExtend.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Config\EMAILSERVERSDK.xml" />

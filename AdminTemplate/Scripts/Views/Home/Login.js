@@ -40,6 +40,7 @@ var axios_1 = require("axios");
 new vue_1["default"]({
     el: "#v-app",
     data: {
+        isLogin: false,
         form: {
             userName: "",
             password: "",
@@ -58,28 +59,28 @@ new vue_1["default"]({
         loginSubmit: function () {
             var _this = this;
             this.$refs.form.validate(function (valid) { return __awaiter(_this, void 0, void 0, function () {
+                var result;
                 return __generator(this, function (_a) {
-                    if (valid) {
-                        axios_1["default"].post('/Home/Login', this.form).then(function (result) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!valid) return [3 /*break*/, 2];
+                            this.$data.isLogin = true;
+                            return [4 /*yield*/, axios_1["default"].post('/Home/Login', this.form)];
+                        case 1:
+                            result = _a.sent();
                             if (result.data.Success) {
                                 location.href = "/";
                             }
                             else {
                                 alert(result.data.ErrorMsg);
                             }
-                        });
-                        //var result: AxiosResponse<ResponseModel> = await Axios.post('/Home/Login', this.form);
-                        //if (result.data.Success) {
-                        //    location.href = "/";
-                        //} else {
-                        //    alert(result.data.ErrorMsg);
-                        //}
+                            this.$data.isLogin = false;
+                            return [3 /*break*/, 3];
+                        case 2:
+                            console.log('error submit!!');
+                            return [2 /*return*/, false];
+                        case 3: return [2 /*return*/];
                     }
-                    else {
-                        console.log('error submit!!');
-                        return [2 /*return*/, false];
-                    }
-                    return [2 /*return*/];
                 });
             }); });
         }

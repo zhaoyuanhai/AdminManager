@@ -13,6 +13,9 @@ namespace AdminServicesRealization.System
     {
         public DbSet<T_Menu> Table => entities.Menus;
 
-
+        public IEnumerable<T_Menu> GetMenusByUserId(int userId)
+        {
+            return entities.ExecProcdure<T_Menu>("P_GetMenuByUserId", new { userId });
+        }
     }
 }

@@ -35,16 +35,13 @@ namespace AdminModels.Entities
         /// <summary>
         /// 所属用户
         /// </summary>
+        [ForeignKey("UserId")]
         public ICollection<T_User> Users { get; set; }
 
         /// <summary>
         /// 所有角色
         /// </summary>
+        [ForeignKey("RoleId")]
         public ICollection<T_Role> Roles { get; set; }
-
-        /// <summary>
-        /// 所有权限
-        /// </summary>
-        public ICollection<T_Authority> Authorities { get; set; }
     }
 }
