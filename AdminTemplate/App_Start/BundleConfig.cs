@@ -19,13 +19,12 @@ namespace AdminTemplate
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/mainapp").Include(
+                      "~/Scripts/Lib/jquery-1.10.2.js",
                       "~/Scripts/Lib/vue.js",
-                      "~/Scripts/Lib/vue-router.js",
                       "~/Scripts/Lib/vue-i18n.js",
                       "~/Scripts/Lib/axios.js",
                       "~/Scripts/Lib/elementui.js",
-                      "~/Scripts/Lib/app.js",
-                      "~/Scripts/Lib/app-router.js"));
+                      "~/Scripts/Lib/app.js"));
         }
     }
 }

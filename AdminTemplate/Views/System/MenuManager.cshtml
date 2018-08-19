@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "MenuManager";
+}
+
+<el-card class="box-card">
+    <div slot="header" class="clearfix">
+        <span>菜单管理</span>
+        <el-button style="float: right; padding: 3px 0" type="text" @@click="createMenu">添加根菜单</el-button>
+    </div>
+    <div class="text item">
+        <el-tree :data="data6"
+                 node-key="id"
+                 default-expand-all
+                 @@node-drag-start="handleDragStart"
+                 @@node-drag-enter="handleDragEnter"
+                 @@node-drag-leave="handleDragLeave"
+                 @@node-drag-over="handleDragOver"
+                 @@node-drag-end="handleDragEnd"
+                 @@node-drop="handleDrop"
+                 draggable
+                 :allow-drop="allowDrop"
+                 :allow-drag="allowDrag">
+        </el-tree>
+    </div>
+</el-card>
+
+<el-dialog title="添加菜单"
+           :visible.sync="dialogVisible"
+           width="500px"
+           :before-close="handleClose">
+    <div>
+        <el-form ref="menuForm" label-width="80px">
+            <el-form-item label="菜单名称">
+                <el-input v-model="menuForm.name"></el-input>
+            </el-form-item>
+            <el-form-item label="菜单图表">
+                <el-input v-model="menuForm.icon"></el-input>
+            </el-form-item>
+            <el-form-item label="父菜单">
+                <el-select v-model="menuForm.parentId" placeholder="请选择父菜单">
+                    <el-option label="菜单一" value="1"></el-option>
+                    <el-option label="菜单二" value="2"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="连接地址">
+                <el-input v-model="menuForm.url" placeholder="请输入连接地址"></el-input>
+            </el-form-item>
+            <el-form-item label="排序">
+                <el-input type="number" v-model="menuForm.order"></el-input>
+            </el-form-item>
+        </el-form>
+    </div>
+    <span slot="footer" class="dialog-footer">
+        <el-button @@click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @@click="dialogVisible = false">确 定</el-button>
+    </span>
+</el-dialog>

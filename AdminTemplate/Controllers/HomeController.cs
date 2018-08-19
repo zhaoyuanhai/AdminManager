@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AdminServices;
+﻿using AdminServices.Common;
 using AdminServices.System;
 using AdminTemplate.Models;
-using AdminServices.Common;
+using System.Web.Mvc;
 using System.Web.Security;
 
 namespace AdminTemplate.Controllers
 {
     public class HomeController : BaseController
     {
-        readonly IUserService userService;
-        readonly IValidateCodeService validateCode;
-        readonly string verCodeSeccionKey = "VerCode";
+        private readonly IUserService userService;
+        private readonly IValidateCodeService validateCode;
+        private readonly string verCodeSeccionKey = "VerCode";
 
         public HomeController(IUserService userService, IValidateCodeService validateCode)
         {
@@ -24,12 +19,26 @@ namespace AdminTemplate.Controllers
         }
 
         #region 页面
+
+        /// <summary>
+        /// 首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index() => View();
 
+        /// <summary>
+        /// 登录页
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Login() => View();
-        #endregion
 
+        #endregion 页面
+
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult CodeImage()
         {
@@ -39,6 +48,11 @@ namespace AdminTemplate.Controllers
             return File(stream, "image/png");
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(LoginModel model)
@@ -52,6 +66,11 @@ namespace AdminTemplate.Controllers
             return JsonError("登陆失败，用户名或者密码错误");
         }
 
+        /// <summary>
+        /// 直接返回页面视图
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public ActionResult Page(string path)
         {
             return View("~/Views/" + path + ".cshtml");

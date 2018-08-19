@@ -1,6 +1,8 @@
-﻿import Vue from 'vue';
+﻿//import Vue, { ComponentOptions } from 'vue';
+//import * as Jquery from 'jquery';
+//import { ExtendedVue } from 'vue/types/vue';
 
-new Vue({
-    //router: router
-    router: window.router
-}).$mount("#v-app");
+
+VueInit({
+    data: {}
+});

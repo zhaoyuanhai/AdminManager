@@ -168,8 +168,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,6 +221,7 @@
     <Content Include="Scripts\Lib\app.js" />
     <Content Include="Scripts\Lib\axios.js" />
     <Content Include="Scripts\Lib\elementui.js" />
+    <Content Include="Scripts\Lib\jquery-1.10.2.js" />
     <Content Include="Scripts\Lib\menu.js" />
     <Content Include="Scripts\Lib\vue-i18n.js" />
     <Content Include="Scripts\Lib\vue-router.js" />
@@ -272,14 +273,21 @@
     <Content Include="Views\Shared\EditorTemplates\RadioButtonList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxList.cshtml" />
     <Content Include="Views\System\Abc.cshtml" />
+    <Content Include="Views\System\MenuManager.cshtml" />
+    <Content Include="Views\System\UserManager.cshtml" />
+    <Content Include="Views\System\AuthorityManager.cshtml" />
+    <Content Include="Views\System\RoleManager.cshtml" />
+    <Content Include="Views\System\UserGroupManager.cshtml" />
+    <Content Include="Views\System\OperationLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ScriptsTypes\NavMenu.d.ts" />
     <TypeScriptCompile Include="ScriptsTypes\ResModel.d.ts" />
-    <Content Include="Scripts\Lib\app-router.js" />
-    <TypeScriptCompile Include="ScriptsTypes\router.d.ts" />
+    <TypeScriptCompile Include="ScriptsTypes\Window.d.ts" />
     <TypeScriptCompile Include="Views\Default\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Login.ts" />
+    <TypeScriptCompile Include="Views\System\MenuManager.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

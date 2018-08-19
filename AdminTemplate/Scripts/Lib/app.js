@@ -16,4 +16,13 @@
         return moduleDic[name];
     }
 
+    var vueOption = {};
+    //初始化vue的方法
+    window.VueInit = function (_option) {
+        vueOption = _option;
+    }
+
+    window.GetVueOption = function () {
+        return vueOption;
+    }
 })(window);

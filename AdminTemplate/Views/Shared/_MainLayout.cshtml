@@ -10,6 +10,20 @@
 @section scripts{
     @RenderSection("scripts", required: false)
     @Html.UsePageJs()
+    <script>
+        (function () {
+            var vueOption = $.extend(true, {
+                el: "#v-app",
+                methods: {
+                    _menuClick: function (url, id) {
+                        location.href = url;
+                    }
+                }
+            }, GetVueOption());
+
+            new Vue(vueOption);
+        })();
+    </script>
 }
 
 <el-container style="height: 100%; border: 1px solid #eee">

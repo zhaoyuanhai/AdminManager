@@ -16,6 +16,7 @@ namespace AdminTemplate.Controllers
 
         }
 
+        #region Json对象
         protected override JsonResult Json(object data, string contentType, Encoding contentEncoding)
         {
             return base.Json(data, contentType, contentEncoding);
@@ -60,5 +61,6 @@ namespace AdminTemplate.Controllers
                 Errors = errors
             });
         }
+        #endregion
     }
 }

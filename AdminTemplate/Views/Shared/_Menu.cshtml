@@ -27,7 +27,7 @@
         }
         else
         {
-            <el-menu-item index="@itemMenu.Id">
+            <el-menu-item index="@itemMenu.Id" @@click="_menuClick('@itemMenu.Url','@itemMenu.Id')">
                 @if (!string.IsNullOrWhiteSpace(itemMenu.Icon))
                 {<i class="@itemMenu.Icon"></i>}
                 @itemMenu.Title
@@ -37,14 +37,14 @@
     }
     if (childMenus.Count() == 0)
     {
-        <el-menu-item index="@menu.Id">
+        <el-menu-item index="@menu.Id" @@click="_menuClick('@menu.Url','@menu.Id')">
             <i class="@menu.Icon"></i>
             @menu.Title
         </el-menu-item>
     }
 }
 
-<el-menu :default-openeds="['1']" :router="true" :unique-opened="true">
+<el-menu :default-openeds="['1']" :router="false" :unique-opened="true">
     @foreach (var menu in menus.Where(x => x.ParentId == null).OrderBy(x => x.Order))
     {
         <el-submenu index="@menu.Id">
@@ -63,10 +63,10 @@
             <i class=""></i>
             测试的
         </template>
-        <el-menu-item index="/foo">
-            Go to Foo
+        <el-menu-item index="/System/Abc" @@click="_menuClick('/System/Abc')">
+            Go to /System/Abc
         </el-menu-item>
-        <el-menu-item index="/bar">
+        <el-menu-item index="/bar" @@click="_menuClick('ddd')">
             Go to Bar
         </el-menu-item>
     </el-submenu>
