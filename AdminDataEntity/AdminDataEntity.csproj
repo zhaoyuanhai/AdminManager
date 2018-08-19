@@ -56,6 +56,10 @@
     <Compile Include="Migrations\201808191551000_Init-Update.Designer.cs">
       <DependentUpon>201808191551000_Init-Update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808191652459_Addconstraint.cs" />
+    <Compile Include="Migrations\201808191652459_Addconstraint.Designer.cs">
+      <DependentUpon>201808191652459_Addconstraint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ParameterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808191551000_Init-Update.resx">
       <DependentUpon>201808191551000_Init-Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808191652459_Addconstraint.resx">
+      <DependentUpon>201808191652459_Addconstraint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

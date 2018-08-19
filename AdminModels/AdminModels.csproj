@@ -46,6 +46,7 @@
     <Compile Include="Entities\T_Menu.cs" />
     <Compile Include="Entities\T_OperatorLog.cs" />
     <Compile Include="Entities\T_Role.cs" />
+    <Compile Include="Entities\T_SystemConfig.cs" />
     <Compile Include="Entities\T_User.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

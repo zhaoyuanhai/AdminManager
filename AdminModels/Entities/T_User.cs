@@ -10,31 +10,45 @@ namespace AdminModels.Entities
 {
     public class T_User : ModelBase
     {
+        public T_User()
+        {
+            this.Roles = new List<T_Role>();
+            this.Groups = new List<T_Group>();
+        }
+
         /// <summary>
         /// 用户名
         /// </summary>
         [Required]
+        [MaxLength(20)]
         public string UserName { get; set; }
 
         /// <summary>
         /// 密码
         /// </summary>
+        [MinLength(6)]
+        [MaxLength(20)]
         [Required]
         public string Password { get; set; }
 
         /// <summary>
         /// 姓名
         /// </summary>
+        [MaxLength(20)]
         public string RealName { get; set; }
 
         /// <summary>
         /// 手机号
         /// </summary>
+        [MaxLength(11)]
+        [MinLength(11)]
         public string Mobile { get; set; }
 
         /// <summary>
         /// 电子邮箱
         /// </summary>
+        [MaxLength(50)]
+        [MinLength(5)]
         public string Email { get; set; }
 
         /// <summary>

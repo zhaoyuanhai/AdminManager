@@ -10,6 +10,12 @@ namespace AdminModels.Entities
 {
     public class T_Group : ModelBase
     {
+        public T_Group()
+        {
+            this.Users = new List<T_User>();
+            this.Roles = new List<T_Role>();
+        }
+
         /// <summary>
         /// 组名称
         /// </summary>

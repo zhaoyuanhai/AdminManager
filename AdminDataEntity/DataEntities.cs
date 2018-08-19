@@ -22,6 +22,7 @@ namespace AdminDataEntity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            #region 设置外键关联关系
             //用户和角色
             modelBuilder.Entity<T_User>()
                 .HasMany(x => x.Roles)
@@ -75,6 +76,13 @@ namespace AdminDataEntity
                     m.MapRightKey("MenuId");
                     m.ToTable("T_AuthorityMenu");
                 });
+            #endregion
+
+            #region 设置约束
+            modelBuilder.Entity<T_User>().HasIndex(x => x.UserName).IsUnique();
+            modelBuilder.Entity<T_Role>().HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<T_Authority>().HasIndex(x => x.Name).IsUnique();
+            #endregion
 
             base.OnModelCreating(modelBuilder);
         }

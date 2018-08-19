@@ -10,10 +10,18 @@ namespace AdminModels.Entities
 {
     public class T_Role : ModelBase
     {
+        public T_Role()
+        {
+            this.Users = new List<T_User>();
+            this.Groups = new List<T_Group>();
+            this.Authorities = new List<T_Authority>();
+        }
+
         /// <summary>
         /// 角色名称
         /// </summary>
         [Required]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         /// <summary>

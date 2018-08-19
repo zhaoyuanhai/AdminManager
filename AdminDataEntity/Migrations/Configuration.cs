@@ -83,6 +83,20 @@ namespace AdminDataEntity.Migrations
                 context.SaveChanges();
             }
 
+            //添加默认角色
+            if (!context.Roles.Any())
+            {
+                var user = context.Users.First(x => x.UserName == "root");
+                var role = new T_Role()
+                {
+                    Name = "超级管理员",
+                    Description = "系统的超级用户,拥有至高无上的权利",
+                };
+                role.Users.Add(user);
+                context.Roles.AddOrUpdate(role);
+                context.SaveChanges();
+            }
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

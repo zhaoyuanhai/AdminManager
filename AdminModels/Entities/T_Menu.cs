@@ -10,10 +10,16 @@ namespace AdminModels.Entities
 {
     public class T_Menu : ModelBase
     {
+        public T_Menu()
+        {
+            this.Authorities = new List<T_Authority>();
+        }
+
         /// <summary>
         /// 标题
         /// </summary>
         [Required]
+        [MaxLength(10)]
         public string Title { get; set; }
 
         /// <summary>
@@ -24,6 +30,7 @@ namespace AdminModels.Entities
         /// <summary>
         /// 图标
         /// </summary>
+        [MaxLength(20)]
         public string Icon { get; set; }
 
         /// <summary>
