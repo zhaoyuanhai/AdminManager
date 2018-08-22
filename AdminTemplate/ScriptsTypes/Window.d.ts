@@ -4,6 +4,7 @@ interface Window {
     router: any;
     getRouter: (router: any) => void;
     MenuCompent: any;
+    [propName: string]: any;
 }
 
 declare global {

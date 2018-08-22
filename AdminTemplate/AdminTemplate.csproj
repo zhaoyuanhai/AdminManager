@@ -281,11 +281,14 @@
     <Content Include="Views\System\RoleManager.cshtml" />
     <Content Include="Views\System\UserGroupManager.cshtml" />
     <Content Include="Views\System\OperationLog.cshtml" />
+    <Content Include="Views\Shared\404.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="AppScript\Base.ts" />
     <TypeScriptCompile Include="ScriptsTypes\NavMenu.d.ts" />
     <TypeScriptCompile Include="ScriptsTypes\ResModel.d.ts" />
     <TypeScriptCompile Include="ScriptsTypes\Window.d.ts" />
+    <TypeScriptCompile Include="AppScript\App.ts" />
     <TypeScriptCompile Include="Views\Default\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Login.ts" />

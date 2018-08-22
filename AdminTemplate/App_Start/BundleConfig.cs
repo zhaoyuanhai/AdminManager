@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace AdminTemplate
 {
@@ -24,7 +23,7 @@ namespace AdminTemplate
                       "~/Scripts/Lib/vue-i18n.js",
                       "~/Scripts/Lib/axios.js",
                       "~/Scripts/Lib/elementui.js",
-                      "~/Scripts/Lib/app.js"));
+                      "~/Scripts/AppScript/app.js"));
         }
     }
 }

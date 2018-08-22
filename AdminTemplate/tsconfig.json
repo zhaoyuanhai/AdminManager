@@ -7,7 +7,6 @@
     "rootDir": "./",
     "sourceMap": true,
     "moduleResolution": "node",
-    "types": [ "ScriptsTypes/**/*.d.ts" ],
     "noImplicitAny": false
   }
 }

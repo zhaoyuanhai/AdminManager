@@ -43,6 +43,7 @@ namespace AdminDataEntity.Migrations
                         ParentId = systemMenu.Id,
                         ParentMenu = systemMenu,
                         Title = "菜单管理",
+                        Icon = "el-icon-document",
                         Url = "/System/MenuManager"
                     },
                     new T_Menu()
@@ -50,6 +51,7 @@ namespace AdminDataEntity.Migrations
                         ParentId = systemMenu.Id,
                         ParentMenu = systemMenu,
                         Title = "用户管理",
+                        Icon = "el-icon-document",
                         Url = "/System/UserManager"
                     },
                     new T_Menu()
@@ -57,6 +59,7 @@ namespace AdminDataEntity.Migrations
                         ParentId = systemMenu.Id,
                         ParentMenu = systemMenu,
                         Title = "权限管理",
+                        Icon = "el-icon-document",
                         Url = "/System/AuthorityManager"
                     },
                     new T_Menu()
@@ -64,6 +67,7 @@ namespace AdminDataEntity.Migrations
                         ParentId = systemMenu.Id,
                         ParentMenu = systemMenu,
                         Title = "角色管理",
+                        Icon = "el-icon-document",
                         Url = "/System/RoleManager"
                     },
                     new T_Menu()
@@ -71,6 +75,7 @@ namespace AdminDataEntity.Migrations
                         ParentId = systemMenu.Id,
                         ParentMenu = systemMenu,
                         Title = "用户组管理",
+                        Icon = "el-icon-document",
                         Url = "/System/UserGroupManager"
                     },
                     new T_Menu()
@@ -78,7 +83,16 @@ namespace AdminDataEntity.Migrations
                         ParentId = systemMenu.Id,
                         ParentMenu = systemMenu,
                         Title = "操作日志",
+                        Icon = "el-icon-document",
                         Url = "/System/OperationLog"
+                    },
+                    new T_Menu()
+                    {
+                        ParentId = systemMenu.Id,
+                        ParentMenu = systemMenu,
+                        Title = "系统配置",
+                        Icon = "el-icon-edit",
+                        Url = "/System/Config"
                     });
                 context.SaveChanges();
             }

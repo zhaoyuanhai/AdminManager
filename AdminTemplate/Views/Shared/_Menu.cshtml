@@ -6,6 +6,7 @@
 
     var menuService = DependencyResolver.Current.GetService<IMenuService>();
     var menus = menuService.Select().ToList();
+    var defaultActive = menus.FirstOrDefault(x => Request.Path.StartsWith(x.Url) && !string.IsNullOrWhiteSpace(x.Url))?.Id;
 }
 
 @helper CreateMenu(T_Menu menu, List<T_Menu> menus)
@@ -44,7 +45,7 @@
     }
 }
 
-<el-menu :default-openeds="['1']" :router="false" :unique-opened="true">
+<el-menu :default-openeds="['1']" :default-active="'@defaultActive'" :router="false" :unique-opened="true">
     @foreach (var menu in menus.Where(x => x.ParentId == null).OrderBy(x => x.Order))
     {
         <el-submenu index="@menu.Id">

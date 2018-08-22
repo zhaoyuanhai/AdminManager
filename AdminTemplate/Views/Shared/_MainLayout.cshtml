@@ -10,20 +10,7 @@
 @section scripts{
     @RenderSection("scripts", required: false)
     @Html.UsePageJs()
-    <script>
-        (function () {
-            var vueOption = $.extend(true, {
-                el: "#v-app",
-                methods: {
-                    _menuClick: function (url, id) {
-                        location.href = url;
-                    }
-                }
-            }, GetVueOption());
-
-            new Vue(vueOption);
-        })();
-    </script>
+    <script src="~/Scripts/AppScript/Base.js"></script>
 }
 
 <el-container style="height: 100%; border: 1px solid #eee">
@@ -32,17 +19,20 @@
     </el-aside>
 
     <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-            <el-dropdown>
-                <i class="el-icon-setting" style="margin-right: 15px"></i>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>修改密码</el-dropdown-item>
-                    <el-dropdown-item>修改头像</el-dropdown-item>
-                    <el-dropdown-item>基本信息</el-dropdown-item>
-                    <el-dropdown-item>退出</el-dropdown-item>
-                </el-dropdown-menu>
-            </el-dropdown>
-            <span>王小虎</span>
+        <el-header>
+            后台信息管理系统
+            <div style="text-align: right;float:right; font-size: 12px">
+                <el-dropdown>
+                    <i class="el-icon-setting" style="margin-right: 15px"></i>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>修改密码</el-dropdown-item>
+                        <el-dropdown-item>修改头像</el-dropdown-item>
+                        <el-dropdown-item>基本信息</el-dropdown-item>
+                        <el-dropdown-item>退出</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <span>王小虎</span>
+            </div>
         </el-header>
 
         <el-main>
