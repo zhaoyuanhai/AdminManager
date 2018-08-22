@@ -1,8 +1,6 @@
-﻿import Vue from 'vue';
-import Axios, { AxiosResponse } from 'axios';
+﻿import Axios from 'axios';
 
-new Vue({
-    el: "#v-app",
+VueInit({
     data: {
         isLogin: false,
         form: {
@@ -38,4 +36,4 @@ new Vue({
             });
         }
     }
-})
+});

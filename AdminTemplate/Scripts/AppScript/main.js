@@ -18,11 +18,7 @@ require.config({
         api: 'AppScript/api'
     }
 });
-require(['vue',
-    'jquery',
-    'ELEMENT',
-    '/Scripts/Views/System/MenuManager.js'
-], function (Vue, jquery, ELEMENT) {
+function renderPage(Vue, jquery, ELEMENT) {
     let vueOption = {
         el: "#v-app",
         data: {},
@@ -45,5 +41,15 @@ require(['vue',
     };
     Vue.use(ELEMENT);
     new Vue($.extend(true, vueOption, window.GetVueOption()));
-});
+}
+if (isPageJs) {
+    require(['vue',
+        'jquery',
+        'ELEMENT',
+        '/Scripts/Views' + pageUrl + '.js'
+    ], renderPage);
+}
+else {
+    require(['vue', 'jquery', 'ELEMENT'], renderPage);
+}
 //# sourceMappingURL=main.js.map

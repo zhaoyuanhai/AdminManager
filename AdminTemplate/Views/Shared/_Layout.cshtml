@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using System.IO;
+@{
+    var isPagejs = false;
+    var path = $"/{ControllerName}/{ActionName}";
+    if (File.Exists(Server.MapPath($"~/Scripts/Views{path}.js")))
+    {
+        isPagejs = true;
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,9 +21,11 @@
     <div id="v-app" v-cloak>
         @RenderBody()
     </div>
-    @*@Scripts.Render("~/bundles/mainapp")*@
     @RenderSection("scripts", required: false)
+    <script>
+        var pageUrl = "/@ControllerName/@ActionName";
+        var isPageJs = '@isPagejs' == 'True';
+    </script>
     <script src="~/Scripts/Lib/require.js" data-main="/Scripts/AppScript/main.js"></script>
-    <script src="~/Scripts/Lib/elementui.js"></script>
 </body>
 </html>

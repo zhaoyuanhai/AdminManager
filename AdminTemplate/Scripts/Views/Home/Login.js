@@ -6,11 +6,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-define(["require", "exports", "vue", "axios"], function (require, exports, vue_1, axios_1) {
+define(["require", "exports", "axios"], function (require, exports, axios_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    new vue_1.default({
-        el: "#v-app",
+    VueInit({
         data: {
             isLogin: false,
             form: {

@@ -195,6 +195,7 @@
     <Compile Include="UIAttribute\ListBoxAttribute.cs" />
     <Compile Include="UIAttribute\MyCustomMetadataAware.cs" />
     <Compile Include="UIAttribute\RadioButtonListAttribute.cs" />
+    <Compile Include="ViewExtends\CustomWebViewPage.cs" />
     <Compile Include="ViewExtends\ViewExtend.cs" />
     <Compile Include="WebValidateUserExtend.cs" />
   </ItemGroup>
@@ -967,7 +968,6 @@
     <Content Include="node_modules\vue\src\shared\constants.js" />
     <Content Include="node_modules\vue\src\shared\util.js" />
     <Content Include="package.json" />
-    <Content Include="Scripts\AppScript\main1.js" />
     <Content Include="Scripts\Lib\app.js" />
     <Content Include="Scripts\Lib\axios.js" />
     <Content Include="Scripts\Lib\elementui.js" />
@@ -996,7 +996,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Scripts\AppScript\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -1251,7 +1253,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AppScript\api.ts" />
-    <TypeScriptCompile Include="AppScript\base.ts" />
     <TypeScriptCompile Include="AppScript\main.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\api\index.ts" />
@@ -1332,8 +1333,7 @@
     <TypeScriptCompile Include="node_modules\vue\types\vue.d.ts" />
     <TypeScriptCompile Include="ScriptsTypes\NavMenu.d.ts" />
     <TypeScriptCompile Include="ScriptsTypes\ResModel.d.ts" />
-    <TypeScriptCompile Include="ScriptsTypes\Window.d.ts" />
-    <TypeScriptCompile Include="AppScript\app.ts" />
+    <TypeScriptCompile Include="ScriptsTypes\global.d.ts" />
     <TypeScriptCompile Include="Views\Default\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Login.ts" />

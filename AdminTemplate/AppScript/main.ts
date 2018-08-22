@@ -28,36 +28,41 @@ require.config({
     }
 });
 
-require(
-    ['vue',
+function renderPage(Vue, jquery, ELEMENT) {
+    let vueOption = {
+        el: "#v-app",
+        data: {},
+        methods: {
+            _init_() {
+                console.log("init");
+            },
+            _menuClick(url, id) {
+                location.href = url;
+            },
+            create() {
+
+            },
+            modify() {
+
+            },
+            delete() {
+
+            },
+            select() {
+
+            }
+        }
+    };
+    Vue.use(ELEMENT);
+    new Vue($.extend(true, vueOption, window.GetVueOption()));
+}
+
+if (isPageJs) {
+    require(['vue',
         'jquery',
         'ELEMENT',
-        '/Scripts/Views/System/MenuManager.js'
-    ], function (Vue, jquery, ELEMENT) {
-        let vueOption = {
-            el: "#v-app",
-            data: {},
-            methods: {
-                _init_() {
-                    console.log("init");
-                },
-                _menuClick(url, id) {
-                    location.href = url;
-                },
-                create() {
-
-                },
-                modify() {
-
-                },
-                delete() {
-
-                },
-                select() {
-
-                }
-            }
-        };
-        Vue.use(ELEMENT);
-        new Vue($.extend(true, vueOption, window.GetVueOption()));
-    });
+        '/Scripts/Views' + pageUrl + '.js'
+    ], renderPage);
+} else {
+    require(['vue', 'jquery', 'ELEMENT'], renderPage);
+}
