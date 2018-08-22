@@ -4,10 +4,10 @@ import 'jquery';
 let vueOption: ComponentOptions<Vue> = {
     el: "#v-app",
     data: {},
-    mounted() {
-
-    },
     methods: {
+        _init_() {
+            console.log("init");
+        },
         _menuClick(url, id) {
             location.href = url;
         },

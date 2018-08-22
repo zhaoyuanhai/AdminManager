@@ -9,7 +9,8 @@
     let moduleDic = {
         vue: { default: window["Vue"] },
         axios: { default: window["axios"] },
-        jquery: { default: window["$"] }
+        jquery: { default: window["$"] },
+        api: { default: window["api"] }
     };
 
     window["require"] = function (name) {

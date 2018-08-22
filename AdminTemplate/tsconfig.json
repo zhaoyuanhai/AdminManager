@@ -1,8 +1,11 @@
 ﻿{
   "compileOnSave": true,
   "compilerOptions": {
+    "experimentalDecorators": true,
     "lib": [ "es2015", "es5", "dom" ],
-    "module": "commonjs",
+    "module": "amd",
+    "target": "es2015",
+    "baseUrl": "./",
     "outDir": "./Scripts/",
     "rootDir": "./",
     "sourceMap": true,

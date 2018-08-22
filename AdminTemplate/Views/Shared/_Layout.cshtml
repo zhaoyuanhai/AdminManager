@@ -12,7 +12,9 @@
     <div id="v-app" v-cloak>
         @RenderBody()
     </div>
-    @Scripts.Render("~/bundles/mainapp")
+    @*@Scripts.Render("~/bundles/mainapp")*@
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/Lib/require.js" data-main="/Scripts/AppScript/main.js"></script>
+    <script src="~/Scripts/Lib/elementui.js"></script>
 </body>
 </html>

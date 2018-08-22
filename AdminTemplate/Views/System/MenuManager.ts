@@ -1,4 +1,6 @@
-﻿VueInit({
+﻿import api from 'api'
+
+VueInit({
     data: {
         dialogVisible: false,
         menuForm: {
@@ -50,7 +52,7 @@
                     label: '三级 3-2-3'
                 }]
             }]
-            }],
+        }],
         tableData: [{
             date: '2016-05-02',
             name: '王小虎',
@@ -73,8 +75,9 @@
             label: 'label'
         }
     },
-    mounted() {
-
+    async mounted() {
+        var data = await api.system.getMenuList();
+        console.log(data.data);
     },
     methods: {
         createMenu() {

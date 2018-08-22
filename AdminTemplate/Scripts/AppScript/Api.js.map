@@ -1,0 +1,1 @@
+{"version":3,"file":"api.js","sourceRoot":"","sources":["../../AppScript/api.ts"],"names":[],"mappings":";;;IAEA;QAAA;YACI,WAAM,GAAG;gBACL,WAAW;oBACP,OAAO,eAAK,CAAC,GAAG,CAAgB,UAAU,EAAE,EAAE,CAAC,CAAC;gBACpD,CAAC;aACJ,CAAA;QACL,CAAC;KAAA;IAED,IAAI,GAAG,GAAG,IAAI,GAAG,EAAE,CAAC;IAEpB,kBAAe,GAAG,CAAC"}
