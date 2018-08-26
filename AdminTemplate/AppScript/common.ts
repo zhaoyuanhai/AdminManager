@@ -2,6 +2,8 @@
 
     /**
      * 组织平面数据变成树形结构
+     * @param T 数组类型项类型
+     * @param M 组织成树形结构的类型
      * @param array 平面结构的数据
      * @param fid 父节点的id值
      * @param idName Id字段名称
@@ -9,11 +11,11 @@
      * @param itemFactory 
      * @param orderFn 排序函数
      */
-    static CompileTree<T = any>(array: Array<any>, fid: any,
+    static CompileTree<T = any, M = { source: T, children: T }>(array: Array<T>, fid: any,
         idName: string,
         fidName: string,
-        itemFactory: (item, children) => any = null,
-        orderFn: (a, b) => number = null): Array<T> {
+        itemFactory: (item: T, children: Array<M>) => M = null,
+        orderFn: (a: T, b: T) => number = null): Array<M> {
         var tempArr = [];
         for (var i = 0; i < array.length; i++) {
             if (array[i][fidName] == fid) {
@@ -30,7 +32,7 @@
             for (let i = 0; i < arr.length; i++) {
                 let current = arr[i];
 
-                let obj = {
+                let obj: any = {
                     source: arr[i],
                     children: []
                 }
@@ -117,4 +119,8 @@
                     obj[name] = "";
             }
     }
+}
+
+export enum Color {
+    loading = "rgba(0, 0, 0, 0.8)"
 }

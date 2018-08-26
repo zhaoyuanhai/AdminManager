@@ -50,8 +50,8 @@
     @*@Html.UsePageJs()*@
 }
 
-<div class="flex-box-center" v-loading="isLogin">
-    <div class="login-box">
+<div class="flex-box-center">
+    <div class="login-box" v-loading="isLogin">
         <div class="login-title">后台管理员登陆</div>
         <el-form ref="form" :model="form" :rules="rules" label-width="70px">
             <el-form-item label="用户名" prop="userName">

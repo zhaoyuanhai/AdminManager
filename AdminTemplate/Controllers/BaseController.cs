@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using AdminTemplate.JsonNet;
 
 namespace AdminTemplate.Controllers
 {
@@ -19,12 +20,23 @@ namespace AdminTemplate.Controllers
         #region Json对象
         protected override JsonResult Json(object data, string contentType, Encoding contentEncoding)
         {
-            return base.Json(data, contentType, contentEncoding, JsonRequestBehavior.AllowGet);
+            return new JsonNetResult()
+            {
+                Data = data,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding
+            };
         }
 
         protected override JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior)
         {
-            return base.Json(data, contentType, contentEncoding, JsonRequestBehavior.AllowGet);
+            return new JsonNetResult()
+            {
+                Data = data,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding,
+                JsonRequestBehavior = behavior
+            };
         }
 
         protected JsonResult JsonMessage(object data, bool success, string code, params string[] errorMsgs)
@@ -67,5 +79,10 @@ namespace AdminTemplate.Controllers
             });
         }
         #endregion
+
+        protected void UpdateModel<TModel>(TModel model, string[] includePropers, string[] excludePropers) where TModel : class
+        {
+            UpdateModel(model, string.Empty, includePropers, excludePropers);
+        }
     }
 }

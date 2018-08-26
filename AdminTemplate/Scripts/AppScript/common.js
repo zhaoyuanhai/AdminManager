@@ -4,6 +4,8 @@ define(["require", "exports"], function (require, exports) {
     class Common {
         /**
          * 组织平面数据变成树形结构
+         * @param T 数组类型项类型
+         * @param M 组织成树形结构的类型
          * @param array 平面结构的数据
          * @param fid 父节点的id值
          * @param idName Id字段名称
@@ -100,5 +102,9 @@ define(["require", "exports"], function (require, exports) {
         }
     }
     exports.default = Common;
+    var Color;
+    (function (Color) {
+        Color["loading"] = "rgba(0, 0, 0, 0.8)";
+    })(Color = exports.Color || (exports.Color = {}));
 });
 //# sourceMappingURL=common.js.map

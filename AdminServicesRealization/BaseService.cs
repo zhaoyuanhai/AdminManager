@@ -64,6 +64,9 @@ namespace AdminServicesRealization
             if (entities.Entry(model).State == EntityState.Detached)
                 entities.Entry(model).State = EntityState.Modified;
 
+            model._UpdateDate = DateTime.Now;
+            entities.Entry(model).Property(x => x._CreateDate).IsModified = false;
+
             return entities.SaveChanges();
         }
 

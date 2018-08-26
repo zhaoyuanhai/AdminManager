@@ -4,7 +4,7 @@
     "experimentalDecorators": true,
     "lib": [ "es2015", "es5", "dom" ],
     "module": "amd",
-    "target": "es2015",
+    "target": "esnext",
     "baseUrl": "./",
     "outDir": "./Scripts/",
     "rootDir": "./",

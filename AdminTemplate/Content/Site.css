@@ -28,3 +28,7 @@
 .h100 {
     height: 100%;
 }
+
+[readonly] {
+    background-color: #e4e7ed;
+}

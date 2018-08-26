@@ -34,7 +34,9 @@ function renderPage(Vue, jquery, ELEMENT) {
         el: "#v-app",
         methods: {
             _menuClick(url, id) {
-                location.hash = url;
+                if (url) {
+                    location.hash = url;
+                }
             },
             create() {
 

@@ -6,24 +6,24 @@
 
     var menuService = DependencyResolver.Current.GetService<IMenuService>();
     var menus = menuService.Select().ToList();
-    var defaultActive = menus.FirstOrDefault(x => Request.Path.StartsWith(x.Url) && !string.IsNullOrWhiteSpace(x.Url))?.Id;
+    var defaultActive = menus.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x.Url) && Request.Path.StartsWith(x.Url))?.Id;
     defaultActive = defaultActive ?? -1;
 }
 
 @helper CreateMenu(T_Menu menu, List<T_Menu> menus)
 {//生成菜单
-    var childMenus = menus.Where(x => x.ParentId == menu.Id);
-    foreach (var itemMenu in childMenus.OrderBy(x => x.Order))
+    var childMenus = menus.Where(x => x.ParentId == menu.Id).OrderBy(x => x.Order);
+    foreach (var itemMenu in childMenus)
     {
         if (menus.Any(x => x.ParentId == itemMenu.Id))
         {
             <el-submenu index="@itemMenu.Id">
-                <template solt="title">
+                <span slot="title">
                     @if (!string.IsNullOrWhiteSpace(itemMenu.Icon))
                     {
                         <i class="@itemMenu.Icon"></i>}
                     @itemMenu.Title
-                </template>
+                </span>
                 @CreateMenu(itemMenu, menus)
             </el-submenu>
         }
@@ -37,13 +37,6 @@
         }
 
     }
-    if (childMenus.Count() == 0)
-    {
-        <el-menu-item index="@menu.Id" @@click="_menuClick('@menu.Url','@menu.Id')">
-            <i class="@menu.Icon"></i>
-            @menu.Title
-        </el-menu-item>
-    }
 }
 
 <el-menu :default-openeds="['1']" :default-active="'@defaultActive'" :router="false" :unique-opened="true">
@@ -53,27 +46,26 @@
     </el-menu-item>
     @foreach (var menu in menus.Where(x => x.ParentId == null).OrderBy(x => x.Order))
     {
-        <el-submenu index="@menu.Id">
-            <template slot="title">
-                @if (!string.IsNullOrWhiteSpace(menu.Icon))
-                {
-                    <i class="@menu.Icon"></i>
-                }
+        var hasChildren = menus.Any(x => x.ParentId == menu.Id);
+        if (hasChildren)
+        {
+            <el-submenu index="@menu.Id">
+                <template slot="title">
+                    @if (!string.IsNullOrWhiteSpace(menu.Icon))
+                    {
+                        <i class="@menu.Icon"></i>
+                    }
+                    @menu.Title
+                </template>
+                @CreateMenu(menu, menus)
+            </el-submenu>
+        }
+        else
+        {
+            <el-menu-item index="@menu.Id" @@click="_menuClick('@menu.Url','@menu.Id')">
+                <i class="@menu.Icon"></i>
                 @menu.Title
-            </template>
-            @CreateMenu(menu, menus)
-        </el-submenu>
+            </el-menu-item>
+        }
     }
-    <el-submenu index="22">
-        <template slot="title">
-            <i class=""></i>
-            测试的
-        </template>
-        <el-menu-item index="/System/Abc" @@click="_menuClick('/System/Abc')">
-            Go to /System/Abc
-        </el-menu-item>
-        <el-menu-item index="/bar" @@click="_menuClick('ddd')">
-            Go to Bar
-        </el-menu-item>
-    </el-submenu>
 </el-menu>

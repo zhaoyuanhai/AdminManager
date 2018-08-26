@@ -12,32 +12,31 @@
             font-size: 14px;
             padding-right: 8px;
         }
+
+        .el-table .parent-row {
+            background: oldlace;
+        }
     </style>
 }
 
 <el-card class="box-card h100">
     <div slot="header" class="clearfix">
         <span>菜单管理</span>
-        <el-button style="float: right; padding: 3px 0" type="text" @@click="createMenu">添加根菜单</el-button>
+        <el-button style="float: right; padding: 3px 0" type="text" @@click="createMenu()">添加根菜单</el-button>
     </div>
     <div class="text item">
         <el-row type="flex" :gutter="10">
-            <el-col style="width:700px;">
+            <el-col style="width:500px;">
                 <el-card class="box-card">
                     <div class="grid-content">
-                        <el-tree :data="menuTree"
+                        <el-tree ref="menuTree"
+                                 :data="menuTree"
                                  node-key="id"
                                  default-expand-all
                                  :expand-on-click-node="false"
-                                 @@node-drag-start="handleDragStart"
-                                 @@node-drag-enter="handleDragEnter"
-                                 @@node-drag-leave="handleDragLeave"
-                                 @@node-drag-over="handleDragOver"
-                                 @@node-drag-end="handleDragEnd"
+                                 @@node-click="nodeClick"
                                  @@node-drop="handleDrop"
-                                 draggable
-                                 :allow-drop="allowDrop"
-                                 :allow-drag="allowDrag">
+                                 draggable>
                             <span class="custom-tree-node" slot-scope="{ node, data }">
                                 <span>
                                     <i :class="node.icon"></i>
@@ -46,17 +45,17 @@
                                 <span>
                                     <el-button type="text"
                                                size="mini"
-                                               @@click="append(data)">
+                                               @@click="createMenu(data)">
                                         添加子菜单
                                     </el-button>
                                     <el-button type="text"
                                                size="mini"
-                                               @@click="modify">
+                                               @@click="modifyMenu(data)">
                                         编辑
                                     </el-button>
                                     <el-button type="text"
                                                size="mini"
-                                               @@click="remove(node, data)">
+                                               @@click="removeMenu(data,node)">
                                         删除
                                     </el-button>
                                 </span>
@@ -68,14 +67,17 @@
             <el-col>
                 <el-card class="box-card">
                     <el-table :data="tableData"
+                              :row-class-name="parentClassName"
                               style="width: 100%">
-                        <el-table-column prop="date" label="图标" width="180">
+                        <el-table-column prop="Icon" label="图标" width="180">
                         </el-table-column>
-                        <el-table-column prop="name" label="名称" width="180">
+                        <el-table-column prop="Title" label="名称" width="180">
                         </el-table-column>
-                        <el-table-column prop="address" label="地址">
+                        <el-table-column prop="Url" label="地址">
                         </el-table-column>
-                        <el-table-column prop="createUser" label="创建人">
+                        <el-table-column prop="CreateUser" label="创建人" width="100">
+                        </el-table-column>
+                        <el-table-column prop="_CreateDate" label="创建时间" width="100">
                         </el-table-column>
                     </el-table>
                 </el-card>
@@ -84,12 +86,16 @@
     </div>
 </el-card>
 
-<el-dialog title="添加菜单"
+<el-dialog ref="menuDialog"
+           :title="menuTitle"
            :visible.sync="dialogVisible"
            width="500px"
            :before-close="handleClose">
     <div>
         <el-form ref="menuForm" :model="menuForm" :rules="rules" label-width="100px">
+            <el-form-item label="父级菜单">
+                <el-input v-model="parentName" readonly=""></el-input>
+            </el-form-item>
             <el-form-item label="菜单名称" prop="Title">
                 <el-input v-model="menuForm.Title"></el-input>
             </el-form-item>

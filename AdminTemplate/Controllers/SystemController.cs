@@ -55,21 +55,36 @@ namespace AdminTemplate.Controllers
                 var count = menuService.Add(menu);
                 if (count >= 1)
                 {
-                    return JsonSuccess();
+                    return JsonSuccess(menu);
                 }
                 return JsonError("添加失败");
             }
             else
             {
                 var model = menuService.Find(menu.Id);
-                UpdateModel(model);
+                UpdateModel(model, null, new string[] { "_CreateDate" });
                 var count = menuService.Modify(model);
                 if (count > 0)
                 {
-                    return JsonSuccess();
+                    return JsonSuccess(model);
                 }
                 return JsonError("修改失败");
             }
+        }
+
+        /// <summary>
+        /// 删除菜单
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DeleteMenu(int id)
+        {
+            var count = menuService.Delete(id);
+            if (count >= 1)
+            {
+                return JsonSuccess();
+            }
+            else
+                return JsonError("删除失败");
         }
     }
 }
