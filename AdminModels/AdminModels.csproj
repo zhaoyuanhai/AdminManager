@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\T_Authority.cs" />
+    <Compile Include="Entities\T_AuthorityType.cs" />
     <Compile Include="Entities\T_Group.cs" />
     <Compile Include="Entities\T_Menu.cs" />
     <Compile Include="Entities\T_OperatorLog.cs" />

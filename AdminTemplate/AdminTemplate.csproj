@@ -1250,13 +1250,16 @@
     <Content Include="Views\System\UserGroupManager.cshtml" />
     <Content Include="Views\System\OperationLog.cshtml" />
     <Content Include="Views\Shared\404.cshtml" />
+    <Content Include="Views\Home\Default.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AppScript\api.ts" />
+    <TypeScriptCompile Include="AppScript\common.ts" />
     <TypeScriptCompile Include="AppScript\main.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\api\index.ts" />
     <TypeScriptCompile Include="node_modules\axios\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\common\index.ts" />
     <TypeScriptCompile Include="node_modules\element-ui\types\alert.d.ts" />
     <TypeScriptCompile Include="node_modules\element-ui\types\aside.d.ts" />
     <TypeScriptCompile Include="node_modules\element-ui\types\autocomplete.d.ts" />
@@ -1335,6 +1338,7 @@
     <TypeScriptCompile Include="ScriptsTypes\ResModel.d.ts" />
     <TypeScriptCompile Include="ScriptsTypes\global.d.ts" />
     <TypeScriptCompile Include="Views\Default\Index.ts" />
+    <TypeScriptCompile Include="Views\Home\Default.ts" />
     <TypeScriptCompile Include="Views\Home\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Login.ts" />
     <TypeScriptCompile Include="Views\System\MenuManager.ts" />

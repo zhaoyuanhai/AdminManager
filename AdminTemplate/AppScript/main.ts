@@ -10,11 +10,11 @@ declare var require: any;
     //初始化vue的方法
     window.VueInit = function (_option) {
         vueOption = _option;
-    }
+    };
 
     window.GetVueOption = function () {
         return vueOption;
-    }
+    };
 })();
 
 require.config({
@@ -24,20 +24,17 @@ require.config({
         axios: 'Lib/axios',
         vue: 'Lib/vue',
         ELEMENT: 'Lib/elementui',
-        api: 'AppScript/api'
+        api: 'AppScript/api',
+        common: 'AppScript/common'
     }
 });
 
 function renderPage(Vue, jquery, ELEMENT) {
     let vueOption = {
         el: "#v-app",
-        data: {},
         methods: {
-            _init_() {
-                console.log("init");
-            },
             _menuClick(url, id) {
-                location.href = url;
+                location.hash = url;
             },
             create() {
 
@@ -54,10 +51,11 @@ function renderPage(Vue, jquery, ELEMENT) {
         }
     };
     Vue.use(ELEMENT);
-    new Vue($.extend(true, vueOption, window.GetVueOption()));
+    var vue = new Vue($.extend(true, vueOption, window.GetVueOption()));
+    window["vue"] = vue;
 }
 
-if (isPageJs) {
+if (usePageJs) {
     require(['vue',
         'jquery',
         'ELEMENT',

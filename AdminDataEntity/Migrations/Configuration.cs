@@ -16,6 +16,25 @@ namespace AdminDataEntity.Migrations
 
         protected override void Seed(AdminDataEntity.DataEntities context)
         {
+            //添加权限类型数据
+            if (!context.AuthorityTypes.Any())
+            {
+                context.AuthorityTypes.AddOrUpdate(
+                    new T_AuthorityType()
+                    {
+                        Id = 1,
+                        Description = "菜单类型"
+                    }, new T_AuthorityType()
+                    {
+                        Id = 2,
+                        Description = "页面元素类型"
+                    }, new T_AuthorityType()
+                    {
+                        Id = 3,
+                        Description = "文件类型"
+                    });
+            }
+
             //添加初始用户
             if (!context.Users.Any(x => x.UserName == "root"))
             {

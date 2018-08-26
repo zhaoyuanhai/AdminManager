@@ -25,11 +25,6 @@ namespace AdminModels.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// 父元素Id
-        /// </summary>
-        public int? ParentId { get; set; }
-
-        /// <summary>
         /// 描述
         /// </summary>
         public string Description { get; set; }

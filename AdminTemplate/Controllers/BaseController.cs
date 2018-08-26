@@ -19,7 +19,12 @@ namespace AdminTemplate.Controllers
         #region Json对象
         protected override JsonResult Json(object data, string contentType, Encoding contentEncoding)
         {
-            return base.Json(data, contentType, contentEncoding);
+            return base.Json(data, contentType, contentEncoding, JsonRequestBehavior.AllowGet);
+        }
+
+        protected override JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior)
+        {
+            return base.Json(data, contentType, contentEncoding, JsonRequestBehavior.AllowGet);
         }
 
         protected JsonResult JsonMessage(object data, bool success, string code, params string[] errorMsgs)

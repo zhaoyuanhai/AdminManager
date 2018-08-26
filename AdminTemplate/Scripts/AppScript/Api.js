@@ -5,7 +5,18 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
         constructor() {
             this.system = {
                 getMenuList() {
-                    return axios_1.default.get("/System/", {});
+                    return new Promise((resolve, reject) => {
+                        axios_1.default.get("/System/MenuList", {}).then((result) => {
+                            resolve(result.data);
+                        });
+                    });
+                },
+                /**
+                 * 登录接口
+                 * @param form
+                 */
+                login(form) {
+                    return axios_1.default.post('/Home/Login', form);
                 }
             };
         }

@@ -1,4 +1,5 @@
-﻿using AdminServices.System;
+﻿using AdminModels.Entities;
+using AdminServices.System;
 using System.Web.Mvc;
 
 namespace AdminTemplate.Controllers
@@ -32,12 +33,43 @@ namespace AdminTemplate.Controllers
         public ActionResult OperationLog() => View();
         #endregion
 
+        /// <summary>
+        /// 返回菜单列表
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult MenuList()
         {
-            //menuService.SelectPage()
-            return null;
-            //return Json();
+            var menus = menuService.Select();
+            return JsonSuccess(menus);
+        }
+
+        /// <summary>
+        /// 创建菜单
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CreateModifyMenu(T_Menu menu)
+        {
+            if (menu.Id <= 0)
+            {
+                var count = menuService.Add(menu);
+                if (count >= 1)
+                {
+                    return JsonSuccess();
+                }
+                return JsonError("添加失败");
+            }
+            else
+            {
+                var model = menuService.Find(menu.Id);
+                UpdateModel(model);
+                var count = menuService.Modify(model);
+                if (count > 0)
+                {
+                    return JsonSuccess();
+                }
+                return JsonError("修改失败");
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-define(["require", "exports", "axios"], function (require, exports, axios_1) {
+define(["require", "exports", "api"], function (require, exports, api_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
@@ -31,9 +31,9 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                 this.$refs.form.validate((valid) => __awaiter(this, void 0, void 0, function* () {
                     if (valid) {
                         this.$data.isLogin = true;
-                        var result = yield axios_1.default.post('/Home/Login', this.form);
+                        var result = yield api_1.default.system.login(this.$data.form);
                         if (result.data.Success) {
-                            location.href = "/";
+                            location.href = "/#/Home/Default";
                         }
                         else {
                             alert(result.data.ErrorMsg);

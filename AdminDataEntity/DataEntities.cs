@@ -169,5 +169,10 @@ namespace AdminDataEntity
         /// 操作日期表
         /// </summary>
         public DbSet<T_OperatorLog> OperatorLogs { get; set; }
+
+        /// <summary>
+        /// 权限类型表
+        /// </summary>
+        public DbSet<T_AuthorityType> AuthorityTypes { get; set; }
     }
 }

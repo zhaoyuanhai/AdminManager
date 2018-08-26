@@ -26,22 +26,22 @@ namespace AdminServicesRealization
             entities.Dispose();
         }
 
-        public virtual void Add(T model)
+        public virtual int Add(T model)
         {
             if (model == null)
                 throw new ArgumentException("model参数不能为null");
 
             entities.Set<T>().Add(model);
-            entities.SaveChanges();
+            return entities.SaveChanges();
         }
 
-        public virtual void AddBatch(IEnumerable<T> models)
+        public virtual int AddBatch(IEnumerable<T> models)
         {
             if (models == null)
                 throw new ArgumentException("models参数不能为null");
 
             entities.Set<T>().AddRange(models);
-            entities.SaveChanges();
+            return entities.SaveChanges();
         }
 
         public virtual int Delete(T model)
@@ -75,6 +75,11 @@ namespace AdminServicesRealization
                     entities.Entry(item).State = EntityState.Modified;
             }
             return entities.SaveChanges();
+        }
+
+        public virtual T Find(params object[] keyValues)
+        {
+            return entities.Set<T>().Find(keyValues);
         }
 
         public virtual IEnumerable<T> Select()

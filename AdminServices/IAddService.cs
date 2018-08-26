@@ -8,8 +8,8 @@ namespace AdminServices
 {
     public interface IAddService<T> where T : class, new()
     {
-        void Add(T model);
+        int Add(T model);
 
-        void AddBatch(IEnumerable<T> models);
+        int AddBatch(IEnumerable<T> models);
     }
 }

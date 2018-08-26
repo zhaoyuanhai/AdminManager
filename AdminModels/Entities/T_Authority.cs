@@ -23,6 +23,18 @@ namespace AdminModels.Entities
         public string Name { get; set; }
 
         /// <summary>
+        /// 权限类型
+        /// </summary>
+
+        public int TypeId { get; set; }
+
+        /// <summary>
+        /// 类型对象
+        /// </summary>
+        [ForeignKey("TypeId")]
+        public T_AuthorityType Type { get; set; }
+
+        /// <summary>
         /// 角色列表
         /// </summary>
         [ForeignKey("RoleId")]

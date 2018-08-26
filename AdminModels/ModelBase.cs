@@ -8,10 +8,10 @@ namespace AdminModels
 {
     public class ModelBase
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public DateTime _CreateDate { get; set; } = DateTime.Now;
+        public virtual DateTime _CreateDate { get; set; } = DateTime.Now;
 
-        public DateTime? _UpdateDate { get; set; }
+        public virtual DateTime? _UpdateDate { get; set; }
     }
 }

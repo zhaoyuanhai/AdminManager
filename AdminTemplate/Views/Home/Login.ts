@@ -1,4 +1,5 @@
 ﻿import Axios from 'axios';
+import api from 'api';
 
 VueInit({
     data: {
@@ -22,9 +23,9 @@ VueInit({
             this.$refs.form.validate(async (valid) => {
                 if (valid) {
                     this.$data.isLogin = true;
-                    var result = await Axios.post<ResponseModel>('/Home/Login', this.form);
+                    var result = await api.system.login(this.$data.form);
                     if (result.data.Success) {
-                        location.href = "/";
+                        location.href = "/#/Home/Default";
                     } else {
                         alert(result.data.ErrorMsg);
                     }

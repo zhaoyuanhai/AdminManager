@@ -20,6 +20,8 @@ namespace AdminTemplate.Controllers
 
         #region 页面
 
+        public ActionResult Default() => View();
+
         /// <summary>
         /// 首页
         /// </summary>

@@ -6,93 +6,71 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-define(["require", "exports", "api"], function (require, exports, api_1) {
+define(["require", "exports", "api", "common"], function (require, exports, api_1, common_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
         data: {
             dialogVisible: false,
             menuForm: {
-                name: "",
-                icon: "",
-                parentId: ""
+                Id: "",
+                Title: "",
+                Icon: "",
+                ParentId: "",
+                Order: "",
+                Url: ""
             },
-            data6: [{
-                    id: 1,
-                    label: '一级 1',
-                    children: [{
-                            id: 4,
-                            label: '二级 1-1',
-                            children: [{
-                                    id: 9,
-                                    label: '三级 1-1-1'
-                                }, {
-                                    id: 10,
-                                    label: '三级 1-1-2'
-                                }]
-                        }]
-                }, {
-                    id: 2,
-                    label: '一级 2',
-                    children: [{
-                            id: 5,
-                            label: '二级 2-1'
-                        }, {
-                            id: 6,
-                            label: '二级 2-2'
-                        }]
-                }, {
-                    id: 3,
-                    label: '一级 3',
-                    children: [{
-                            id: 7,
-                            label: '二级 3-1'
-                        }, {
-                            id: 8,
-                            label: '二级 3-2',
-                            children: [{
-                                    id: 11,
-                                    label: '三级 3-2-1'
-                                }, {
-                                    id: 12,
-                                    label: '三级 3-2-2'
-                                }, {
-                                    id: 13,
-                                    label: '三级 3-2-3'
-                                }]
-                        }]
-                }],
-            tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }],
-            defaultProps: {
-                children: 'children',
-                label: 'label'
-            }
+            menuList: [],
+            rules: {
+                Title: [
+                    { required: true, message: "请输入菜单名称", trigger: 'blur' }
+                ],
+                Url: [
+                    { required: true, message: "请输入连接地址", trigger: 'blur' }
+                ]
+            },
+            menuTree: [],
+            tableData: []
         },
         mounted() {
             return __awaiter(this, void 0, void 0, function* () {
                 var data = yield api_1.default.system.getMenuList();
-                console.log(data.data);
+                this.$data.menuList = data.Data;
+                //设置菜单列表
+                var treeData = common_1.default.CompileTree(data.Data, null, "Id", "ParentId", (item, arr) => {
+                    return {
+                        id: item.Id,
+                        label: item.Title,
+                        icon: item.Icon,
+                        children: arr
+                    };
+                });
+                this.$data.menuTree = treeData;
+                //设置添加菜单的数据
+                var menus = data.Data.filter(x => x.ParentId == null).map(item => {
+                    return {
+                        name: item.Title,
+                        value: item.Id
+                    };
+                });
             });
         },
         methods: {
             createMenu() {
+                common_1.default.SetObjectPropEmptyString(this.$data.menuForm);
                 this.$data.dialogVisible = true;
+            },
+            removeMenu(menu) {
+            },
+            append(data) {
+                this.createMenu();
+                //this.$data
+            },
+            remove(node, data) {
+                const parent = node.parent;
+                const children = parent.data.children || parent.data;
+                const index = children.findIndex(d => d.id === data.id);
+                children.splice(index, 1);
             },
             handleClose(done) {
                 this.$confirm('确认关闭？')
@@ -100,6 +78,13 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                     done();
                 })
                     .catch(_ => { });
+            },
+            btnSubmit() {
+                this.$refs.menuForm.validate((isValid, fialFields) => {
+                    if (isValid) {
+                        this.$data.dialogVisible = false;
+                    }
+                });
             },
             handleDragStart(node, ev) {
                 console.log('drag start', node);

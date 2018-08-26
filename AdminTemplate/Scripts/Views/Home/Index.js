@@ -1,7 +1,15 @@
-//import Vue, { ComponentOptions } from 'vue';
-//import * as Jquery from 'jquery';
-//import { ExtendedVue } from 'vue/types/vue';
 VueInit({
-    data: {}
+    mounted() {
+        $("#_frame").height($(".el-main").height() - 1);
+        if (location.hash) {
+            $("#_frame").attr("src", location.hash.substring(1));
+        }
+        window.addEventListener("hashchange", function (hashChangeEvent) {
+            $("#_frame").attr("src", location.hash.substring(1));
+        });
+        window.addEventListener("resize", function () {
+            $("#_frame").height($(".el-main").height() - 1);
+        });
+    }
 });
 //# sourceMappingURL=Index.js.map
