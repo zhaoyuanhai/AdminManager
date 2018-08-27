@@ -76,12 +76,22 @@ namespace AdminDataEntity
                     m.MapRightKey("MenuId");
                     m.ToTable("T_AuthorityMenu");
                 });
+
+            //权限和功能
+            modelBuilder.Entity<T_Authority>()
+                .HasMany(x => x.Operations)
+                .WithMany(x => x.Authorities)
+                .Map(m =>
+                {
+                    m.MapLeftKey("AuthorityId");
+                    m.MapRightKey("OperationId");
+                    m.ToTable("T_AuthorityOperation");
+                });
             #endregion
 
             #region 设置约束
             modelBuilder.Entity<T_User>().HasIndex(x => x.UserName).IsUnique();
             modelBuilder.Entity<T_Role>().HasIndex(x => x.Name).IsUnique();
-            modelBuilder.Entity<T_Authority>().HasIndex(x => x.Name).IsUnique();
             #endregion
 
             base.OnModelCreating(modelBuilder);

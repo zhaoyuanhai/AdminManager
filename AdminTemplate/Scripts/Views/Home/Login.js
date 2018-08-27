@@ -1,11 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 define(["require", "exports", "api"], function (require, exports, api_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -28,10 +20,10 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                 e.target.src = e.target.getAttribute("data-src") + "?r=" + Math.random();
             },
             loginSubmit: function () {
-                this.$refs.form.validate((valid) => __awaiter(this, void 0, void 0, function* () {
+                this.$refs.form.validate(async (valid) => {
                     if (valid) {
                         this.$data.isLogin = true;
-                        var result = yield api_1.default.system.login(this.$data.form);
+                        var result = await api_1.default.system.login(this.$data.form);
                         if (result.data.Success) {
                             location.href = "/#/Home/Default";
                         }
@@ -44,7 +36,7 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                         console.log('error submit!!');
                         return false;
                     }
-                }));
+                });
             }
         }
     });

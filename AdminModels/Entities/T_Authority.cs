@@ -17,15 +17,8 @@ namespace AdminModels.Entities
         }
 
         /// <summary>
-        /// 权限名称
-        /// </summary>
-        [MaxLength(20)]
-        public string Name { get; set; }
-
-        /// <summary>
         /// 权限类型
         /// </summary>
-
         public int TypeId { get; set; }
 
         /// <summary>
@@ -40,7 +33,16 @@ namespace AdminModels.Entities
         [ForeignKey("RoleId")]
         public virtual ICollection<T_Role> Roles { get; set; }
 
+        /// <summary>
+        /// 菜单Id
+        /// </summary>
         [ForeignKey("MenuId")]
         public virtual ICollection<T_Menu> Menus { get; set; }
+
+        /// <summary>
+        /// 操作Id
+        /// </summary>
+        [ForeignKey("OperationId")]
+        public virtual ICollection<T_Operation> Operations { get; set; }
     }
 }

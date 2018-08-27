@@ -3,7 +3,7 @@ namespace AdminDataEntity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class InitDatabase : DbMigration
     {
         public override void Up()
         {
@@ -12,25 +12,26 @@ namespace AdminDataEntity.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        RoleId = c.Int(nullable: false),
-                        MenuId = c.Int(nullable: false),
+                        Name = c.String(maxLength: 20),
+                        TypeId = c.Int(nullable: false),
                         _CreateDate = c.DateTime(nullable: false),
                         _UpdateDate = c.DateTime(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.T_AuthorityType", t => t.TypeId, cascadeDelete: true)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.TypeId);
             
             CreateTable(
                 "dbo.T_Menu",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false),
+                        Title = c.String(nullable: false, maxLength: 10),
                         ParentId = c.Int(),
-                        Icon = c.String(),
+                        Icon = c.String(maxLength: 20),
                         Order = c.Int(nullable: false),
                         Url = c.String(),
-                        AuthorityId = c.Int(nullable: false),
                         _CreateDate = c.DateTime(nullable: false),
                         _UpdateDate = c.DateTime(),
                     })
@@ -39,20 +40,31 @@ namespace AdminDataEntity.Migrations
                 .Index(t => t.ParentId);
             
             CreateTable(
-                "dbo.T_Role",
+                "dbo.T_Operation",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false),
-                        ParentId = c.Int(),
-                        Description = c.String(),
-                        UserId = c.Int(nullable: false),
-                        GroupId = c.Int(nullable: false),
-                        AuthorityId = c.Int(nullable: false),
+                        Name = c.String(),
+                        Event = c.String(),
+                        Icon = c.String(),
+                        ClassName = c.String(),
                         _CreateDate = c.DateTime(nullable: false),
                         _UpdateDate = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.T_Role",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 20),
+                        Description = c.String(),
+                        _CreateDate = c.DateTime(nullable: false),
+                        _UpdateDate = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
             
             CreateTable(
                 "dbo.T_Group",
@@ -74,12 +86,24 @@ namespace AdminDataEntity.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserName = c.String(nullable: false),
-                        Password = c.String(nullable: false),
-                        RealName = c.String(),
-                        Mobile = c.String(),
-                        Email = c.String(),
+                        UserName = c.String(nullable: false, maxLength: 20),
+                        Password = c.String(nullable: false, maxLength: 20),
+                        RealName = c.String(maxLength: 20),
+                        Mobile = c.String(maxLength: 11),
+                        Email = c.String(maxLength: 50),
                         LoginCount = c.Long(nullable: false),
+                        _CreateDate = c.DateTime(nullable: false),
+                        _UpdateDate = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.UserName, unique: true);
+            
+            CreateTable(
+                "dbo.T_AuthorityType",
+                c => new
+                    {
+                        Id = c.Int(nullable: false),
+                        Description = c.String(),
                         _CreateDate = c.DateTime(nullable: false),
                         _UpdateDate = c.DateTime(),
                     })
@@ -112,6 +136,19 @@ namespace AdminDataEntity.Migrations
                 .ForeignKey("dbo.T_Menu", t => t.MenuId, cascadeDelete: true)
                 .Index(t => t.AuthorityId)
                 .Index(t => t.MenuId);
+            
+            CreateTable(
+                "dbo.T_AuthorityOperation",
+                c => new
+                    {
+                        AuthorityId = c.Int(nullable: false),
+                        OperationId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.AuthorityId, t.OperationId })
+                .ForeignKey("dbo.T_Authority", t => t.AuthorityId, cascadeDelete: true)
+                .ForeignKey("dbo.T_Operation", t => t.OperationId, cascadeDelete: true)
+                .Index(t => t.AuthorityId)
+                .Index(t => t.OperationId);
             
             CreateTable(
                 "dbo.T_RoleAuthority",
@@ -164,12 +201,14 @@ namespace AdminDataEntity.Migrations
                 .ForeignKey("dbo.T_Group", t => t.GroupId, cascadeDelete: true)
                 .Index(t => t.RoleId)
                 .Index(t => t.GroupId);
-            
+
+            SqlFile(@"H:\project\AdminTemplate\AdminDataEntity\main.sql");
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.T_OperatorLog", "UserId", "dbo.T_User");
+            DropForeignKey("dbo.T_Authority", "TypeId", "dbo.T_AuthorityType");
             DropForeignKey("dbo.T_RoleGroup", "GroupId", "dbo.T_Group");
             DropForeignKey("dbo.T_RoleGroup", "RoleId", "dbo.T_Role");
             DropForeignKey("dbo.T_UserRole", "RoleId", "dbo.T_Role");
@@ -179,6 +218,8 @@ namespace AdminDataEntity.Migrations
             DropForeignKey("dbo.T_Group", "ParentId", "dbo.T_Group");
             DropForeignKey("dbo.T_RoleAuthority", "AuthorityId", "dbo.T_Authority");
             DropForeignKey("dbo.T_RoleAuthority", "RoleId", "dbo.T_Role");
+            DropForeignKey("dbo.T_AuthorityOperation", "OperationId", "dbo.T_Operation");
+            DropForeignKey("dbo.T_AuthorityOperation", "AuthorityId", "dbo.T_Authority");
             DropForeignKey("dbo.T_AuthorityMenu", "MenuId", "dbo.T_Menu");
             DropForeignKey("dbo.T_AuthorityMenu", "AuthorityId", "dbo.T_Authority");
             DropForeignKey("dbo.T_Menu", "ParentId", "dbo.T_Menu");
@@ -190,20 +231,29 @@ namespace AdminDataEntity.Migrations
             DropIndex("dbo.T_UserGroup", new[] { "UserId" });
             DropIndex("dbo.T_RoleAuthority", new[] { "AuthorityId" });
             DropIndex("dbo.T_RoleAuthority", new[] { "RoleId" });
+            DropIndex("dbo.T_AuthorityOperation", new[] { "OperationId" });
+            DropIndex("dbo.T_AuthorityOperation", new[] { "AuthorityId" });
             DropIndex("dbo.T_AuthorityMenu", new[] { "MenuId" });
             DropIndex("dbo.T_AuthorityMenu", new[] { "AuthorityId" });
             DropIndex("dbo.T_OperatorLog", new[] { "UserId" });
+            DropIndex("dbo.T_User", new[] { "UserName" });
             DropIndex("dbo.T_Group", new[] { "ParentId" });
+            DropIndex("dbo.T_Role", new[] { "Name" });
             DropIndex("dbo.T_Menu", new[] { "ParentId" });
+            DropIndex("dbo.T_Authority", new[] { "TypeId" });
+            DropIndex("dbo.T_Authority", new[] { "Name" });
             DropTable("dbo.T_RoleGroup");
             DropTable("dbo.T_UserRole");
             DropTable("dbo.T_UserGroup");
             DropTable("dbo.T_RoleAuthority");
+            DropTable("dbo.T_AuthorityOperation");
             DropTable("dbo.T_AuthorityMenu");
             DropTable("dbo.T_OperatorLog");
+            DropTable("dbo.T_AuthorityType");
             DropTable("dbo.T_User");
             DropTable("dbo.T_Group");
             DropTable("dbo.T_Role");
+            DropTable("dbo.T_Operation");
             DropTable("dbo.T_Menu");
             DropTable("dbo.T_Authority");
         }

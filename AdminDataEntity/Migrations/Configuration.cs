@@ -2,6 +2,7 @@ namespace AdminDataEntity.Migrations
 {
     using AdminModels.Entities;
     using System;
+    using System.Configuration;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -14,7 +15,7 @@ namespace AdminDataEntity.Migrations
             ContextKey = "AdminDataEntity.DataEntities";
         }
 
-        protected override void Seed(AdminDataEntity.DataEntities context)
+        protected override void Seed(DataEntities context)
         {
             //添加权限类型数据
             if (!context.AuthorityTypes.Any())

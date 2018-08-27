@@ -1,11 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 define(["require", "exports", "api", "common", "axios"], function (require, exports, api_1, common_1, axios_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -42,21 +34,19 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                 return this.$data.menuForm.Id ? "编辑菜单" : "添加菜单";
             }
         },
-        mounted() {
-            return __awaiter(this, void 0, void 0, function* () {
-                var data = yield api_1.default.system.getMenuList();
-                this.$data.menuList = data.Data;
-                //设置菜单列表
-                var treeData = common_1.default.CompileTree(data.Data, null, "Id", "ParentId", (item, arr) => {
-                    return {
-                        id: item.Id,
-                        label: item.Title,
-                        icon: item.Icon,
-                        children: arr
-                    };
-                }, (a, b) => a.Order - b.Order);
-                this.$data.menuTree = treeData;
-            });
+        async mounted() {
+            var data = await api_1.default.system.getMenuList();
+            this.$data.menuList = data.Data;
+            //设置菜单列表
+            var treeData = common_1.default.CompileTree(data.Data, null, "Id", "ParentId", (item, arr) => {
+                return {
+                    id: item.Id,
+                    label: item.Title,
+                    icon: item.Icon,
+                    children: arr
+                };
+            }, (a, b) => a.Order - b.Order);
+            this.$data.menuTree = treeData;
         },
         methods: {
             createMenu(parentMenu) {
@@ -72,20 +62,18 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                 this.$data.menuForm = menu;
                 this.$data.dialogVisible = true;
             },
-            removeMenu(menu, node) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    var result = yield this.$confirm("确定删除此菜单及其下菜单么?", "删除菜单");
-                    if (result == 'confirm') {
-                        var data = yield api_1.default.system.deleteMenu(menu.id);
-                        if (data.Success) {
-                            const parent = node.parent;
-                            const children = parent.data.children; //|| parent.data;
-                            const index = children.findIndex(d => d.id === menu.id);
-                            children.splice(index, 1);
-                            this.$message("菜单已删除");
-                        }
+            async removeMenu(menu, node) {
+                var result = await this.$confirm("确定删除此菜单及其下菜单么?", "删除菜单");
+                if (result == 'confirm') {
+                    var data = await api_1.default.system.deleteMenu(menu.id);
+                    if (data.Success) {
+                        const parent = node.parent;
+                        const children = parent.data.children; //|| parent.data;
+                        const index = children.findIndex(d => d.id === menu.id);
+                        children.splice(index, 1);
+                        this.$message("菜单已删除");
                     }
-                });
+                }
             },
             handleClose(done) {
                 this.$confirm('确认关闭？')
@@ -95,13 +83,13 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                     .catch(_ => { });
             },
             btnSubmit() {
-                this.$refs.menuForm.validate((isValid, fialFields) => __awaiter(this, void 0, void 0, function* () {
+                this.$refs.menuForm.validate(async (isValid, fialFields) => {
                     if (isValid) {
                         let loading = this.$loading({
                             target: this.$refs.menuDialog.$el,
                             background: common_1.Color.loading
                         });
-                        let data = yield api_1.default.system.setMenu(this.$data.menuForm);
+                        let data = await api_1.default.system.setMenu(this.$data.menuForm);
                         if (data.Success) {
                             let item = data.Data;
                             if (this.$data.menuForm.Id) {
@@ -130,7 +118,7 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                             this.$data.dialogVisible = false;
                         }
                     }
-                }));
+                });
             },
             nodeClick(data) {
                 var parent = this.$data.menuList.find(x => x.Id === data.id);
@@ -143,24 +131,22 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                     return 'parent-row';
                 }
             },
-            handleDrop(draggingNode, dropNode, dropType) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    console.log('tree drop: ', dropNode.label, dropType);
-                    var menu = this.$data.menuList.find(x => x.Id === draggingNode.data.id);
-                    var target = this.$data.menuList.find(x => x.Id === dropNode.data.id);
-                    if (dropType === 'inner') {
-                        menu.ParentId = target.Id;
-                    }
-                    else {
-                        menu.ParentId = target.ParentId;
-                    }
-                    menu.Order = target.Id;
-                    target.Order = menu.Id;
-                    menu.ParentMenu = null;
-                    target.ParentMenu = null;
-                    var result = yield axios_1.default.all([api_1.default.system.setMenu(menu), api_1.default.system.setMenu(target)]);
-                    this.$message("数据已修改");
-                });
+            async handleDrop(draggingNode, dropNode, dropType) {
+                console.log('tree drop: ', dropNode.label, dropType);
+                var menu = this.$data.menuList.find(x => x.Id === draggingNode.data.id);
+                var target = this.$data.menuList.find(x => x.Id === dropNode.data.id);
+                if (dropType === 'inner') {
+                    menu.ParentId = target.Id;
+                }
+                else {
+                    menu.ParentId = target.ParentId;
+                }
+                menu.Order = target.Id;
+                target.Order = menu.Id;
+                menu.ParentMenu = null;
+                target.ParentMenu = null;
+                var result = await axios_1.default.all([api_1.default.system.setMenu(menu), api_1.default.system.setMenu(target)]);
+                this.$message("数据已修改");
             }
         }
     });

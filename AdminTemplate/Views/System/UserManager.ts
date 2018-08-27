@@ -1,0 +1,7 @@
+﻿
+VueInit({
+    data: {
+        tableData: []
+    },
+
+});

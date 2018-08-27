@@ -32,7 +32,7 @@ function renderPage(Vue, jquery, ELEMENT) {
             },
             modify() {
             },
-            delete() {
+            remove() {
             },
             select() {
             }

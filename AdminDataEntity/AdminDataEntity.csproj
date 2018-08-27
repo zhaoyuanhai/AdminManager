@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,21 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataEntities.cs" />
-    <Compile Include="Migrations\201808191542501_Init.cs" />
-    <Compile Include="Migrations\201808191542501_Init.Designer.cs">
-      <DependentUpon>201808191542501_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201808271027074_InitDatabase.cs" />
+    <Compile Include="Migrations\201808271027074_InitDatabase.Designer.cs">
+      <DependentUpon>201808271027074_InitDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808191551000_Init-Update.cs" />
-    <Compile Include="Migrations\201808191551000_Init-Update.Designer.cs">
-      <DependentUpon>201808191551000_Init-Update.cs</DependentUpon>
+    <Compile Include="Migrations\201808271042092_aaa.cs" />
+    <Compile Include="Migrations\201808271042092_aaa.Designer.cs">
+      <DependentUpon>201808271042092_aaa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808191652459_Addconstraint.cs" />
-    <Compile Include="Migrations\201808191652459_Addconstraint.Designer.cs">
-      <DependentUpon>201808191652459_Addconstraint.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808241611419_AddAuthorityType.cs" />
-    <Compile Include="Migrations\201808241611419_AddAuthorityType.Designer.cs">
-      <DependentUpon>201808241611419_AddAuthorityType.cs</DependentUpon>
+    <Compile Include="Migrations\201808271143111_DeleteAuthorityNameColumn.cs" />
+    <Compile Include="Migrations\201808271143111_DeleteAuthorityNameColumn.Designer.cs">
+      <DependentUpon>201808271143111_DeleteAuthorityNameColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ParameterModel.cs" />
@@ -79,17 +76,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808191542501_Init.resx">
-      <DependentUpon>201808191542501_Init.cs</DependentUpon>
+    <Content Include="main.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808271027074_InitDatabase.resx">
+      <DependentUpon>201808271027074_InitDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808191551000_Init-Update.resx">
-      <DependentUpon>201808191551000_Init-Update.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808271042092_aaa.resx">
+      <DependentUpon>201808271042092_aaa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808191652459_Addconstraint.resx">
-      <DependentUpon>201808191652459_Addconstraint.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808241611419_AddAuthorityType.resx">
-      <DependentUpon>201808241611419_AddAuthorityType.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808271143111_DeleteAuthorityNameColumn.resx">
+      <DependentUpon>201808271143111_DeleteAuthorityNameColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

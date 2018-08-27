@@ -7,13 +7,13 @@ namespace AdminDataEntity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Addconstraint : IMigrationMetadata
+    public sealed partial class aaa : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Addconstraint));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(aaa));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808191652459_Addconstraint"; }
+            get { return "201808271042092_aaa"; }
         }
         
         string IMigrationMetadata.Source
