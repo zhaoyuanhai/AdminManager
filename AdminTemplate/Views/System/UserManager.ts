@@ -1,7 +1,8 @@
 ﻿
 VueInit({
     data: {
-        tableData: []
+        tableData: [],
+        formInline: {}
     },
 
 });

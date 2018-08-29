@@ -32,3 +32,27 @@
 [readonly] {
     background-color: #e4e7ed;
 }
+
+.el-select [readonly] {
+    background-color: white;
+}
+
+.is-bordered {
+    border: 1px solid #dcdfe6;
+}
+
+.form-box {
+    padding-top: 15px;
+}
+
+    .form-box .el-form-item {
+        margin-bottom: 11px;
+    }
+
+
+.tools-button {
+    float: right;
+    position: absolute;
+    top: 14px;
+    right: 8px;
+}

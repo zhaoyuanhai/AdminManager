@@ -151,7 +151,6 @@ VueInit({
             }
         },
         async handleDrop(draggingNode: TreeNode, dropNode: TreeNode, dropType) {
-            console.log('tree drop: ', dropNode.label, dropType);
             var menu: MenuModel = this.$data.menuList.find(x => x.Id === draggingNode.data.id);
             var target: MenuModel = this.$data.menuList.find(x => x.Id === dropNode.data.id);
 

@@ -132,7 +132,6 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                 }
             },
             async handleDrop(draggingNode, dropNode, dropType) {
-                console.log('tree drop: ', dropNode.label, dropType);
                 var menu = this.$data.menuList.find(x => x.Id === draggingNode.data.id);
                 var target = this.$data.menuList.find(x => x.Id === dropNode.data.id);
                 if (dropType === 'inner') {

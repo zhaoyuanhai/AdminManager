@@ -123,7 +123,7 @@ ON T_Menu
 INSTEAD OF DELETE
 AS
 --删除关联的相关信息
-DELETE dbo.T_AuthorityMenu
+DELETE am
 FROM dbo.T_AuthorityMenu am
     JOIN Deleted d
         ON am.MenuId = d.Id;
@@ -204,17 +204,33 @@ VALUES
     2,         -- TypeId - int
     GETDATE(), -- _CreateDate - datetime
     GETDATE()  -- _UpdateDate - datetime
-    )
+    );
 
 --关联操作按钮和权限
-DECLARE @authorityId INT = @@IDENTITY
-INSERT INTO	dbo.T_AuthorityOperation
+DECLARE @authorityId INT = @@IDENTITY;
+INSERT INTO dbo.T_AuthorityOperation
 (
-  [AuthorityId],
-   [OperationId]
+    [AuthorityId],
+    [OperationId]
 )
-SELECT @authorityId,ID
-FROM Inserted
-GO	
+SELECT @authorityId,
+       Id
+FROM Inserted;
+GO
 
 --创建删除按钮的触发器
+CREATE TRIGGER Tgr_DeleteOperation
+ON dbo.T_Operation
+INSTEAD OF DELETE
+AS
+--删除引用
+DELETE auop
+FROM dbo.T_AuthorityOperation auop
+    JOIN Deleted d
+        ON d.Id = auop.OperationId;
+
+--删除操作按钮
+DELETE op
+FROM dbo.T_Operation op
+    JOIN Deleted d
+        ON d.Id = op.Id;

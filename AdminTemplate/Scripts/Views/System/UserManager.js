@@ -1,6 +1,7 @@
 VueInit({
     data: {
-        tableData: []
+        tableData: [],
+        formInline: {}
     },
 });
 //# sourceMappingURL=UserManager.js.map
