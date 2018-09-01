@@ -46,6 +46,28 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                  */
                 login(form) {
                     return axios_1.default.post('/Home/Login', form);
+                },
+                /**
+                 * 获取用户集合
+                 * @param pageModel 分页的查询参数
+                 */
+                getUserList(pageModel) {
+                    return new Promise((resolve, reject) => {
+                        axios_1.default.get("/System/GetUserList", { params: pageModel }).then(result => {
+                            resolve(result.data);
+                        });
+                    });
+                },
+                /**
+                 * 获取角色集合
+                 * @param pageModel
+                 */
+                getRoleList(pageModel) {
+                    return new Promise((resolve, reject) => {
+                        axios_1.default.get("/System/GetRoleList", { params: pageModel }).then(result => {
+                            resolve(result.data);
+                        });
+                    });
                 }
             };
         }

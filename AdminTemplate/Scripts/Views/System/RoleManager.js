@@ -7,9 +7,9 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
             formInline: {}
         },
         async mounted() {
-            let result = await api_1.default.system.getUserList({ PageIndex: 1, PageSize: 10 });
+            var result = await api_1.default.system.getRoleList();
             this.$data.tableData = result.Data.Datas;
         }
     });
 });
-//# sourceMappingURL=UserManager.js.map
+//# sourceMappingURL=RoleManager.js.map

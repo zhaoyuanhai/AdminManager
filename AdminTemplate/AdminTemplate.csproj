@@ -27,7 +27,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1257,6 +1257,7 @@
     <TypeScriptCompile Include="AppScript\api.ts" />
     <TypeScriptCompile Include="AppScript\common.ts" />
     <TypeScriptCompile Include="AppScript\main.ts" />
+    <TypeScriptCompile Include="AppScript\models.ts" />
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\api\index.ts" />
     <TypeScriptCompile Include="node_modules\axios\index.d.ts" />
@@ -1330,6 +1331,7 @@
     <TypeScriptCompile Include="node_modules\element-ui\types\transfer.d.ts" />
     <TypeScriptCompile Include="node_modules\element-ui\types\tree.d.ts" />
     <TypeScriptCompile Include="node_modules\element-ui\types\upload.d.ts" />
+    <TypeScriptCompile Include="node_modules\models\index.ts" />
     <TypeScriptCompile Include="node_modules\vue\types\index.d.ts" />
     <TypeScriptCompile Include="node_modules\vue\types\options.d.ts" />
     <TypeScriptCompile Include="node_modules\vue\types\plugin.d.ts" />
@@ -1343,12 +1345,17 @@
     <TypeScriptCompile Include="Views\Home\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Login.ts" />
     <TypeScriptCompile Include="Views\System\MenuManager.ts" />
+    <TypeScriptCompile Include="Views\System\RoleManager.ts" />
     <TypeScriptCompile Include="Views\System\UserManager.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdminCommon\AdminCommon.csproj">
+      <Project>{fc5b0680-1c0d-4f82-82c4-c0514bb12358}</Project>
+      <Name>AdminCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AdminEngine\AdminEngine.csproj">
       <Project>{d6ec4828-ece1-46b2-923a-26f1ccee14f1}</Project>
       <Name>AdminEngine</Name>

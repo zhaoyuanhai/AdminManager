@@ -33,6 +33,9 @@ namespace AdminModels.Entities
         /// 权限对象
         /// </summary>
         [ForeignKey("AuthorityId")]
-        public ICollection<T_Authority> Authorities { get; set; }
+        public virtual ICollection<T_Authority> Authorities { get; set; }
+
+        [ForeignKey("MenuId")]
+        public virtual ICollection<T_Menu> Menus { get; set; }
     }
 }

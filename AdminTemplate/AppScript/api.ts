@@ -1,20 +1,5 @@
 ﻿import Axios from 'axios';
-
-export interface LoginModel {
-    userName: string;
-    password: string;
-    code: string;
-}
-
-export interface MenuModel {
-    Id: number;
-    Title: string;
-    ParentId: number;
-    Icon: string;
-    Url: string;
-    Order: number;
-    ParentMenu: MenuModel;
-}
+import * as models from 'models';
 
 class Api {
     system = {
@@ -23,7 +8,7 @@ class Api {
          * @param menu
          * @returns {Promise} 结果
          */
-        setMenu(menu: MenuModel): Promise<ResponseModel<MenuModel>> {
+        setMenu(menu: models.MenuModel): Promise<ResponseModel<models.MenuModel>> {
             return new Promise((resolve, reject) => {
                 Axios.post<ResponseModel>("/System/CreateModifyMenu", menu).then((result) => {
                     resolve(result.data);
@@ -35,7 +20,7 @@ class Api {
          * 获取菜单
          * @returns {Promise} 结果
          */
-        getMenuList(): Promise<ResponseModel<MenuModel[]>> {
+        getMenuList(): Promise<ResponseModel<models.MenuModel[]>> {
             return new Promise((resolve, reject) => {
                 Axios.get<ResponseModel>("/System/MenuList").then(result => {
                     resolve(result.data);
@@ -61,8 +46,32 @@ class Api {
          * @param form
          * @returns {Promise} 结果
          */
-        login<T = any>(form: LoginModel) {
+        login<T = any>(form: models.LoginModel) {
             return Axios.post<ResponseModel<T>>('/Home/Login', form);
+        },
+
+        /**
+         * 获取用户集合
+         * @param pageModel 分页的查询参数
+         */
+        getUserList(pageModel?: models.PageingModel): Promise<ResponseModel<models.PageingModel<models.UserModel>>> {
+            return new Promise((resolve, reject) => {
+                Axios.get("/System/GetUserList", { params: pageModel }).then(result => {
+                    resolve(result.data);
+                });
+            });
+        },
+
+        /**
+         * 获取角色集合
+         * @param pageModel
+         */
+        getRoleList(pageModel?: models.PageingModel): Promise<ResponseModel<models.PageingModel<models.RoleModel>>> {
+            return new Promise((resolve, reject) => {
+                Axios.get("/System/GetRoleList", { params: pageModel }).then(result => {
+                    resolve(result.data);
+                });
+            });
         }
     }
 }

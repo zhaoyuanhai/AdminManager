@@ -15,6 +15,7 @@ namespace AdminTemplate.JsonNet
             this.Settings = new JsonSerializerSettings()
             {
                 DateFormatString = "yyyy-MM-dd",
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 //ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
         }

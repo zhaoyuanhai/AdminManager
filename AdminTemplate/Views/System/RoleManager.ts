@@ -6,7 +6,7 @@ VueInit({
         formInline: {}
     },
     async mounted() {
-        let result = await api.system.getUserList({ PageIndex: 1, PageSize: 10 });
+        var result = await api.system.getRoleList();
         this.$data.tableData = result.Data.Datas;
     }
 });

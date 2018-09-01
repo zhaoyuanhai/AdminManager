@@ -1,7 +1,8 @@
 ﻿import Vue from 'vue';
-import api, { MenuModel } from 'api'
+import api from 'api'
 import Common, { Color } from 'common';
 import Axios from 'axios';
+import * as models from 'models';
 
 interface NodeData {
     id: number;
@@ -56,7 +57,7 @@ VueInit({
         this.$data.menuList = data.Data;
 
         //设置菜单列表
-        var treeData = Common.CompileTree<MenuModel, NodeData>(data.Data, null, "Id", "ParentId", (item, arr) => {
+        var treeData = Common.CompileTree<models.MenuModel, NodeData>(data.Data, null, "Id", "ParentId", (item, arr) => {
             return {
                 id: item.Id,
                 label: item.Title,
@@ -151,8 +152,8 @@ VueInit({
             }
         },
         async handleDrop(draggingNode: TreeNode, dropNode: TreeNode, dropType) {
-            var menu: MenuModel = this.$data.menuList.find(x => x.Id === draggingNode.data.id);
-            var target: MenuModel = this.$data.menuList.find(x => x.Id === dropNode.data.id);
+            var menu: models.MenuModel = this.$data.menuList.find(x => x.Id === draggingNode.data.id);
+            var target: models.MenuModel = this.$data.menuList.find(x => x.Id === dropNode.data.id);
 
             if (dropType === 'inner') {
                 menu.ParentId = target.Id;

@@ -49,5 +49,10 @@ namespace AdminTemplate.ViewExtends
         {
             return UseTag(htmlHelper.ViewContext, ".css");
         }
+
+        public static IHtmlString RenderAuthority(this HtmlHelper htmlHelper, string tagName, object htmlAttribute)
+        {
+            return null;
+        }
     }
 }

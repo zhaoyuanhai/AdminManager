@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201808271143111_DeleteAuthorityNameColumn.Designer.cs">
       <DependentUpon>201808271143111_DeleteAuthorityNameColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809011720054_addMenuOperation.cs" />
+    <Compile Include="Migrations\201809011720054_addMenuOperation.Designer.cs">
+      <DependentUpon>201809011720054_addMenuOperation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ParameterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808271143111_DeleteAuthorityNameColumn.resx">
       <DependentUpon>201808271143111_DeleteAuthorityNameColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809011720054_addMenuOperation.resx">
+      <DependentUpon>201809011720054_addMenuOperation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

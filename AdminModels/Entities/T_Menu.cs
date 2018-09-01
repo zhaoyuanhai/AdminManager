@@ -59,6 +59,9 @@ namespace AdminModels.Entities
         /// 外键权限对象
         /// </summary>
         [ForeignKey("AuthorityId")]
-        public ICollection<T_Authority> Authorities { get; set; }
+        public virtual ICollection<T_Authority> Authorities { get; set; }
+
+        [ForeignKey("OperationId")]
+        public virtual ICollection<T_Operation> Operations { get; set; }
     }
 }

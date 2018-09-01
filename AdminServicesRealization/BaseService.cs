@@ -95,16 +95,16 @@ namespace AdminServicesRealization
             return entities.Set<T>().Where(expression).ToList();
         }
 
-        public virtual Tuple<IEnumerable<T>, int> SelectPage(int pageIndex, int pageSize)
+        public virtual IPageingModel<T> SelectPage(int pageIndex, int pageSize)
         {
             return SelectPage(x => true, pageIndex, pageSize);
         }
 
-        public virtual Tuple<IEnumerable<T>, int> SelectPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize)
+        public virtual IPageingModel<T> SelectPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize)
         {
             var total = entities.Set<T>().Count();
-            var datas = entities.Set<T>().Where(expression).Skip((pageIndex - 1) * pageIndex).Take(pageSize).ToList().AsEnumerable();
-            return Tuple.Create(datas, total);
+            var datas = entities.Set<T>().Where(expression).OrderBy(x => x.Id).Skip((pageIndex - 1) * pageIndex).Take(pageSize).ToList().AsEnumerable();
+            return new PageingModel<T>(pageIndex, pageSize, total, datas);
         }
 
         public int Delete(int id)

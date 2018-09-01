@@ -43,6 +43,7 @@
     <Compile Include="Common\IValidateCodeService.cs" />
     <Compile Include="IDeleteService.cs" />
     <Compile Include="IModifyService.cs" />
+    <Compile Include="IPageingService.cs" />
     <Compile Include="ISelectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IAddService.cs" />

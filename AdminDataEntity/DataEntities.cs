@@ -22,6 +22,8 @@ namespace AdminDataEntity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            this.Configuration.LazyLoadingEnabled = true;
+
             #region 设置外键关联关系
             //用户和角色
             modelBuilder.Entity<T_User>()
@@ -86,6 +88,17 @@ namespace AdminDataEntity
                     m.MapLeftKey("AuthorityId");
                     m.MapRightKey("OperationId");
                     m.ToTable("T_AuthorityOperation");
+                });
+
+            //菜单和功能
+            modelBuilder.Entity<T_Menu>()
+                .HasMany(x => x.Operations)
+                .WithMany(x => x.Menus)
+                .Map(m =>
+                {
+                    m.MapLeftKey("MenuId");
+                    m.MapRightKey("OperationId");
+                    m.ToTable("T_MenuOperation");
                 });
             #endregion
 

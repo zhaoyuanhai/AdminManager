@@ -16,12 +16,34 @@ namespace AdminServices
         /// <returns></returns>
         T Find(params object[] keyValues);
 
+        /// <summary>
+        /// 查询所有的数据
+        /// </summary>
+        /// <returns></returns>
         IEnumerable<T> Select();
 
+        /// <summary>
+        /// 查询匹配条件的所有数据
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
         IEnumerable<T> Select(Expression<Func<T, bool>> expression);
 
-        Tuple<IEnumerable<T>, int> SelectPage(int pageIndex, int pageSize);
+        /// <summary>
+        /// 分页查询数据
+        /// </summary>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">每页数量</param>
+        /// <returns>数据和总条数</returns>
+        IPageingModel<T> SelectPage(int pageIndex, int pageSize);
 
-        Tuple<IEnumerable<T>, int> SelectPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize);
+        /// <summary>
+        /// 条件分页查询数据
+        /// </summary>
+        /// <param name="expression">条件</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">每页数量</param>
+        /// <returns>数据和总条数</returns>
+        IPageingModel<T> SelectPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize);
     }
 }
