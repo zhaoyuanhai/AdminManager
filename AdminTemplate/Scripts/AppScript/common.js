@@ -1,7 +1,9 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class Common {
+    var Common = /** @class */ (function () {
+        function Common() {
+        }
         /**
          * 组织平面数据变成树形结构
          * @param T 数组类型项类型
@@ -13,7 +15,9 @@ define(["require", "exports"], function (require, exports) {
          * @param itemFactory
          * @param orderFn 排序函数
          */
-        static CompileTree(array, fid, idName, fidName, itemFactory = null, orderFn = null) {
+        Common.CompileTree = function (array, fid, idName, fidName, itemFactory, orderFn) {
+            if (itemFactory === void 0) { itemFactory = null; }
+            if (orderFn === void 0) { orderFn = null; }
             var tempArr = [];
             for (var i = 0; i < array.length; i++) {
                 if (array[i][fidName] == fid) {
@@ -24,26 +28,29 @@ define(["require", "exports"], function (require, exports) {
                 tempArr.sort(orderFn);
             }
             function tree(arr, objArr) {
-                for (let i = 0; i < arr.length; i++) {
-                    let current = arr[i];
-                    let obj = {
-                        source: arr[i],
+                var _loop_1 = function (i_1) {
+                    var current = arr[i_1];
+                    var obj = {
+                        source: arr[i_1],
                         children: []
                     };
                     if (itemFactory != null) {
-                        obj = itemFactory(arr[i], []);
+                        obj = itemFactory(arr[i_1], []);
                     }
                     objArr.push(obj);
-                    let childArr = array.filter(function (x) { return x[fidName] == arr[i][idName]; });
+                    var childArr = array.filter(function (x) { return x[fidName] == arr[i_1][idName]; });
                     if (orderFn != null)
                         childArr.sort(orderFn);
                     tree(childArr, obj.children);
+                };
+                for (var i_1 = 0; i_1 < arr.length; i_1++) {
+                    _loop_1(i_1);
                 }
             }
             var objArr = [];
             tree(tempArr, objArr);
             return objArr;
-        }
+        };
         /**
          * 排序已组织好的树
          * @param arrTree 树结构
@@ -53,7 +60,8 @@ define(["require", "exports"], function (require, exports) {
          * @param orderFn 排序函数
          * @param isParent 是否为父元素添加isParent字段
          */
-        static OrderByTree(arrTree, fid, idName, fidName, orderFn, isParent = false) {
+        Common.OrderByTree = function (arrTree, fid, idName, fidName, orderFn, isParent) {
+            if (isParent === void 0) { isParent = false; }
             if (!(arrTree instanceof Array))
                 throw "必须为数组类型";
             var data = Common.CompileTree(arrTree, fid, idName, fidName, orderFn);
@@ -70,12 +78,12 @@ define(["require", "exports"], function (require, exports) {
             }
             tree(data);
             return arr;
-        }
+        };
         /**
          * 合并已经组织好的树结构
          * @param array
          */
-        static Merge(array) {
+        Common.Merge = function (array) {
             var arr = [];
             (function merge(array) {
                 for (var i = 0; i < array.length; i++) {
@@ -84,23 +92,24 @@ define(["require", "exports"], function (require, exports) {
                 }
             })(array);
             return arr;
-        }
+        };
         /**
          * 设置对象的属性为空字符串
          * @param obj 对象
          * @returns {void}
          */
-        static SetObjectPropEmptyString(obj) {
+        Common.SetObjectPropEmptyString = function (obj) {
             if (obj != null)
-                for (let name in obj) {
-                    if (typeof obj[name] === 'object') {
-                        Common.SetObjectPropEmptyString(obj[name]);
+                for (var name_1 in obj) {
+                    if (typeof obj[name_1] === 'object') {
+                        Common.SetObjectPropEmptyString(obj[name_1]);
                     }
                     else
-                        obj[name] = "";
+                        obj[name_1] = "";
                 }
-        }
-    }
+        };
+        return Common;
+    }());
     exports.default = Common;
     var Color;
     (function (Color) {

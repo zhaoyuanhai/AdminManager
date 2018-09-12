@@ -1,5 +1,5 @@
 (function () {
-    let vueOption = {};
+    var vueOption = {};
     //初始化vue的方法
     window.VueInit = function (_option) {
         vueOption = _option;
@@ -20,21 +20,21 @@ require.config({
     }
 });
 function renderPage(Vue, jquery, ELEMENT) {
-    let vueOption = {
+    var vueOption = {
         el: "#v-app",
         methods: {
-            _menuClick(url, id) {
+            _menuClick: function (url, id) {
                 if (url) {
                     location.hash = url;
                 }
             },
-            create() {
+            create: function () {
             },
-            modify() {
+            modify: function () {
             },
-            remove() {
+            remove: function () {
             },
-            select() {
+            select: function () {
             }
         }
     };

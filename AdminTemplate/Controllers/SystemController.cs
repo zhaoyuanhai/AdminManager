@@ -10,14 +10,17 @@ namespace AdminTemplate.Controllers
         readonly IMenuService menuService;
         readonly IUserService userService;
         readonly IRoleService roleService;
+        readonly IOperationService operationService;
 
         public SystemController(IMenuService menuService,
             IUserService userService,
-            IRoleService roleService)
+            IRoleService roleService,
+            IOperationService operationService)
         {
             this.menuService = menuService;
             this.userService = userService;
             this.roleService = roleService;
+            this.operationService = operationService;
         }
 
         #region 页面
@@ -37,8 +40,16 @@ namespace AdminTemplate.Controllers
         public ActionResult UserGroupManager() => View();
 
         //[Authorize(Roles = "admin")]
+        public ActionResult OperationManager() => View();
+
+        //[Authorize(Roles = "admin")]
+        public ActionResult Config() => View();
+
+        //[Authorize(Roles = "admin")]
         public ActionResult OperationLog() => View();
         #endregion
+
+        #region 菜单接口
 
         /// <summary>
         /// 返回菜单列表
@@ -93,6 +104,9 @@ namespace AdminTemplate.Controllers
             else
                 return JsonError("删除失败");
         }
+        #endregion
+
+        #region 用户接口
 
         /// <summary>
         /// 获取用户列表
@@ -103,6 +117,9 @@ namespace AdminTemplate.Controllers
             var datas = userService.SelectPage(pageing.PageIndex, pageing.PageSize);
             return JsonSuccess(datas);
         }
+        #endregion
+
+        #region 角色接口
 
         /// <summary>
         /// 获取角色集合
@@ -113,5 +130,14 @@ namespace AdminTemplate.Controllers
             var datas = roleService.SelectPage(pageing.PageIndex, pageing.PageSize);
             return JsonSuccess(datas);
         }
+        #endregion
+
+        #region 功能接口
+        public ActionResult OperationList(PageingModel pageing)
+        {
+            var datas = operationService.SelectPage(pageing.PageIndex, pageing.PageSize);
+            return JsonSuccess(datas);
+        }
+        #endregion
     }
 }

@@ -197,5 +197,7 @@ namespace AdminDataEntity
         /// 权限类型表
         /// </summary>
         public DbSet<T_AuthorityType> AuthorityTypes { get; set; }
+
+        public DbSet<T_Operation> Operations { get; set; }
     }
 }

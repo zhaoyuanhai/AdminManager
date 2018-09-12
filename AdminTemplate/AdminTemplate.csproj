@@ -1252,6 +1252,8 @@
     <Content Include="Views\System\OperationLog.cshtml" />
     <Content Include="Views\Shared\404.cshtml" />
     <Content Include="Views\Home\Default.cshtml" />
+    <Content Include="Views\System\OperationManager.cshtml" />
+    <Content Include="Views\System\Config.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AppScript\api.ts" />
@@ -1344,7 +1346,9 @@
     <TypeScriptCompile Include="Views\Home\Default.ts" />
     <TypeScriptCompile Include="Views\Home\Index.ts" />
     <TypeScriptCompile Include="Views\Home\Login.ts" />
+    <TypeScriptCompile Include="Views\System\AuthorityManager.ts" />
     <TypeScriptCompile Include="Views\System\MenuManager.ts" />
+    <TypeScriptCompile Include="Views\System\OperationManager.ts" />
     <TypeScriptCompile Include="Views\System\RoleManager.ts" />
     <TypeScriptCompile Include="Views\System\UserManager.ts" />
   </ItemGroup>

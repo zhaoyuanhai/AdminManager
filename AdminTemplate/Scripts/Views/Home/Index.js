@@ -1,5 +1,5 @@
 VueInit({
-    mounted() {
+    mounted: function () {
         $("#_frame").height($(".el-main").height() - 1);
         if (location.hash) {
             $("#_frame").attr("src", location.hash.substring(1));

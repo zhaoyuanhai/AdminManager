@@ -33,7 +33,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", "api"], function (require, exports, api_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
@@ -43,11 +43,18 @@ define(["require", "exports"], function (require, exports) {
         },
         mounted: function () {
             return __awaiter(this, void 0, void 0, function () {
+                var result;
                 return __generator(this, function (_a) {
-                    return [2 /*return*/];
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, api_1.default.system.getOperationList()];
+                        case 1:
+                            result = _a.sent();
+                            this.$data.tableData = result.Data.Datas;
+                            return [2 /*return*/];
+                    }
                 });
             });
         }
     });
 });
-//# sourceMappingURL=AuthorityManager.js.map
+//# sourceMappingURL=OperationManager.js.map

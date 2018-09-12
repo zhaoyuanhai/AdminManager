@@ -8,24 +8,18 @@ class Api {
          * @param menu
          * @returns {Promise} 结果
          */
-        setMenu(menu: models.MenuModel): Promise<ResponseModel<models.MenuModel>> {
-            return new Promise((resolve, reject) => {
-                Axios.post<ResponseModel>("/System/CreateModifyMenu", menu).then((result) => {
-                    resolve(result.data);
-                });
-            });
+        async setMenu(menu: models.MenuModel): Promise<ResponseModel<models.MenuModel>> {
+            var result = await Axios.post<ResponseModel>("/System/CreateModifyMenu", menu);
+            return result.data;
         },
 
         /**
          * 获取菜单
          * @returns {Promise} 结果
          */
-        getMenuList(): Promise<ResponseModel<models.MenuModel[]>> {
-            return new Promise((resolve, reject) => {
-                Axios.get<ResponseModel>("/System/MenuList").then(result => {
-                    resolve(result.data);
-                });
-            });
+        async getMenuList(): Promise<ResponseModel<models.MenuModel[]>> {
+            var result = await Axios.get<ResponseModel>("/System/MenuList");
+            return result.data;
         },
 
         /**
@@ -33,12 +27,9 @@ class Api {
          * @param id 菜单Id
          * @returns {Promise} 结果
          */
-        deleteMenu(id: number): Promise<ResponseModel> {
-            return new Promise((resolve, reject) => {
-                Axios.get<ResponseModel>("/System/DeleteMenu", { params: { id: id } }).then(result => {
-                    resolve(result.data);
-                });
-            });
+        async deleteMenu(id: number): Promise<ResponseModel> {
+            var result = await Axios.get<ResponseModel>("/System/DeleteMenu", { params: { id: id } })
+            return result.data;
         },
 
         /**
@@ -54,25 +45,28 @@ class Api {
          * 获取用户集合
          * @param pageModel 分页的查询参数
          */
-        getUserList(pageModel?: models.PageingModel): Promise<ResponseModel<models.PageingModel<models.UserModel>>> {
-            return new Promise((resolve, reject) => {
-                Axios.get("/System/GetUserList", { params: pageModel }).then(result => {
-                    resolve(result.data);
-                });
-            });
+        async getUserList(pageModel?: models.PageingModel): Promise<ResponseModel<models.PageingModel<models.UserModel>>> {
+            var result = await Axios.get("/System/GetUserList", { params: pageModel });
+            return result.data;
         },
 
         /**
          * 获取角色集合
          * @param pageModel
          */
-        getRoleList(pageModel?: models.PageingModel): Promise<ResponseModel<models.PageingModel<models.RoleModel>>> {
-            return new Promise((resolve, reject) => {
-                Axios.get("/System/GetRoleList", { params: pageModel }).then(result => {
-                    resolve(result.data);
-                });
-            });
-        }
+        async getRoleList(pageModel?: models.PageingModel): Promise<ResponseModel<models.PageingModel<models.RoleModel>>> {
+            var result = await Axios.get("/System/GetRoleList", { params: pageModel });
+            return result.data;
+        },
+
+        /**
+         * 获取功能集合
+         * @param pageingModel
+         */
+        async getOperationList(pageingModel?: models.PageingModel): Promise<ResponseModel<models.PageingModel<models.OperationModel>>> {
+            var result = await Axios.get("/System/OperationList", { params: pageingModel });
+            return result.data;
+        },
     }
 }
 

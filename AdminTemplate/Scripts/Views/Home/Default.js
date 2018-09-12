@@ -1,12 +1,12 @@
 VueInit({
     methods: {
-        btnClick() {
+        btnClick: function () {
             top.vue.$alert('这是一段内容', '标题名称', {
                 confirmButtonText: '确定'
             });
         },
-        test() {
-            const h = this.$createElement;
+        test: function () {
+            var h = this.$createElement;
             var btn = h('el-button', {}, '按钮');
             this.$notify({
                 title: '标题名称',

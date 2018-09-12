@@ -29,6 +29,17 @@ export interface UserModel {
     Roles: RoleModel[]
 }
 
+export interface OperationModel {
+    Id: number
+    Name: string
+    Event: string
+    Icon: string
+    ClassName: string
+    _CreateDate: Date
+    _UpdateDate: Date
+}
+
+
 export interface PageingModel<T = any> {
     PageIndex: number;
     PageSize: number;
