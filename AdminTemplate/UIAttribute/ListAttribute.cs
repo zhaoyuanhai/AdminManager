@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AdminTemplate.UIAttribute
@@ -18,7 +15,7 @@ namespace AdminTemplate.UIAttribute
 
         public virtual void OnMetadataCreated(ModelMetadata metadata)
         {
-             metadata.AdditionalValues.Add("ListName", this.ListName);
+            metadata.AdditionalValues.Add("ListName", this.ListName);
         }
     }
 }

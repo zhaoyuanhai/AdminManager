@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace AdminTemplate.UIAttribute
+﻿namespace AdminTemplate.UIAttribute
 {
     //public class MyCustomMetadataAware : Attribute, IMetadataAware
     //{

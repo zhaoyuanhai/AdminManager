@@ -175,6 +175,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="JsonNet\JsonNetResult.cs" />
+    <Compile Include="Mapping\TabeEntityAttribute.cs" />
     <Compile Include="Message\ErrorMessage.cs" />
     <Compile Include="Message\JsonMessage.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -1229,6 +1230,7 @@
     <Content Include="node_modules\element-ui\packages\upload\src\upload-list.vue" />
     <Content Include="node_modules\element-ui\packages\upload\src\upload.vue" />
     <Content Include="node_modules\element-ui\README.md" />
+    <Content Include="Mapping\Setting.json" />
     <None Include="packages.config" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />

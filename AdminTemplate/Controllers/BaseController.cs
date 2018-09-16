@@ -84,5 +84,41 @@ namespace AdminTemplate.Controllers
         {
             UpdateModel(model, string.Empty, includePropers, excludePropers);
         }
+
+        public ActionResult Query()
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
+            return View();
+        }
+
+        public ActionResult Add()
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
+            return View();
+        }
+
+        public ActionResult Edit()
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
+            return View();
+        }
+
+        public ActionResult Delete()
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
+            return View();
+        }
     }
 }
