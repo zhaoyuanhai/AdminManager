@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AdminServices;
 
-namespace AdminCommon
+namespace AdminModels.Customs
 {
     public class PageingModel<T> : IPageingModel<T> where T : class
     {

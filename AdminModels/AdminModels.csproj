@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customs\ConditionModel.cs" />
+    <Compile Include="Customs\IPageingService.cs" />
+    <Compile Include="Customs\PageingModel.cs" />
     <Compile Include="Entities\T_Authority.cs" />
     <Compile Include="Entities\T_AuthorityType.cs" />
+    <Compile Include="Entities\T_File.cs" />
     <Compile Include="Entities\T_Group.cs" />
     <Compile Include="Entities\T_Menu.cs" />
     <Compile Include="Entities\T_Operation.cs" />

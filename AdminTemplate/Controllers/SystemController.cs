@@ -1,16 +1,16 @@
-﻿using AdminModels.Entities;
+﻿using AdminModels.Customs;
+using AdminModels.Entities;
 using AdminServices.System;
 using System.Web.Mvc;
-using AdminCommon;
 
 namespace AdminTemplate.Controllers
 {
     public class SystemController : BaseController
     {
-        readonly IMenuService menuService;
-        readonly IUserService userService;
-        readonly IRoleService roleService;
-        readonly IOperationService operationService;
+        private readonly IMenuService menuService;
+        private readonly IUserService userService;
+        private readonly IRoleService roleService;
+        private readonly IOperationService operationService;
 
         public SystemController(IMenuService menuService,
             IUserService userService,
@@ -24,6 +24,7 @@ namespace AdminTemplate.Controllers
         }
 
         #region 页面
+
         //[Authorize(Roles = "admin")]
         public ActionResult MenuManager() => View();
 
@@ -47,7 +48,8 @@ namespace AdminTemplate.Controllers
 
         //[Authorize(Roles = "admin")]
         public ActionResult OperationLog() => View();
-        #endregion
+
+        #endregion 页面
 
         #region 菜单接口
 
@@ -104,7 +106,8 @@ namespace AdminTemplate.Controllers
             else
                 return JsonError("删除失败");
         }
-        #endregion
+
+        #endregion 菜单接口
 
         #region 用户接口
 
@@ -117,7 +120,8 @@ namespace AdminTemplate.Controllers
             var datas = userService.SelectPage(pageing.PageIndex, pageing.PageSize);
             return JsonSuccess(datas);
         }
-        #endregion
+
+        #endregion 用户接口
 
         #region 角色接口
 
@@ -130,14 +134,17 @@ namespace AdminTemplate.Controllers
             var datas = roleService.SelectPage(pageing.PageIndex, pageing.PageSize);
             return JsonSuccess(datas);
         }
-        #endregion
+
+        #endregion 角色接口
 
         #region 功能接口
+
         public ActionResult OperationList(PageingModel pageing)
         {
             var datas = operationService.SelectPage(pageing.PageIndex, pageing.PageSize);
             return JsonSuccess(datas);
         }
-        #endregion
+
+        #endregion 功能接口
     }
 }

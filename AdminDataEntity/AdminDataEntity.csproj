@@ -49,21 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataEntities.cs" />
-    <Compile Include="Migrations\201808271027074_InitDatabase.cs" />
-    <Compile Include="Migrations\201808271027074_InitDatabase.Designer.cs">
-      <DependentUpon>201808271027074_InitDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808271042092_aaa.cs" />
-    <Compile Include="Migrations\201808271042092_aaa.Designer.cs">
-      <DependentUpon>201808271042092_aaa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808271143111_DeleteAuthorityNameColumn.cs" />
-    <Compile Include="Migrations\201808271143111_DeleteAuthorityNameColumn.Designer.cs">
-      <DependentUpon>201808271143111_DeleteAuthorityNameColumn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809011720054_addMenuOperation.cs" />
-    <Compile Include="Migrations\201809011720054_addMenuOperation.Designer.cs">
-      <DependentUpon>201809011720054_addMenuOperation.cs</DependentUpon>
+    <Compile Include="Migrations\201809180831136_AddFile.cs" />
+    <Compile Include="Migrations\201809180831136_AddFile.Designer.cs">
+      <DependentUpon>201809180831136_AddFile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ParameterModel.cs" />
@@ -83,17 +71,8 @@
     <Content Include="main.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808271027074_InitDatabase.resx">
-      <DependentUpon>201808271027074_InitDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808271042092_aaa.resx">
-      <DependentUpon>201808271042092_aaa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808271143111_DeleteAuthorityNameColumn.resx">
-      <DependentUpon>201808271143111_DeleteAuthorityNameColumn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809011720054_addMenuOperation.resx">
-      <DependentUpon>201809011720054_addMenuOperation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809180831136_AddFile.resx">
+      <DependentUpon>201809180831136_AddFile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

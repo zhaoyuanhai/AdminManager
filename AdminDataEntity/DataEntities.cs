@@ -198,6 +198,14 @@ namespace AdminDataEntity
         /// </summary>
         public DbSet<T_AuthorityType> AuthorityTypes { get; set; }
 
+        /// <summary>
+        /// 操作类型表
+        /// </summary>
         public DbSet<T_Operation> Operations { get; set; }
+
+        /// <summary>
+        /// 文件表
+        /// </summary>
+        public DbSet<T_File> Files { get; set; }
     }
 }

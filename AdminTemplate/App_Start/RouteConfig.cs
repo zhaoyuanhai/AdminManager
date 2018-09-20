@@ -11,6 +11,8 @@ namespace AdminTemplate
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.RouteExistingFiles = true;
+            routes.MapMvcAttributeRoutes();
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             //页面路由,不经过控制器,直接访问视图
@@ -23,16 +25,25 @@ namespace AdminTemplate
                     action = "Page"
                 });
 
-            //标准增删改查路由
+            //标准增删改查路由,实体增删改查
             routes.MapRoute(
                 name: "EntityRouter",
-                url: "Entity/{controller}/{action}/{query}");
+                url: "Entity/{action}/{entity}",
+                defaults: new
+                {
+                    controller = "Entity"
+                });
 
             //标准路由
             routes.MapRoute(
-                name: "Default",
+                name: "DefaultRouter",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
             );
         }
     }

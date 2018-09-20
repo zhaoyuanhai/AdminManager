@@ -9,6 +9,7 @@ using AdminDataEntity;
 using AdminCommon;
 using AdminModels;
 using System.Data.Entity;
+using AdminModels.Customs;
 
 namespace AdminServicesRealization
 {
@@ -104,23 +105,38 @@ namespace AdminServicesRealization
         {
             var total = entities.Set<T>().Count();
             var datas = entities.Set<T>().Where(expression).OrderBy(x => x.Id).Skip((pageIndex - 1) * pageIndex).Take(pageSize).ToList().AsEnumerable();
-            return new PageingModel<T>(pageIndex, pageSize, total, datas);
+            return new AdminModels.Customs.PageingModel<T>(pageIndex, pageSize, total, datas);
         }
 
-        public int Delete(int id)
+        public IPageingModel<T> SelectPage(ConditionModel[] condition, int pageIndex, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual int Delete(int id)
         {
             var entity = entities.Set<T>().First(x => x.Id == id);
             entities.Set<T>().Remove(entity);
             return entities.SaveChanges();
         }
 
-        public int DeleteBatch(IEnumerable<int> ids)
+        public virtual int DeleteBatch(IEnumerable<int> ids)
         {
             var datas = from entity in entities.Set<T>()
                         join id in ids on entity.Id equals id
                         select entity;
             entities.Set<T>().RemoveRange(datas);
             return entities.SaveChanges();
+        }
+
+        public virtual T First(Expression<Func<T, bool>> expression)
+        {
+            return entities.Set<T>().First(expression);
+        }
+
+        public virtual T FirstOrDefault(Expression<Func<T, bool>> expression)
+        {
+            return entities.Set<T>().FirstOrDefault(expression);
         }
     }
 }

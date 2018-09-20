@@ -7,13 +7,13 @@ namespace AdminDataEntity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class DeleteAuthorityNameColumn : IMigrationMetadata
+    public sealed partial class AddFile : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DeleteAuthorityNameColumn));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddFile));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808271143111_DeleteAuthorityNameColumn"; }
+            get { return "201809180831136_AddFile"; }
         }
         
         string IMigrationMetadata.Source
