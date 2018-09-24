@@ -39,10 +39,21 @@ export interface OperationModel {
     _UpdateDate: Date
 }
 
-
 export interface PageingModel<T = any> {
     PageIndex: number;
     PageSize: number;
     PageCount?: number;
     Datas?: Array<T>
+}
+
+export interface EntityModel {
+    Field: string;
+    Value: any;
+    Group?: string;
+    Op: Operation;
+}
+
+export enum Operation {
+    equal = 1,
+    notequal = 2
 }

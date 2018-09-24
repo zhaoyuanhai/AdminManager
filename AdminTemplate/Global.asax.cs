@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AdminEngine;
+using AdminTemplate.MetadataProviders;
 
 namespace AdminTemplate
 {
@@ -22,6 +23,8 @@ namespace AdminTemplate
 
             //启用容器
             EngineContext.Initialize(false);
+
+            //ModelMetadataProviders.Current = new MyCustomModelMetadataProvider();
         }
     }
 }

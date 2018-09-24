@@ -104,13 +104,14 @@ namespace AdminServicesRealization
         public virtual IPageingModel<T> SelectPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize)
         {
             var total = entities.Set<T>().Count();
-            var datas = entities.Set<T>().Where(expression).OrderBy(x => x.Id).Skip((pageIndex - 1) * pageIndex).Take(pageSize).ToList().AsEnumerable();
-            return new AdminModels.Customs.PageingModel<T>(pageIndex, pageSize, total, datas);
+            var datas = entities.Set<T>().WhereIf(expression, expression != null).OrderBy(x => x.Id).Skip((pageIndex - 1) * pageIndex).Take(pageSize).ToList();
+            return new PageingModel<T>(pageIndex, pageSize, total, datas);
         }
 
-        public IPageingModel<T> SelectPage(ConditionModel[] condition, int pageIndex, int pageSize)
+        public IPageingModel<T> SelectPage(IExpressionLambdaModel conditions, int pageIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            var expression = conditions?.ToExpression<T>();
+            return this.SelectPage(expression, pageIndex, pageSize);
         }
 
         public virtual int Delete(int id)

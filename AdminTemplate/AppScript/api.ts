@@ -1,6 +1,13 @@
 ﻿import Axios from 'axios';
 import * as models from 'models';
 
+Axios.interceptors.request.use(config => {
+    config.headers["X-Requested-With"] = "XMLHttpRequest";
+    return config;
+}, error => {
+    console.log(error);
+});
+
 class Api {
     system = {
         /**
@@ -67,6 +74,28 @@ class Api {
             var result = await Axios.get("/System/OperationList", { params: pageingModel });
             return result.data;
         },
+    }
+
+    current = {
+        async get<T = any>(data?: { pageing?: models.PageingModel, condition?: models.EntityModel[] }): Promise<ResponseModel<T>> {
+            let result = await Axios.get("", { params: data });
+            return result.data;
+        },
+
+        async post(data: any): Promise<ResponseModel<any>> {
+            let result = await Axios.post("", data);
+            return result.data;
+        },
+
+        async delete(data: any): Promise<ResponseModel<any>> {
+            let result = await Axios.delete("", data);
+            return result.data;
+        },
+
+        async put(data: any): Promise<ResponseModel<any>> {
+            let result = await Axios.put("", data);
+            return result.data;
+        }
     }
 }
 

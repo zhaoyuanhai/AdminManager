@@ -11,8 +11,13 @@ namespace AdminTemplate.Controllers
     public class TestController : Controller
     {
         // GET: Test
-        public ActionResult Index()
+        public ActionResult Index(Student student)
         {
+            var dd = ModelMetadataProviders.Current.GetMetadataForType(new Func<object>(() =>
+              {
+                  return null;
+              }), typeof(Student));
+
             var models = new List<Student>()
             {
                 new Student("王五",17,false,"www.person.com"),

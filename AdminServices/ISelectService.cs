@@ -68,6 +68,6 @@ namespace AdminServices
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页数量</param>
         /// <returns>数据和总条数</returns>
-        IPageingModel<T> SelectPage(ConditionModel[] condition, int pageIndex, int pageSize);
+        IPageingModel<T> SelectPage(IExpressionLambdaModel conditions, int pageIndex, int pageSize);
     }
 }

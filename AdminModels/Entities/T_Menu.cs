@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace AdminModels.Entities
 {
@@ -13,7 +10,7 @@ namespace AdminModels.Entities
     {
         public T_Menu()
         {
-            this.Authorities = new List<T_Authority>();
+            this.Authorities = new Collection<T_Authority>();
         }
 
         /// <summary>
@@ -53,15 +50,18 @@ namespace AdminModels.Entities
         /// 外键父对象
         /// </summary>
         [ForeignKey("ParentId")]
+        [HiddenInput(DisplayValue = true)]
         public T_Menu ParentMenu { get; set; }
 
         /// <summary>
         /// 外键权限对象
         /// </summary>
         [ForeignKey("AuthorityId")]
+        [HiddenInput(DisplayValue = true)]
         public virtual ICollection<T_Authority> Authorities { get; set; }
 
         [ForeignKey("OperationId")]
+        [HiddenInput(DisplayValue = true)]
         public virtual ICollection<T_Operation> Operations { get; set; }
     }
 }

@@ -36,6 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 define(["require", "exports", "axios"], function (require, exports, axios_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    axios_1.default.interceptors.request.use(function (config) {
+        config.headers["X-Requested-With"] = "XMLHttpRequest";
+        return config;
+    }, function (error) {
+        console.log(error);
+    });
     var Api = /** @class */ (function () {
         function Api() {
             this.system = {
@@ -151,6 +157,60 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                         });
                     });
                 },
+            };
+            this.current = {
+                get: function (data) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.get("", { params: data })];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                post: function (data) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.post("", data)];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                delete: function (data) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.delete("", data)];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                put: function (data) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.put("", data)];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                }
             };
         }
         return Api;

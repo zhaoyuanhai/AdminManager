@@ -4,11 +4,17 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AdminTemplate.Models
 {
     public class Student
     {
+        public Student()
+        {
+
+        }
+
         public Student(string name, int age, bool isBoy, string url)
         {
             this.Name = name;
@@ -21,6 +27,7 @@ namespace AdminTemplate.Models
         public int Id { get; set; }
 
         [DisplayName("姓名")]
+        [Display(Name = "姓名222")]
         public string Name { get; set; }
 
         [DisplayName("年龄")]

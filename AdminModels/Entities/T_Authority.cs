@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdminModels.Entities
 {
@@ -12,8 +8,8 @@ namespace AdminModels.Entities
     {
         public T_Authority()
         {
-            this.Menus = new List<T_Menu>();
-            this.Roles = new List<T_Role>();
+            this.Menus = new Collection<T_Menu>();
+            this.Roles = new Collection<T_Role>();
         }
 
         /// <summary>

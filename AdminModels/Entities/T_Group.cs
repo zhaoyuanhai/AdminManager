@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdminModels.Entities
 {
@@ -12,8 +9,8 @@ namespace AdminModels.Entities
     {
         public T_Group()
         {
-            this.Users = new List<T_User>();
-            this.Roles = new List<T_Role>();
+            this.Users = new Collection<T_User>();
+            this.Roles = new Collection<T_Role>();
         }
 
         /// <summary>

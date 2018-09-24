@@ -12,7 +12,6 @@ namespace AdminModels.Customs
         public PageingModel(int pageIndex, int pageSize)
             : this(pageIndex, pageSize, 0, new List<T>())
         {
-
         }
 
         public PageingModel(int pageIndex, int pageSize, int total, IEnumerable<T> datas)
@@ -57,6 +56,5 @@ namespace AdminModels.Customs
 
     public class PageingModel : PageingModel<object>
     {
-
     }
 }

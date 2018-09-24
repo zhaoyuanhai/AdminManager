@@ -111,6 +111,10 @@
       <Project>{fc5b0680-1c0d-4f82-82c4-c0514bb12358}</Project>
       <Name>AdminCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AdminModels\AdminModels.csproj">
+      <Project>{b5fa9529-0adf-4987-bde5-1c0a6576d973}</Project>
+      <Name>AdminModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AdminServicesRealization\AdminServicesRealization.csproj">
       <Project>{f4bb0698-ad82-44d2-8e14-faa8f96a3167}</Project>
       <Name>AdminServicesRealization</Name>
