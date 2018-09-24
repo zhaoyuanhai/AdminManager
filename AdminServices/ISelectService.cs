@@ -62,7 +62,7 @@ namespace AdminServices
         IPageingModel<T> SelectPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize);
 
         /// <summary>
-        /// 分页条件查询数据
+        /// 分页条件查询数据,pageIndex 和 pageSize 都为 0 的时候查询所有数据
         /// </summary>
         /// <param name="condition">条件对象</param>
         /// <param name="pageIndex">页码</param>

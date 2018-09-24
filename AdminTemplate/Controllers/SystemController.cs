@@ -115,10 +115,43 @@ namespace AdminTemplate.Controllers
         /// 获取用户列表
         /// </summary>
         /// <returns></returns>
-        public ActionResult GetUserList(PageingModel pageing)
+        public ActionResult GetUserList(PageingModel pageing, ConditionModelCollection conditions)
         {
-            var datas = userService.SelectPage(pageing.PageIndex, pageing.PageSize);
+            var datas = userService.SelectPage(conditions, pageing.PageIndex, pageing.PageSize);
             return JsonSuccess(datas);
+        }
+
+        /// <summary>
+        /// 设置用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public ActionResult SetUser(T_User user)
+        {
+            int count = 0;
+            if (user.Id > 0)
+                count = userService.Modify(user);
+            else
+                count = userService.Add(user);
+
+            if (count > 0)
+                return JsonSuccess(user);
+            else
+                return JsonError("添加或者修改失败，请联系管理员");
+        }
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DeleteUser(int id)
+        {
+            var count = userService.Delete(id);
+            if (count > 0)
+                return JsonSuccess();
+            else
+                return JsonError("删除用户失败");
         }
 
         #endregion 用户接口
@@ -133,6 +166,25 @@ namespace AdminTemplate.Controllers
         {
             var datas = roleService.SelectPage(pageing.PageIndex, pageing.PageSize);
             return JsonSuccess(datas);
+        }
+
+        public ActionResult SetRole(T_Role role)
+        {
+            int count;
+            if (role.Id <= 0)
+                count = roleService.Add(role);
+            else
+                count = roleService.Modify(role);
+            return JsonSuccess(role);
+        }
+
+        public ActionResult DeleteRole(int id)
+        {
+            var count = roleService.Delete(id);
+            if (count > 0)
+                return JsonSuccess();
+            else
+                return JsonError("删除失败，请联系管理员");
         }
 
         #endregion 角色接口
