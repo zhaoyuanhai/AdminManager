@@ -53,6 +53,7 @@
     <Compile Include="System\IMenuService.cs" />
     <Compile Include="System\IOperatorLogService.cs" />
     <Compile Include="System\IRoleService.cs" />
+    <Compile Include="System\IUserGroupService.cs" />
     <Compile Include="System\IUserService.cs" />
     <Compile Include="System\IOperationService.cs" />
   </ItemGroup>

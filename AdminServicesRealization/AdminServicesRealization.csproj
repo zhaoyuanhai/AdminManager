@@ -57,6 +57,7 @@
     <Compile Include="System\MenuService.cs" />
     <Compile Include="System\OperationService.cs" />
     <Compile Include="System\RoleService.cs" />
+    <Compile Include="System\UserGroupService.cs" />
     <Compile Include="System\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

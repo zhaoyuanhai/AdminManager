@@ -11,16 +11,19 @@ namespace AdminTemplate.Controllers
         private readonly IUserService userService;
         private readonly IRoleService roleService;
         private readonly IOperationService operationService;
+        private readonly IUserGroupService userGroupService;
 
         public SystemController(IMenuService menuService,
             IUserService userService,
             IRoleService roleService,
-            IOperationService operationService)
+            IOperationService operationService,
+            IUserGroupService userGroupService)
         {
             this.menuService = menuService;
             this.userService = userService;
             this.roleService = roleService;
             this.operationService = operationService;
+            this.userGroupService = userGroupService;
         }
 
         #region 页面
@@ -29,7 +32,10 @@ namespace AdminTemplate.Controllers
         public ActionResult MenuManager() => View();
 
         //[Authorize(Roles = "admin")]
-        public ActionResult UserManager() => View();
+        public ActionResult UserManager(PageingModel pageing)
+        {
+            return View();
+        }
 
         //[Authorize(Roles = "admin")]
         public ActionResult AuthorityManager() => View();
@@ -38,7 +44,15 @@ namespace AdminTemplate.Controllers
         public ActionResult RoleManager() => View();
 
         //[Authorize(Roles = "admin")]
-        public ActionResult UserGroupManager() => View();
+        public ActionResult UserGroupManager(PageingModel pageing)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var datas = userGroupService.SelectPage(pageing.PageIndex, pageing.PageSize);
+                return JsonSuccess(datas);
+            }
+            return View();
+        }
 
         //[Authorize(Roles = "admin")]
         public ActionResult OperationManager() => View();

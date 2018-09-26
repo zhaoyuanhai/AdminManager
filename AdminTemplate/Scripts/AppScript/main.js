@@ -15,11 +15,12 @@ require.config({
         axios: 'Lib/axios',
         vue: 'Lib/vue',
         ELEMENT: 'Lib/elementui',
+        'elementui': 'Lib/elementui',
         api: 'AppScript/api',
         common: 'AppScript/common'
     }
 });
-function renderPage(Vue, jquery, ELEMENT) {
+function renderPage(Vue, jquery, ELEMENT, treeTable) {
     var vueOption = {
         el: "#v-app",
         methods: {
@@ -46,6 +47,7 @@ if (usePageJs) {
     require(['vue',
         'jquery',
         'ELEMENT',
+        '/Scripts/AppScript/Component/TreeTable.js',
         '/Scripts/Views' + pageUrl + '.js'
     ], renderPage);
 }
