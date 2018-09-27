@@ -46,10 +46,6 @@
     </style>
 }
 
-@section scripts{
-    @*@Html.UsePageJs()*@
-}
-
 <div class="flex-box-center">
     <div class="login-box" v-loading="isLogin">
         <div class="login-title">后台管理员登陆</div>
@@ -61,7 +57,7 @@
                 <el-input type="password" v-model="form.password"></el-input>
             </el-form-item>
             <el-form-item label="验证码" prop="code">
-                <el-input class="ver-code" v-model="form.code"></el-input>
+                <el-input class="ver-code" v-model="form.code" @@keyup.enter.native="loginSubmit"></el-input>
                 <img class="code-img" src="/Home/CodeImage"
                      data-src="/Home/CodeImage" @@click="imgClick" />
             </el-form-item>

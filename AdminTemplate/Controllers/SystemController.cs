@@ -29,39 +29,121 @@ namespace AdminTemplate.Controllers
         #region 页面
 
         //[Authorize(Roles = "admin")]
-        public ActionResult MenuManager() => View();
-
-        //[Authorize(Roles = "admin")]
-        public ActionResult UserManager(PageingModel pageing)
+        public ActionResult MenuManager()
         {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
             return View();
         }
 
         //[Authorize(Roles = "admin")]
-        public ActionResult AuthorityManager() => View();
-
-        //[Authorize(Roles = "admin")]
-        public ActionResult RoleManager() => View();
-
-        //[Authorize(Roles = "admin")]
-        public ActionResult UserGroupManager(PageingModel pageing)
+        public ActionResult UserManager(PageingModel pageing)
         {
             if (Request.IsAjaxRequest())
             {
-                var datas = userGroupService.SelectPage(pageing.PageIndex, pageing.PageSize);
+
+            }
+            return View();
+        }
+
+        //[Authorize(Roles = "admin")]
+        public ActionResult AuthorityManager()
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
+            return View();
+        }
+
+        //[Authorize(Roles = "admin")]
+        public ActionResult RoleManager()
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
+            return View();
+        }
+
+        //[Authorize(Roles = "admin")]
+        public ActionResult UserGroupManager()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var datas = userGroupService.Select();
                 return JsonSuccess(datas);
             }
             return View();
         }
 
         //[Authorize(Roles = "admin")]
-        public ActionResult OperationManager() => View();
+        public ActionResult OperationManager(PageingModel pageing)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var datas = operationService.SelectPage(pageing.PageIndex, pageing.PageSize);
+                return JsonSuccess(datas);
+            }
+            return View();
+        }
+
+        public ActionResult CreateOperation(T_Operation model)
+        {
+            if (ModelState.IsValid)
+            {
+                var count = operationService.Add(model);
+                if (count > 0)
+                    return JsonSuccess(model);
+                else
+                    return JsonError("添加失败");
+            }
+            return JsonError("模型验证失败");
+        }
+
+        public ActionResult ModifyOperation(T_Operation model)
+        {
+            if (ModelState.IsValid)
+            {
+                var count = operationService.Modify(model);
+                if (count > 0)
+                    return JsonSuccess(model);
+                else
+                    return JsonError("修改失败");
+            }
+            return JsonError("模型验证失败");
+        }
+
+        public ActionResult RemoveOperation(int id)
+        {
+            var count = operationService.Delete(id);
+            if (count > 0)
+                return JsonSuccess();
+            else
+                return JsonError("删除失败");
+        }
 
         //[Authorize(Roles = "admin")]
-        public ActionResult Config() => View();
+        public ActionResult Config()
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
+            return View();
+        }
 
         //[Authorize(Roles = "admin")]
-        public ActionResult OperationLog() => View();
+        public ActionResult OperationLog()
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+            }
+            return View();
+        }
 
         #endregion 页面
 

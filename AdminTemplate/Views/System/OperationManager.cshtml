@@ -5,11 +5,11 @@
 
 <el-card class="box-card h100">
     <div slot="header" class="clearfix">
-        <span>角色管理</span>
+        <span>功能管理</span>
         <div class="tools-button">
-            <el-button size="mini" type="primary" @@click="createUser()">添加</el-button>
-            <el-button size="mini" type="danger" @@click="createUser()">删除</el-button>
-            <el-button size="mini" type="primary" @@click="createUser()">修改</el-button>
+            <el-button size="mini" type="primary" @@click="create()">添加</el-button>
+            <el-button size="mini" type="danger" @@click="remove()">删除</el-button>
+            <el-button size="mini" type="primary" @@click="modify()">修改</el-button>
         </div>
     </div>
     <div class="text item">
@@ -30,12 +30,20 @@
             </el-table-column>
             <el-table-column prop="Name" label="名称">
             </el-table-column>
-            <el-table-column prop="Description" label="描述">
+            <el-table-column prop="Event" label="事件">
+            </el-table-column>
+            <el-table-column prop="Icon" label="图标">
+                <template slot-scope="scope">
+                    <i :class="scope.row.Icon"></i>
+                    <span>{{ scope.row.Icon }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column prop="ClassName" label="类名称">
             </el-table-column>
             <el-table-column label="操作" width="300" fixed="right">
                 <template slot-scope="scope">
-                    <el-button @@click="modify" type="primary" size="mini">编辑</el-button>
-                    <el-button @@click="remove" type="danger" size="mini">删除</el-button>
+                    <el-button @@click="modify(scope.row)" type="primary" size="mini">编辑</el-button>
+                    <el-button @@click="remove(scope.row)" type="danger" size="mini">删除</el-button>
                     <el-button type="success" size="mini">分配权限</el-button>
                 </template>
             </el-table-column>
@@ -43,7 +51,34 @@
         <el-pagination :background="false"
                        style="text-align:center;border-bottom:1px solid #f1f1f1"
                        layout="total, sizes, prev, pager, next, jumper"
-                       :total="1000">
+                       :total="dataTotal">
         </el-pagination>
     </div>
 </el-card>
+
+<el-dialog ref="modelDialog"
+           :title="modelTitle"
+           :visible.sync="dialogVisible"
+           width="500px"
+           :before-close="handleClose">
+    <div>
+        <el-form ref="formModel" :model="formModel" :rules="rules" label-width="100px">
+            <el-form-item label="名称" prop="Name">
+                <el-input v-model="formModel.Name"></el-input>
+            </el-form-item>
+            <el-form-item label="事件" prop="Event">
+                <el-input v-model="formModel.Event"></el-input>
+            </el-form-item>
+            <el-form-item label="图标" prop="Icon">
+                <el-input v-model="formModel.Icon"></el-input>
+            </el-form-item>
+            <el-form-item label="类名称" prop="ClassName">
+                <el-input v-model="formModel.ClassName"></el-input>
+            </el-form-item>
+        </el-form>
+    </div>
+    <span slot="footer" class="dialog-footer">
+        <el-button @@click="handleClose">取 消</el-button>
+        <el-button type="primary" @@click="btnSubmit">确 定</el-button>
+    </span>
+</el-dialog>

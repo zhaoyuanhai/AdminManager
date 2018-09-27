@@ -33,27 +33,108 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-define(["require", "exports", "api"], function (require, exports, api_1) {
+define(["require", "exports", "api", "common"], function (require, exports, api_1, common_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
         data: {
             tableData: [],
-            formInline: {}
+            formInline: {},
+            modelTitle: "添加功能",
+            dialogVisible: false,
+            dataTotal: 0,
+            formModel: {},
+            rules: {
+                Name: {
+                    required: true, message: "请输入名称", trigger: 'blur'
+                },
+                Event: {
+                    required: true, message: "请输入事件名", trigger: 'blur'
+                }
+            }
         },
         mounted: function () {
             return __awaiter(this, void 0, void 0, function () {
                 var result;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, api_1.default.system.getOperationList()];
+                        case 0: return [4 /*yield*/, api_1.default.current.get()];
                         case 1:
                             result = _a.sent();
                             this.$data.tableData = result.Data.Datas;
+                            this.$data.dataTotal = result.Data.Total;
                             return [2 /*return*/];
                     }
                 });
             });
+        },
+        methods: {
+            handleClose: function () {
+                this.dialogVisible = false;
+            },
+            btnSubmit: function () {
+                var _this = this;
+                this.$refs.formModel.validate(function (isValid, fialFields) { return __awaiter(_this, void 0, void 0, function () {
+                    var result_1, model;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (!isValid) return [3 /*break*/, 5];
+                                if (!this.formModel.Id) return [3 /*break*/, 2];
+                                return [4 /*yield*/, api_1.default.system.modifyOperation(this.formModel)];
+                            case 1:
+                                result_1 = _a.sent();
+                                return [3 /*break*/, 4];
+                            case 2: return [4 /*yield*/, api_1.default.system.createOperation(this.formModel)];
+                            case 3:
+                                result_1 = _a.sent();
+                                _a.label = 4;
+                            case 4:
+                                if (result_1.Success) {
+                                    if (this.formModel.Id) {
+                                        model = this.tableData.find(function (x) { return x.Id === result_1.Data.Id; });
+                                        common_1.default.SetObjectFrom(model, result_1.Data);
+                                    }
+                                    else {
+                                        this.tableData.push(result_1.Data);
+                                    }
+                                    this.dialogVisible = false;
+                                }
+                                _a.label = 5;
+                            case 5: return [2 /*return*/];
+                        }
+                    });
+                }); });
+            },
+            create: function () {
+                this.dialogVisible = true;
+            },
+            modify: function (model) {
+                this.dialogVisible = true;
+                this.formModel = model;
+            },
+            remove: function (model) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var confirm, result, index;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, this.$confirm("确认删除此功能么?", "删除功能")];
+                            case 1:
+                                confirm = _a.sent();
+                                if (!(confirm == "confirm")) return [3 /*break*/, 3];
+                                return [4 /*yield*/, api_1.default.system.removeOperation(model.Id)];
+                            case 2:
+                                result = _a.sent();
+                                if (result.Success) {
+                                    index = this.tableData.findIndex(function (x) { return x.Id === model.Id; });
+                                    this.tableData.splice(index, 1);
+                                }
+                                _a.label = 3;
+                            case 3: return [2 /*return*/];
+                        }
+                    });
+                });
+            }
         }
     });
 });

@@ -119,6 +119,12 @@
                     obj[name] = "";
             }
     }
+
+    static SetObjectFrom(self, other) {
+        for (let name in other) {
+            self[name] = other[name];
+        }
+    }
 }
 
 export enum Color {

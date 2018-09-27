@@ -157,6 +157,45 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                         });
                     });
                 },
+                createOperation: function (data) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.post("/System/CreateOperation", data)];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                modifyOperation: function (data) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.post("/System/ModifyOperation", data)];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                removeOperation: function (id) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.delete("/System/RemoveOperation", { params: { id: id } })];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                }
             };
             this.current = {
                 get: function (data) {

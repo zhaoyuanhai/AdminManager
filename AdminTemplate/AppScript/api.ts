@@ -74,6 +74,21 @@ class Api {
             var result = await Axios.get("/System/OperationList", { params: pageingModel });
             return result.data;
         },
+
+        async createOperation<T = any>(data: models.OperationModel): Promise<ResponseModel<T>> {
+            var result = await Axios.post("/System/CreateOperation", data);
+            return result.data;
+        },
+
+        async modifyOperation(data: models.OperationModel) {
+            var result = await Axios.post("/System/ModifyOperation", data);
+            return result.data;
+        },
+
+        async removeOperation(id: number): Promise<ResponseModel<any>> {
+            var result = await Axios.delete("/System/RemoveOperation", { params: { id } });
+            return result.data;
+        }
     }
 
     current = {

@@ -108,6 +108,11 @@ define(["require", "exports"], function (require, exports) {
                         obj[name_1] = "";
                 }
         };
+        Common.SetObjectFrom = function (self, other) {
+            for (var name_2 in other) {
+                self[name_2] = other[name_2];
+            }
+        };
         return Common;
     }());
     exports.default = Common;

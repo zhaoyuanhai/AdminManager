@@ -37,20 +37,39 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
-        data: {},
+        data: {
+            dialogVisible: false,
+            groupTitle: "添加用户组",
+            rules: {},
+            formModel: {},
+            formInline: {},
+            tableData: []
+        },
         mounted: function () {
             return __awaiter(this, void 0, void 0, function () {
-                var datas;
+                var result;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, api_1.default.current.get()];
                         case 1:
-                            datas = _a.sent();
-                            console.log(datas);
+                            result = _a.sent();
+                            this.tableData = result.Data;
                             return [2 /*return*/];
                     }
                 });
             });
+        },
+        methods: {
+            handleClose: function () {
+            },
+            setGroup: function () {
+                this.$data.dialogVisible = true;
+            },
+            edit: function () {
+                this.$data.dialogVisible = true;
+            },
+            btnSubmit: function () {
+            }
         }
     });
 });
