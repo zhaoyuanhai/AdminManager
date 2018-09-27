@@ -1,15 +1,12 @@
-﻿using System;
+﻿using AdminDataEntity;
+using AdminModels;
+using AdminModels.Customs;
+using AdminServices;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using AdminServices;
-using AdminDataEntity;
-using AdminCommon;
-using AdminModels;
-using System.Data.Entity;
-using AdminModels.Customs;
 
 namespace AdminServicesRealization
 {
@@ -78,6 +75,26 @@ namespace AdminServicesRealization
                 if (entities.Entry(item).State == EntityState.Modified)
                     entities.Entry(item).State = EntityState.Modified;
             }
+            return entities.SaveChanges();
+        }
+
+        public int ModifyToFiled(T model, Expression<Func<T, object>> expression)
+        {
+            var obj = expression.Compile()(model);
+            var entry = entities.Entry(model);
+            if (entry.State == EntityState.Detached)
+                entry.State = EntityState.Modified;
+            obj.GetType().GetProperties().ToList().ForEach(p => entry.Property(p.Name).IsModified = true);
+            return entities.SaveChanges();
+        }
+
+        public int ModifyExcludeField(T model, Expression<Func<T, object>> expression)
+        {
+            var obj = expression.Compile()(model);
+            var entry = entities.Entry(model);
+            if (entry.State == EntityState.Detached)
+                entry.State = EntityState.Modified;
+            obj.GetType().GetProperties().ToList().ForEach(p => entry.Property(p.Name).IsModified = false);
             return entities.SaveChanges();
         }
 
