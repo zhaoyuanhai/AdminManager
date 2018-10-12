@@ -38,8 +38,11 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
         data: {
+            title: "用户",
             tableData: [],
-            formInline: {}
+            formInline: {},
+            modelForm: {},
+            rules: {}
         },
         mounted: function () {
             return __awaiter(this, void 0, void 0, function () {
@@ -54,6 +57,19 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                     }
                 });
             });
+        },
+        methods: {
+            _create: function () {
+            },
+            handleClose: function (done) {
+                this.$confirm('确认关闭？')
+                    .then(function (_) {
+                    done();
+                })
+                    .catch(function (_) { });
+            },
+            btnSubmit: function () {
+            }
         }
     });
 });

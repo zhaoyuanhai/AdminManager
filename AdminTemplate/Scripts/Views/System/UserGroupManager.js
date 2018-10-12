@@ -39,7 +39,7 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
     VueInit({
         data: {
             dialogVisible: false,
-            groupTitle: "添加用户组",
+            title: "用户组",
             rules: {},
             formModel: {},
             formInline: {},
@@ -60,13 +60,14 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
             });
         },
         methods: {
-            handleClose: function () {
+            _create: function (model) {
+                alert(3);
             },
-            setGroup: function () {
-                this.$data.dialogVisible = true;
+            _modify: function (model) {
+                alert(3);
             },
-            edit: function () {
-                this.$data.dialogVisible = true;
+            _remove: function (model) {
+                alert(3);
             },
             btnSubmit: function () {
             }

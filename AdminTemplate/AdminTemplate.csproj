@@ -1267,6 +1267,7 @@
     <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Entity\Detial.cshtml" />
+    <Content Include="Views\Shared\_Pageing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AppScript\api.ts" />

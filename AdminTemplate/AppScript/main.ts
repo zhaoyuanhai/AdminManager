@@ -33,22 +33,57 @@ require.config({
 function renderPage(Vue, jquery, ELEMENT, treeTable) {
     let vueOption = {
         el: "#v-app",
+        data: {
+            //弹框默认隐藏
+            dialogVisible: false,
+            //弹框的标题
+            dialogTitle: "",
+            //分页总数
+            pageingTotal: 0
+        },
         methods: {
             _menuClick(url, id) {
                 if (url) {
                     location.hash = url;
                 }
             },
-            create() {
+            _dialogClose() {
+                this.$data.dialogVisible = false;
+            },
+            _pageingChange(current: number) {
 
+            },
+            _pageingSizeChange() {
+
+            },
+            create() {
+                this.$data.dialogTitle = "添加-" + this.$data.title;
+                this.$data.dialogVisible = true;
+                if (typeof this._create === 'function')
+                    this._create.apply(this, arguments);
             },
             modify() {
-
+                this.$data.dialogTitle = "编辑-" + this.$data.title;
+                this.$data.dialogVisible = true;
+                if (typeof this._modify === 'function')
+                    this._modify.apply(this, arguments);
             },
             remove() {
-
+                let args = arguments;
+                if (typeof this._remove === 'function')
+                    this.$confirm("确认删除么?", "删除-" + this.title).then(() => {
+                        this._remove.apply(this, args);
+                    });
             },
             select() {
+                if (typeof this._select === 'function')
+                    this._select.apply(this, arguments);
+            },
+            downLoad() {
+                if (typeof this._downLoad === 'function')
+                    this._downLoad.apply(this, arguments);
+            },
+            dialogSubmit() {
 
             }
         }

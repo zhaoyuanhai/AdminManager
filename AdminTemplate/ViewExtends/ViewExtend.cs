@@ -54,5 +54,16 @@ namespace AdminTemplate.ViewExtends
         {
             return null;
         }
+
+        public static IHtmlString RenderAuthorityDefault(this HtmlHelper htmlHelper)
+        {
+            return RenderAuthority(htmlHelper, "el-button", new
+            {
+                click = "@Event",
+                type = "text",
+                size = "samll",
+                text = "@Name"
+            });
+        }
     }
 }

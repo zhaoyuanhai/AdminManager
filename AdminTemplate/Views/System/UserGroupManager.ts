@@ -3,7 +3,7 @@
 VueInit({
     data: {
         dialogVisible: false,
-        groupTitle: "添加用户组",
+        title: "用户组",
         rules: {
 
         },
@@ -18,19 +18,20 @@ VueInit({
         this.tableData = result.Data;
     },
     methods: {
-        handleClose() {
-
+        _create(model) {
+            alert(3);
         },
 
-        setGroup() {
-            this.$data.dialogVisible = true;
+        _modify(model) {
+            alert(3);
         },
-        edit() {
-            this.$data.dialogVisible = true;
+
+        _remove(model) {
+            alert(3);
         },
 
         btnSubmit() {
-
+            
         }
     }
 })

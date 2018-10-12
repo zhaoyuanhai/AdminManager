@@ -7,7 +7,7 @@
     <div slot="header" class="clearfix">
         <span>用户组管理</span>
         <div class="tools-button">
-            <el-button size="mini" type="primary" @@click="setGroup()">添加</el-button>
+            <el-button size="mini" type="primary" @@click="create()">添加</el-button>
             <el-button size="mini" type="danger" @@click="createUser()">删除</el-button>
             <el-button size="mini" type="primary" @@click="createUser()">修改</el-button>
             <el-button size="mini" type="success" @@click="createUser()">导出</el-button>
@@ -36,15 +36,9 @@
             <el-table-column prop="Description" label="描述信息"></el-table-column>
             <el-table-column label="操作" width="300" fixed="right">
                 <template slot-scope="scope">
-                    <el-button @@click="edit" type="primary" size="mini">编辑</el-button>
-                    <el-button @@click="remove" type="danger" size="mini">删除</el-button>
-                    @Html.RenderAuthority("el-button", new
-               {
-                   @click = "@Event",
-                   type = "text",
-                   size = "samll",
-                   text = "@Name"
-               })
+                    <el-button @@click="modify(scope.row)" type="primary" size="mini">编辑</el-button>
+                    <el-button @@click="remove(scope.row)" type="danger" size="mini">删除</el-button>
+                    @Html.RenderAuthorityDefault()
                 </template>
             </el-table-column>
         </tree-table>
@@ -52,10 +46,10 @@
 </el-card>
 
 <el-dialog ref="groupDialog"
-           :title="groupTitle"
+           :title="dialogTitle"
            :visible.sync="dialogVisible"
            width="500px"
-           :before-close="handleClose">
+           :before-close="_dialogClose">
     <div>
         <el-form ref="formModel" :model="formModel" :rules="rules" label-width="100px">
             <el-form-item label="父级组">
@@ -70,7 +64,7 @@
         </el-form>
     </div>
     <span slot="footer" class="dialog-footer">
-        <el-button @@click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @@click="btnSubmit">确 定</el-button>
+        <el-button @@click="_dialogClose">取 消</el-button>
+        <el-button type="primary" @@click="dialogSubmit">确 定</el-button>
     </span>
 </el-dialog>
