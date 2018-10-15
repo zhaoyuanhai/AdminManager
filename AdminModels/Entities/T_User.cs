@@ -43,7 +43,6 @@ namespace AdminModels.Entities
         /// </summary>
         [MaxLength(11)]
         [MinLength(11)]
-        [Range(minimum: 11, maximum: 11)]
         [Display(Name = "手机号")]
         public string Mobile { get; set; }
 

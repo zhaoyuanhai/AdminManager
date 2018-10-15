@@ -44,13 +44,23 @@ function renderPage(Vue, jquery, ELEMENT, treeTable) {
             },
             _pageingSizeChange: function () {
             },
+            submit: function (refForm) {
+                var _this = this;
+                var _self = this;
+                this.$refs[refForm].validate(function (valid) {
+                    if (valid) {
+                        if (typeof _this._submit === 'function')
+                            _this._submit.call(_this, refForm);
+                    }
+                });
+            },
             create: function () {
                 this.$data.dialogTitle = "添加-" + this.$data.title;
                 this.$data.dialogVisible = true;
                 if (typeof this._create === 'function')
                     this._create.apply(this, arguments);
             },
-            modify: function () {
+            modify: function (model) {
                 this.$data.dialogTitle = "编辑-" + this.$data.title;
                 this.$data.dialogVisible = true;
                 if (typeof this._modify === 'function')

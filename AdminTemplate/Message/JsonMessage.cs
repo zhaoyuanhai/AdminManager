@@ -33,6 +33,17 @@ namespace AdminTemplate.Message
         public IList<ErrorMessage> Errors { get; set; }
 
         /// <summary>
+        /// 第一个错误消息
+        /// </summary>
+        public ErrorMessage FirstError
+        {
+            get
+            {
+                return this.Errors.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
         /// 数据
         /// </summary>
         public virtual T Data { get; set; }

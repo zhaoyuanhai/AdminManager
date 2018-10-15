@@ -26,5 +26,10 @@ namespace AdminTemplate
 
             //ModelMetadataProviders.Current = new MyCustomModelMetadataProvider();
         }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+
+        }
     }
 }

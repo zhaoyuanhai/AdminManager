@@ -27,7 +27,7 @@ VueInit({
                     if (result.data.Success) {
                         location.href = "/#/Home/Default";
                     } else {
-                        alert(result.data.ErrorMsg);
+                        alert(result.data.Errors);
                     }
                     this.$data.isLogin = false;
                 } else {

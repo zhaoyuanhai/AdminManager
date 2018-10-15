@@ -70,7 +70,7 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                                     location.href = "/#/Home/Default";
                                 }
                                 else {
-                                    alert(result.data.ErrorMsg);
+                                    alert(result.data.Errors);
                                 }
                                 this.$data.isLogin = false;
                                 return [3 /*break*/, 3];

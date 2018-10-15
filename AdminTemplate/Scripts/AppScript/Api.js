@@ -195,6 +195,40 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                             }
                         });
                     });
+                },
+                /**
+                 * 检查用户名是否存在
+                 * @param userName 用户名
+                 */
+                checkUserName: function (userName) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.get("/System/CheckUserName", { params: { userName: userName } })];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                /**
+                 * 设置用户
+                 * @param user 用户数据
+                 */
+                setUser: function (user) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.post("/System/SetUser", user)];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
                 }
             };
             this.current = {

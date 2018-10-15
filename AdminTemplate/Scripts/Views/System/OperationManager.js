@@ -45,12 +45,12 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
             dataTotal: 0,
             formModel: {},
             rules: {
-                Name: {
-                    required: true, message: "请输入名称", trigger: 'blur'
-                },
-                Event: {
-                    required: true, message: "请输入事件名", trigger: 'blur'
-                }
+                Name: [
+                    { required: true, message: "请输入名称", trigger: 'blur' }
+                ],
+                Event: [
+                    { required: true, message: "请输入事件名", trigger: 'blur' }
+                ]
             }
         },
         mounted: function () {

@@ -250,6 +250,20 @@ namespace AdminTemplate.Controllers
                 return JsonError("删除用户失败");
         }
 
+        /// <summary>
+        /// 检查用户名是否已存在
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public ActionResult CheckUserName(string userName)
+        {
+            var user = userService.FirstOrDefault(x => x.UserName == userName);
+            if (user == null)
+                return JsonSuccess();
+            else
+                return JsonError(null, "用户名已存在");
+        }
+
         #endregion 用户接口
 
         #region 角色接口

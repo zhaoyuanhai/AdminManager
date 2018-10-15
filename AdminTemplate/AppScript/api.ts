@@ -88,6 +88,24 @@ class Api {
         async removeOperation(id: number): Promise<ResponseModel<any>> {
             var result = await Axios.delete("/System/RemoveOperation", { params: { id } });
             return result.data;
+        },
+
+        /**
+         * 检查用户名是否存在
+         * @param userName 用户名
+         */
+        async checkUserName(userName: string): Promise<ResponseModel<any>> {
+            var result = await Axios.get("/System/CheckUserName", { params: { userName: userName } });
+            return result.data;
+        },
+
+        /**
+         * 设置用户
+         * @param user 用户数据
+         */
+        async setUser(user: models.UserModel): Promise<ResponseModel<any>> {
+            let result = await Axios.post("/System/SetUser", user);
+            return result.data;
         }
     }
 

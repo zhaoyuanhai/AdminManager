@@ -42,7 +42,43 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
             tableData: [],
             formInline: {},
             modelForm: {},
-            rules: {}
+            rules: {
+                userName: [
+                    { required: true, message: "用户名必填", trigger: "blur" },
+                    { min: 3, max: 20, message: "用户名长度必须在3-20个字符之间", trigger: "blur" },
+                    {
+                        validator: function (rule, value, callback) {
+                            return __awaiter(this, void 0, void 0, function () {
+                                var result;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, api_1.default.system.checkUserName(value)];
+                                        case 1:
+                                            result = _a.sent();
+                                            if (result.Success) {
+                                                callback();
+                                            }
+                                            else {
+                                                callback(new Error(result.Errors[0].Message));
+                                            }
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            });
+                        },
+                        trigger: "blur"
+                    }
+                ],
+                realName: [
+                    { required: true, message: "真实姓名必填", trigger: "blur" }
+                ],
+                mobile: [
+                    { pattern: /^1[34578]\d{9}$/, message: '手机号格式错误', trigger: "blur" }
+                ],
+                email: [
+                    { type: 'email', max: 50, message: "邮箱格式不正确", trigger: "blur" }
+                ]
+            }
         },
         mounted: function () {
             return __awaiter(this, void 0, void 0, function () {
@@ -59,8 +95,6 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
             });
         },
         methods: {
-            _create: function () {
-            },
             handleClose: function (done) {
                 this.$confirm('确认关闭？')
                     .then(function (_) {
@@ -68,7 +102,21 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                 })
                     .catch(function (_) { });
             },
-            btnSubmit: function () {
+            _submit: function () {
+                return __awaiter(this, void 0, void 0, function () {
+                    var result;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, api_1.default.system.setUser(this.$data.modelForm)];
+                            case 1:
+                                result = _a.sent();
+                                if (result.Success) {
+                                    alert('ok');
+                                }
+                                return [2 /*return*/];
+                        }
+                    });
+                });
             }
         }
     });
