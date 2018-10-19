@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AdminTemplate.Vue;
 
 namespace AdminTemplate.ViewExtends
 {
@@ -20,6 +21,14 @@ namespace AdminTemplate.ViewExtends
             get
             {
                 return ViewContext.RouteData.Values["action"].ToString();
+            }
+        }
+
+        public VueElementUIHelper ElementUI
+        {
+            get
+            {
+                return new VueElementUIHelper(Html);
             }
         }
     }

@@ -74,8 +74,11 @@ function renderPage(Vue, jquery, ELEMENT, treeTable) {
             modify(model) {
                 this.$data.dialogTitle = "编辑-" + this.$data.title;
                 this.$data.dialogVisible = true;
-                if (typeof this._modify === 'function')
+                if (typeof this._modify === 'function') {
                     this._modify.apply(this, arguments);
+                } else {
+                    this.modelForm = model;
+                }
             },
             remove() {
                 let args = arguments;
@@ -88,12 +91,36 @@ function renderPage(Vue, jquery, ELEMENT, treeTable) {
                 if (typeof this._select === 'function')
                     this._select.apply(this, arguments);
             },
+
+            /**下载操作 */
             downLoad() {
                 if (typeof this._downLoad === 'function')
                     this._downLoad.apply(this, arguments);
             },
+
+            /**弹出框提交操作 */
             dialogSubmit() {
 
+            },
+
+            /**
+             * 关闭弹出框操作
+             * @param done
+             */
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        done();
+                        this.dialogVisible = false;
+                    })
+                    .catch(_ => { });
+            },
+
+            /**取消弹出框操作 */
+            handleCancel() {
+                this.$confirm("取消会丢失所填写的数据，确认取消么？").then(_ => {
+                    this.dialogVisible = false;
+                });
             }
         }
     };

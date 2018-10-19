@@ -3,6 +3,7 @@
 }
 <el-button @@click="btnClick">点击我</el-button>
 <el-button @@click="test">测试</el-button>
+<el-button @@click="create()">测试弹出窗</el-button>
 <select id="sex">
     <option value="">请选择</option>
     <option value="1">男</option>
@@ -21,6 +22,16 @@
                      label="地址">
     </el-table-column>
 </tree-table>
+
+@using (ElementUI.BeginFormDialog(new MvcVueDialog.Options()
+{
+    title = "你好",
+    visible = ".sync:dialogVisible",
+    beforeClose = ":handleClose"
+}))
+{
+    <div>你好我 我临时卡第三方诶酸辣粉ie</div>
+}
 
 
 @section styles{

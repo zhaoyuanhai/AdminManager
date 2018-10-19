@@ -38,6 +38,7 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
         data: {
+            title: "",
             tableData: [],
             formInline: {},
             modelTitle: "添加功能",
@@ -113,28 +114,6 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
                 this.dialogVisible = true;
                 this.formModel = model;
             },
-            remove: function (model) {
-                return __awaiter(this, void 0, void 0, function () {
-                    var confirm, result, index;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4 /*yield*/, this.$confirm("确认删除此功能么?", "删除功能")];
-                            case 1:
-                                confirm = _a.sent();
-                                if (!(confirm == "confirm")) return [3 /*break*/, 3];
-                                return [4 /*yield*/, api_1.default.system.removeOperation(model.Id)];
-                            case 2:
-                                result = _a.sent();
-                                if (result.Success) {
-                                    index = this.tableData.findIndex(function (x) { return x.Id === model.Id; });
-                                    this.tableData.splice(index, 1);
-                                }
-                                _a.label = 3;
-                            case 3: return [2 /*return*/];
-                        }
-                    });
-                });
-            }
         }
     });
 });

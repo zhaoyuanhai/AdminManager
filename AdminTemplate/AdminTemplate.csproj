@@ -199,6 +199,9 @@
     <Compile Include="UIAttribute\RadioButtonListAttribute.cs" />
     <Compile Include="ViewExtends\CustomWebViewPage.cs" />
     <Compile Include="ViewExtends\ViewExtend.cs" />
+    <Compile Include="Vue\Component\DialogExtensions.cs" />
+    <Compile Include="Vue\OptionsBase.cs" />
+    <Compile Include="Vue\VueEleUIHelper.cs" />
     <Compile Include="WebValidateUserExtend.cs" />
   </ItemGroup>
   <ItemGroup>

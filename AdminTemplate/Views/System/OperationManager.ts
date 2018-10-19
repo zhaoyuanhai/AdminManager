@@ -4,6 +4,7 @@ import * as ms from 'Models';
 
 VueInit({
     data: {
+        title:"",
         tableData: [],
         formInline: {},
         modelTitle: "添加功能",
@@ -58,15 +59,15 @@ VueInit({
             this.dialogVisible = true;
             this.formModel = model;
         },
-        async remove(model) {
-            var confirm: any = await this.$confirm("确认删除此功能么?", "删除功能");
-            if (confirm == "confirm") {
-                var result = await api.system.removeOperation(model.Id);
-                if (result.Success) {
-                    var index = this.tableData.findIndex(x => x.Id === model.Id);
-                    this.tableData.splice(index, 1);
-                }
-            }
-        }
+        //async remove(model) {
+        //    var confirm: any = await this.$confirm("确认删除此功能么?", "删除功能");
+        //    if (confirm == "confirm") {
+        //        var result = await api.system.removeOperation(model.Id);
+        //        if (result.Success) {
+        //            var index = this.tableData.findIndex(x => x.Id === model.Id);
+        //            this.tableData.splice(index, 1);
+        //        }
+        //    }
+        //}
     }
 });

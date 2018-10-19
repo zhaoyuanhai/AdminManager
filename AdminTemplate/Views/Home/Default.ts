@@ -1,5 +1,6 @@
 ﻿VueInit({
     data: {
+        title: "测试弹出框",
         tableData: [{
             id: 2,
             pid: 1,

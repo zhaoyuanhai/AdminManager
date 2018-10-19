@@ -38,14 +38,6 @@ VueInit({
         this.$data.tableData = result.Data.Datas;
     },
     methods: {
-        handleClose(done) {
-            this.$confirm('确认关闭？')
-                .then(_ => {
-                    done();
-                })
-                .catch(_ => { });
-        },
-        
         async _submit() {
             var result = await api.system.setUser(this.$data.modelForm);
             if (result.Success) {

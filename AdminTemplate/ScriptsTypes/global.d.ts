@@ -32,19 +32,19 @@ interface DataInstance {
 type MyDatas<V> = DataInstance | ((this: V) => object);
 type MyMethods<V> = {
     [key: string]: (this: V, ...args: any[]) => any;
-    create?(): void;
-    _create?(): void;
+    create?(...args): void;
+    _create?(...args): void;
 
-    modify?(): void;
-    _modify?(): void;
+    modify?(...args): void;
+    _modify?(...args): void;
 
-    remove?(): void;
-    _remove?(): void;
+    remove?(...args): void;
+    _remove?(...args): void;
 
-    submit?(): void;
-    _submit?(): void;
+    submit?(...args): void;
+    _submit?(...args): void;
 
-    select?(): void;
+    select?(...args): void;
 
     handleClose?(done: () => void): void;
 };

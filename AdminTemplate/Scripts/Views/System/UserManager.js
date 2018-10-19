@@ -95,13 +95,6 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
             });
         },
         methods: {
-            handleClose: function (done) {
-                this.$confirm('确认关闭？')
-                    .then(function (_) {
-                    done();
-                })
-                    .catch(function (_) { });
-            },
             _submit: function () {
                 return __awaiter(this, void 0, void 0, function () {
                     var result;
