@@ -7,7 +7,7 @@ VueInit({
         rules: {
 
         },
-        formModel: {},
+        modelForm: {},
         formInline: {
 
         },
@@ -19,19 +19,19 @@ VueInit({
     },
     methods: {
         _create(model) {
-            alert(3);
+            //alert(3);
         },
 
         _modify(model) {
-            alert(3);
+            //alert(3);
         },
 
         _remove(model) {
-            alert(3);
+            //alert(3);
         },
 
-        btnSubmit() {
-            
+        _submit(refForm) {
+            alert(3);
         }
     }
 })

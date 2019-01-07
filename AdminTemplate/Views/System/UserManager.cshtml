@@ -17,79 +17,97 @@
         <div class="is-bordered form-box">
             <el-form :inline="true" size="mini" :model="formInline" class="demo-form-inline" label-width="100px">
                 <el-form-item label="用户名">
-                    <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+                    <el-input v-model="query.userName" placeholder="按照用户名模糊查询"></el-input>
                 </el-form-item>
                 <el-form-item label="用户组">
-                    <el-select v-model="formInline.region" placeholder="活动区域">
+                    <el-select v-model="query.group" placeholder="活动区域">
                         <el-option label="区域一" value="shanghai"></el-option>
                         <el-option label="区域二" value="beijing"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">查询</el-button>
+                    <el-button type="primary" @@click="search">查询</el-button>
                 </el-form-item>
             </el-form>
         </div>
-        <el-table :data="tableData"
-                  size="small"
-                  style="width: 100%">
-            <el-table-column type="selection" width="50" fixed>
-            </el-table-column>
-            <el-table-column prop="UserName" label="用户名">
-            </el-table-column>
-            <el-table-column prop="Roles" label="所有角色">
-                <template slot-scope="scope">
-                    <el-tag size="medium" v-for="item in scope.row.Roles">{{ item.Name }}</el-tag>
-                </template>
-            </el-table-column>
-            <el-table-column prop="RealName" label="真实姓名">
-            </el-table-column>
-            <el-table-column prop="LoginCount" label="登录次数">
-                <template slot-scope="scope">
-                    {{ scope.row.LoginCount }}次
-                </template>
-            </el-table-column>
-            <el-table-column prop="_CreateDate" label="创建时间">
-            </el-table-column>
-            <el-table-column label="操作" width="300" fixed="right">
-                <template slot-scope="scope">
-                    <el-button @@click="modify(scope.row)" type="primary" size="mini">编辑</el-button>
-                    <el-button @@click="remove(scope.row)" type="danger" size="mini">删除</el-button>
-                    <el-button type="success" size="mini">分配角色</el-button>
-                    @Html.RenderAuthorityDefault()
-                </template>
-            </el-table-column>
-        </el-table>
-        @Html.Partial("_pageing")
+        <data-query ref="dq" url="/System/GetUserList" :query="query" v-model="tableData">
+            <el-table :data="tableData"
+                      size="small"
+                      style="width: 100%">
+                <el-table-column type="selection" width="50" fixed>
+                </el-table-column>
+                <el-table-column prop="UserName" label="用户名">
+                </el-table-column>
+                <el-table-column prop="Roles" label="所有角色">
+                    <template slot-scope="scope">
+                        <el-tag size="medium" v-for="item in scope.row.Roles">{{ item.Name }}</el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="RealName" label="真实姓名">
+                </el-table-column>
+                <el-table-column prop="LoginCount" label="登录次数">
+                    <template slot-scope="scope">
+                        {{ scope.row.LoginCount }}次
+                    </template>
+                </el-table-column>
+                <el-table-column prop="_CreateDate" label="创建时间">
+                </el-table-column>
+                <el-table-column label="操作" width="300" fixed="right">
+                    <template slot-scope="scope">
+                        <el-button @@click="modify(scope.row)" type="primary" size="mini">编辑</el-button>
+                        <el-button @@click="remove(scope.row)" type="danger" size="mini">删除</el-button>
+                        <el-button @@click="showRoleDialog(scope.row)" type="success" size="mini">分配角色</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </data-query>
     </div>
 </el-card>
 
-<el-dialog ref="menuDialog"
-           :title="dialogTitle"
-           :visible.sync="dialogVisible"
-           width="500px"
-           :before-close="handleClose">
-    <div>
-        <el-form ref="modelForm" :model="modelForm" :rules="rules" label-width="100px">
-            <el-form-item label="用户名" prop="serName">
-                <el-input v-model="modelForm.UserName" placeholder="请输入用户名"></el-input>
-            </el-form-item>
-            <el-form-item label="真实姓名" prop="realName">
-                <el-input v-model="modelForm.RealName" placeholder="请输入真实姓名"></el-input>
-            </el-form-item>
-            <el-form-item label="手机号" prop="mobile">
-                <el-input v-model="modelForm.Mobile" placeholder="请输入手机号"></el-input>
-            </el-form-item>
-            <el-form-item label="邮箱" prop="email">
-                <el-input v-model="modelForm.Email" placeholder="请输入邮箱地址"></el-input>
-            </el-form-item>
-            <el-form-item label="密码" prop="password">
-                <el-input v-model="modelForm.Password" placeholder="请输入邮箱地址"></el-input>
-            </el-form-item>
-        </el-form>
-    </div>
-    <span slot="footer" class="dialog-footer">
-        <el-button @@click="handleCancel">取 消</el-button>
-        <el-button type="primary" @@click="submit('modelForm')">确 定</el-button>
-    </span>
-</el-dialog>
+@section dialogs{
+    <el-dialog ref="menuDialog"
+               :title="dialogTitle"
+               :visible.sync="dialogVisible"
+               width="500px"
+               :before-close="handleClose">
+        <div>
+            <el-form ref="modelForm" :model="modelForm" :rules="rules" label-width="100px">
+                <el-form-item label="用户名" prop="UserName">
+                    <el-input v-model="modelForm.UserName" :disabled="toBlean(modelForm.Id)" placeholder="请输入用户名"></el-input>
+                </el-form-item>
+                <el-form-item label="真实姓名" prop="RealName">
+                    <el-input v-model="modelForm.RealName" placeholder="请输入真实姓名"></el-input>
+                </el-form-item>
+                <el-form-item label="手机号" prop="Mobile">
+                    <el-input v-model="modelForm.Mobile" placeholder="请输入手机号"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱" prop="Email">
+                    <el-input v-model="modelForm.Email" placeholder="请输入邮箱地址"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="Password">
+                    <el-input v-model="modelForm.Password" placeholder="请输入邮箱地址"></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+        <span slot="footer" class="dialog-footer">
+            <el-button @@click="handleCancel">取 消</el-button>
+            <el-button type="primary" @@click="submit('modelForm')">确 定</el-button>
+        </span>
+    </el-dialog>
+
+    <el-dialog ref="roleDialog"
+               :title="roleDialogTitle"
+               :close-on-click-modal="false"
+               :visible.sync="roleDialogVisable"
+               width="540px">
+        <div>
+            <el-transfer v-model="roleModel.roles"
+                         :titles="['角色列表','已选角色']"
+                         :data="roles"></el-transfer>
+        </div>
+        <span slot="footer" class="dialog-footer">
+            <el-button @@click="handleCancel">取 消</el-button>
+            <el-button @@click="setRole" type="primary">确 定</el-button>
+        </span>
+    </el-dialog>
+}

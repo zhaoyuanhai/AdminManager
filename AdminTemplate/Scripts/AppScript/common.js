@@ -108,6 +108,11 @@ define(["require", "exports"], function (require, exports) {
                         obj[name_1] = "";
                 }
         };
+        /**
+         * 将一个对象上的属性复制到自己身上,浅拷贝
+         * @param self 当前对象
+         * @param other 原对象
+         */
         Common.SetObjectFrom = function (self, other) {
             for (var name_2 in other) {
                 self[name_2] = other[name_2];

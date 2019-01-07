@@ -58,11 +58,19 @@ class Api {
         },
 
         /**
-         * 获取角色集合
+         * 获取角色集合带分页
          * @param pageModel
          */
         async getRoleList(pageModel?: models.PageingModel): Promise<ResponseModel<models.PageingModel<models.RoleModel>>> {
             var result = await Axios.get("/System/GetRoleList", { params: pageModel });
+            return result.data;
+        },
+
+        /**
+         * 获取所有角色集合
+         */
+        async getRoleAllList(): Promise<ResponseModel<models.RoleModel[]>> {
+            var result = await Axios.get("/System/GetRoleAllList/");
             return result.data;
         },
 
@@ -105,6 +113,34 @@ class Api {
          */
         async setUser(user: models.UserModel): Promise<ResponseModel<any>> {
             let result = await Axios.post("/System/SetUser", user);
+            return result.data;
+        },
+
+        /**
+         * 用户分配权限
+         * @param userId 用户Id
+         * @param roleIds 权限列表
+         */
+        async setUserRoles(userId: number, roleIds: number[]): Promise<ResponseModel<any>> {
+            let result = await Axios.post("/System/SetUserRoles", { userId, roleIds });
+            return result.data;
+        },
+
+        /**
+         * 设置角色
+         * @param role 角色对象
+         */
+        async setRole(role: models.RoleModel): Promise<ResponseModel<any>> {
+            let result = await Axios.post("/System/SetRole", role);
+            return result.data;
+        },
+
+        /**
+         * 检查角色名称是否存在
+         * @param roleName
+         */
+        async checkRoleName(roleName: string, id?: number): Promise<ResponseModel> {
+            let result = await Axios.post("/System/CheckRoleName", { roleName, id });
             return result.data;
         }
     }

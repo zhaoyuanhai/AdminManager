@@ -15,9 +15,9 @@ export interface MenuModel {
 }
 
 export interface RoleModel {
-    Id: number;
-    Name: string;
-    Description: string;
+    Id?: number;
+    Name?: string;
+    Description?: string;
 }
 
 export interface UserModel {

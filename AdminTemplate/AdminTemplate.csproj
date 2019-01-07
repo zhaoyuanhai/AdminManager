@@ -177,6 +177,10 @@
     <Compile Include="Message\JsonMessage.cs" />
     <Compile Include="MetadataProviders\ModelMetadata.cs" />
     <Compile Include="MetadataProviders\MyCustomModelMetadataProvider.cs" />
+    <Compile Include="ModelBinding\ConditionModeBinder.cs" />
+    <Compile Include="ModelBinding\ConditionModelCollectionBinder.cs" />
+    <Compile Include="ModelBinding\ConditionModelProviderFactory.cs" />
+    <Compile Include="ModelBinding\ConditionModeValueProvider.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EntityModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -200,8 +204,10 @@
     <Compile Include="ViewExtends\CustomWebViewPage.cs" />
     <Compile Include="ViewExtends\ViewExtend.cs" />
     <Compile Include="Vue\Component\DialogExtensions.cs" />
+    <Compile Include="Vue\Component\FormExtensions.cs" />
+    <Compile Include="Vue\Component\FormItemExtensions.cs" />
     <Compile Include="Vue\OptionsBase.cs" />
-    <Compile Include="Vue\VueEleUIHelper.cs" />
+    <Compile Include="Vue\VueElementUIHelper.cs" />
     <Compile Include="WebValidateUserExtend.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -984,6 +990,7 @@
     <Content Include="Scripts\Lib\vue-i18n.js" />
     <Content Include="Scripts\Lib\vue-router.js" />
     <Content Include="Scripts\Lib\vue.js" />
+    <Content Include="Views\Home\data.js" />
     <Content Include="Views\Home\Index.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1271,10 +1278,15 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Entity\Detial.cshtml" />
     <Content Include="Views\Shared\_Pageing.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Pages\Web.config" />
+    <Content Include="Pages\abc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AppScript\api.ts" />
     <TypeScriptCompile Include="AppScript\common.ts" />
+    <TypeScriptCompile Include="AppScript\Component\TableTreeColumn.ts" />
+    <TypeScriptCompile Include="AppScript\Component\DataQuery.ts" />
     <TypeScriptCompile Include="AppScript\Component\TreeTable.ts" />
     <TypeScriptCompile Include="AppScript\main.ts" />
     <TypeScriptCompile Include="AppScript\models.ts" />

@@ -188,7 +188,7 @@ namespace AdminTemplate.Vue.Component
                 "   </div>\r\n" +
                 "   <span slot=\"footer\" class=\"dialog-footer\">\r\n" +
                 "       <el-button @click=\"handleCancel\">取 消</el-button>\r\n" +
-                "       <el-button type=\"primary\" @@click=\"submit('modelForm')\">确 定</el-button>\r\n" +
+                "       <el-button type=\"primary\" @click=\"submit('model_form')\">确 定</el-button>\r\n" +
                 "   </span>\r\n"
             );
             viewContext.Writer.Write("</el-dialog>");

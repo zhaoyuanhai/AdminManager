@@ -1,0 +1,39 @@
+﻿@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/Lib/vue.js"></script>
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        @(nameof(V_Test))
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app"
+        });
+
+        var baseVm = new Vue({
+            data: function () {
+                return {
+                    age: 23
+                };
+            },
+            methods: {
+                abc: function () {
+                    alert("abc");
+                }
+            }
+        });
+
+        vm.__proto__ = baseVm;
+
+    </script>
+</body>
+</html>

@@ -124,7 +124,7 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                     });
                 },
                 /**
-                 * 获取角色集合
+                 * 获取角色集合带分页
                  * @param pageModel
                  */
                 getRoleList: function (pageModel) {
@@ -133,6 +133,22 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0: return [4 /*yield*/, axios_1.default.get("/System/GetRoleList", { params: pageModel })];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                /**
+                 * 获取所有角色集合
+                 */
+                getRoleAllList: function () {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.get("/System/GetRoleAllList/")];
                                 case 1:
                                     result = _a.sent();
                                     return [2 /*return*/, result.data];
@@ -223,6 +239,58 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0: return [4 /*yield*/, axios_1.default.post("/System/SetUser", user)];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                /**
+                 * 用户分配权限
+                 * @param userId 用户Id
+                 * @param roleIds 权限列表
+                 */
+                setUserRoles: function (userId, roleIds) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.post("/System/SetUserRoles", { userId: userId, roleIds: roleIds })];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                /**
+                 * 设置角色
+                 * @param role 角色对象
+                 */
+                setRole: function (role) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.post("/System/SetRole", role)];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                /**
+                 * 检查角色名称是否存在
+                 * @param roleName
+                 */
+                checkRoleName: function (roleName, id) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.post("/System/CheckRoleName", { roleName: roleName, id: id })];
                                 case 1:
                                     result = _a.sent();
                                     return [2 /*return*/, result.data];

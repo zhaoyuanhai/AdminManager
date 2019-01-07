@@ -38,8 +38,41 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
         data: {
+            title: "角色",
             tableData: [],
-            formInline: {}
+            formInline: {},
+            modelForm: {},
+            rules: {
+                Name: [
+                    { required: true, message: "角色名称必填", trigger: "blur" },
+                    { max: 20, message: "长度不能超过20个字符", trigger: "blur" },
+                    {
+                        validator: function (rule, value, callback) {
+                            return __awaiter(this, void 0, void 0, function () {
+                                var result;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, api_1.default.system.checkRoleName(value, vue.modelForm.Id)];
+                                        case 1:
+                                            result = _a.sent();
+                                            if (result.Success) {
+                                                callback();
+                                            }
+                                            else {
+                                                callback(new Error(result.Errors[0].Message));
+                                            }
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            });
+                        },
+                        trigger: "blur"
+                    }
+                ],
+                Description: [
+                    { max: 200, message: "长度不能超过200个字符", trigger: "blur" }
+                ]
+            }
         },
         mounted: function () {
             return __awaiter(this, void 0, void 0, function () {
@@ -54,6 +87,24 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                     }
                 });
             });
+        },
+        methods: {
+            _submit: function () {
+                return __awaiter(this, void 0, void 0, function () {
+                    var result;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, api_1.default.system.setRole(this.modelForm)];
+                            case 1:
+                                result = _a.sent();
+                                if (result.Success) {
+                                    alert("ok");
+                                }
+                                return [2 /*return*/];
+                        }
+                    });
+                });
+            }
         }
     });
 });

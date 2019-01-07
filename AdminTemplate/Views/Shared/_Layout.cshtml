@@ -20,6 +20,8 @@
 <body>
     <div id="v-app" v-cloak>
         @RenderBody()
+
+        @RenderSection("dialogs", false)
     </div>
     @RenderSection("scripts", required: false)
     <script>

@@ -53,6 +53,7 @@ declare global {
     var VueInit: (vueOption: ComponentOptions<Vue, MyDatas<Vue>, MyMethods<Vue>>) => void;
     var usePageJs: boolean;
     var pageUrl: string;
+    var vue: Vue;
 
     interface Window {
         vue: Vue;

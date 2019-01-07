@@ -39,11 +39,19 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
     VueInit({
         data: {
             title: "用户",
+            roleDialogTitle: "分配权限",
             tableData: [],
+            query: { userName: "" },
             formInline: {},
             modelForm: {},
+            roleDialogVisable: false,
+            roles: [],
+            roleModel: {
+                id: 0,
+                roles: []
+            },
             rules: {
-                userName: [
+                UserName: [
                     { required: true, message: "用户名必填", trigger: "blur" },
                     { min: 3, max: 20, message: "用户名长度必须在3-20个字符之间", trigger: "blur" },
                     {
@@ -52,8 +60,12 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                                 var result;
                                 return __generator(this, function (_a) {
                                     switch (_a.label) {
-                                        case 0: return [4 /*yield*/, api_1.default.system.checkUserName(value)];
-                                        case 1:
+                                        case 0:
+                                            if (!vue.$data.modelForm.Id) return [3 /*break*/, 1];
+                                            callback();
+                                            return [3 /*break*/, 3];
+                                        case 1: return [4 /*yield*/, api_1.default.system.checkUserName(value)];
+                                        case 2:
                                             result = _a.sent();
                                             if (result.Success) {
                                                 callback();
@@ -61,7 +73,8 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                                             else {
                                                 callback(new Error(result.Errors[0].Message));
                                             }
-                                            return [2 /*return*/];
+                                            _a.label = 3;
+                                        case 3: return [2 /*return*/];
                                     }
                                 });
                             });
@@ -69,32 +82,74 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                         trigger: "blur"
                     }
                 ],
-                realName: [
+                RealName: [
                     { required: true, message: "真实姓名必填", trigger: "blur" }
                 ],
-                mobile: [
+                Mobile: [
                     { pattern: /^1[34578]\d{9}$/, message: '手机号格式错误', trigger: "blur" }
                 ],
-                email: [
+                Email: [
                     { type: 'email', max: 50, message: "邮箱格式不正确", trigger: "blur" }
                 ]
             }
         },
         mounted: function () {
             return __awaiter(this, void 0, void 0, function () {
-                var result;
+                var result, roleResult;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, api_1.default.system.getUserList({ PageIndex: 1, PageSize: 10 })];
                         case 1:
                             result = _a.sent();
                             this.$data.tableData = result.Data.Datas;
+                            return [4 /*yield*/, api_1.default.system.getRoleAllList()];
+                        case 2:
+                            roleResult = _a.sent();
+                            this.roles = roleResult.Data.map(function (m) {
+                                return {
+                                    key: m.Id,
+                                    label: m.Name
+                                };
+                            });
                             return [2 /*return*/];
                     }
                 });
             });
         },
         methods: {
+            toBlean: function (value) {
+                return (value == undefined || value == null || value == 0) === false;
+            },
+            showRoleDialog: function (model) {
+                this.roleDialogTitle = model.UserName + "-分配权限";
+                this.roleModel.id = model.Id;
+                this.roleModel.roles = model.Roles.map(function (m) { return m.Id; });
+                this.roleDialogVisable = true;
+            },
+            search: function () {
+                this.$refs.dq.reload();
+            },
+            setRole: function () {
+                return __awaiter(this, void 0, void 0, function () {
+                    var result;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, api_1.default.system.setUserRoles(this.roleModel.id, this.roleModel.roles)];
+                            case 1:
+                                result = _a.sent();
+                                if (result.Success) {
+                                    this.$message.success("数据已保存");
+                                    this.roleDialogVisable = false;
+                                    this.$refs.dq.reload();
+                                }
+                                else {
+                                    this.$message.error(result.FirstError.Message);
+                                }
+                                return [2 /*return*/];
+                        }
+                    });
+                });
+            },
             _submit: function () {
                 return __awaiter(this, void 0, void 0, function () {
                     var result;
@@ -104,7 +159,9 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                             case 1:
                                 result = _a.sent();
                                 if (result.Success) {
-                                    alert('ok');
+                                    this.dialogVisible = false;
+                                    this.$message.success("数据已保存");
+                                    this.$refs.dq.reload();
                                 }
                                 return [2 /*return*/];
                         }

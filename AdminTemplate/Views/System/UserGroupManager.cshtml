@@ -28,11 +28,11 @@
             </el-form>
         </div>
         <tree-table :data="tableData"
-                name="Name" 
-                id-name="Id" 
-                parent-name="ParentId"
-                size="small"
-                style="width: 100%">
+                    name="Name"
+                    id-name="Id"
+                    parent-name="ParentId"
+                    size="small"
+                    style="width: 100%">
             <el-table-column prop="Description" label="描述信息"></el-table-column>
             <el-table-column label="操作" width="300" fixed="right">
                 <template slot-scope="scope">
@@ -45,26 +45,27 @@
     </div>
 </el-card>
 
-<el-dialog ref="groupDialog"
-           :title="dialogTitle"
-           :visible.sync="dialogVisible"
-           width="500px"
-           :before-close="_dialogClose">
-    <div>
-        <el-form ref="formModel" :model="formModel" :rules="rules" label-width="100px">
-            <el-form-item label="父级组">
-                <el-input v-model="formModel.ParentName" readonly="readonly"></el-input>
-            </el-form-item>
-            <el-form-item label="组名称" prop="Name">
-                <el-input v-model="formModel.Name"></el-input>
-            </el-form-item>
-            <el-form-item label="描述" prop="Description">
-                <el-input type="textarea" rows="5" v-model="formModel.Description"></el-input>
-            </el-form-item>
-        </el-form>
-    </div>
-    <span slot="footer" class="dialog-footer">
-        <el-button @@click="_dialogClose">取 消</el-button>
-        <el-button type="primary" @@click="dialogSubmit">确 定</el-button>
-    </span>
-</el-dialog>
+@section dialogs{
+    @using (ElementUI.BeginFormDialog(new MvcVueDialog.Options()
+    {
+        title = ":dialogTitle",
+        visible = ".sync:dialogVisible",
+        beforeClose = ":handleClose",
+        width = "500px"
+    }))
+    {
+        <div>
+            <el-form ref="model_form" :model="modelForm" :rules="rules" label-width="100px">
+                <el-form-item label="父级组">
+                    <el-input v-model="modelForm.ParentName" readonly="readonly"></el-input>
+                </el-form-item>
+                <el-form-item label="组名称" prop="Name">
+                    <el-input v-model="modelForm.Name"></el-input>
+                </el-form-item>
+                <el-form-item label="描述" prop="Description">
+                    <el-input type="textarea" rows="5" v-model="modelForm.Description"></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+    }
+}

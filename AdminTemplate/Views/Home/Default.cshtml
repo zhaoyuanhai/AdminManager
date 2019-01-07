@@ -22,6 +22,52 @@
                      label="地址">
     </el-table-column>
 </tree-table>
+<br />
+<el-table :data="tableData" max-height="400">
+    <el-table-column prop="id" label="id" type="selection" fixed></el-table-column>
+    <el-table-tree-column fixed :expand-all="true"
+                          file-icon="icon icon-file"
+                          folder-icon="icon icon-folder"
+                          prop="name"
+                          label="title"
+                          parent-key="pid"
+                          child-key="id"
+                          :show-overflow-tooltip="true" width="320"
+                          :indent-size="20">
+        <template slot-scope="scope">
+            <span>prefix =></span>
+            <span @@click="text(scope)">{{scope.row.name}} -- {{scope.row.id}}</span>
+            <span>
+                <=suffix
+            </span>
+        </template>
+    </el-table-tree-column>
+    <el-table-column prop="address"
+                     label="地址"></el-table-column>
+</el-table>
+<br />
+<el-table :data="model.menus" max-height="400">
+    <el-table-column prop="id" label="id" type="selection" fixed></el-table-column>
+    <el-table-tree-column fixed :expand-all="true"
+                          file-icon="icon icon-file"
+                          folder-icon="icon icon-folder"
+                          prop="label"
+                          label="title"
+                          child-key="children"
+                          :show-overflow-tooltip="true" width="320"
+                          :indent-size="20">
+        <template slot-scope="scope">
+            <span>prefix =></span>
+            <span @@click="text(scope)">{{scope.row.label}} -- {{scope.row.id}}</span>
+            <span>
+                <=suffix
+            </span>
+        </template>
+    </el-table-tree-column>
+    <el-table-column prop="description"
+                     label="Description"></el-table-column>
+</el-table>
+
 
 @using (ElementUI.BeginFormDialog(new MvcVueDialog.Options()
 {
@@ -44,4 +90,8 @@
             color: gray;
         }
     </style>
+}
+
+@section scripts{
+    <script src="~/Views/Home/data.js"></script>
 }

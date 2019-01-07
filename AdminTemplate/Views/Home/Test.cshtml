@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>eeee</title>
+    <script src="~/Scripts/Lib/vue.js"></script>
+    <script src="~/Scripts/Lib/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <ul>
+        <li>原型链的原理</li>
+        <li>基于原型链的继承</li>
+        <li>变量作用域</li>
+        <li>闭包,闭包的原理</li>
+    </ul>
+    <a href="/abc/ddd">ddd</a>
+    <a href="/abc/ttt">ttt</a>
+
+    <div id="app">
+
+    </div>
+    <script>
+        $("a").click(function () {
+            event.stopPropagation();
+            var stateObj = { foo: "bar" };
+            history.pushState(stateObj, this.getAttribute("href"), this.getAttribute("href"));
+
+            return false;
+        });
+    </script>
+</body>
+</html>

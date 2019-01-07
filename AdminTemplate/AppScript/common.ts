@@ -120,6 +120,11 @@
             }
     }
 
+    /**
+     * 将一个对象上的属性复制到自己身上,浅拷贝
+     * @param self 当前对象
+     * @param other 原对象
+     */
     static SetObjectFrom(self, other) {
         for (let name in other) {
             self[name] = other[name];

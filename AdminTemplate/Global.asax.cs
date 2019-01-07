@@ -7,7 +7,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AdminEngine;
+using AdminModels.Customs;
 using AdminTemplate.MetadataProviders;
+using AdminTemplate.ModelBinding;
 
 namespace AdminTemplate
 {
@@ -25,6 +27,9 @@ namespace AdminTemplate
             EngineContext.Initialize(false);
 
             //ModelMetadataProviders.Current = new MyCustomModelMetadataProvider();
+            ValueProviderFactories.Factories.Insert(0, new ConditionModelProviderFactory());
+            ModelBinders.Binders.Add(typeof(ConditionModel), new ConditionModeBinder());
+            ModelBinders.Binders.Add(typeof(ConditionModelCollection), new ConditionModelCollectionBinder());
         }
 
         protected void Application_Error(object sender, EventArgs e)

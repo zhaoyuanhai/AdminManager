@@ -26,5 +26,15 @@ namespace AdminServicesRealization.System
             }
             return false;
         }
+
+        public bool SetUserRoles(int userId, int[] roleIds)
+        {
+            var user = entities.Users.Find(userId);
+            user.Roles.Clear();
+            entities.Roles.Where(x => roleIds.Contains(x.Id))
+                .ToList().ForEach(user.Roles.Add);
+            entities.SaveChanges();
+            return true;
+        }
     }
 }

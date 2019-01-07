@@ -9,8 +9,6 @@
 
 @section scripts{
     @RenderSection("scripts", required: false)
-    @*@Html.UsePageJs()*@
-    @*<script src="~/Scripts/AppScript/Base.js"></script>*@
 }
 
 <el-container style="height: 100%; border: 1px solid #eee">
@@ -38,5 +36,7 @@
         <el-main>
             @RenderBody()
         </el-main>
+
+        @RenderSection("dialogs", false)
     </el-container>
 </el-container>

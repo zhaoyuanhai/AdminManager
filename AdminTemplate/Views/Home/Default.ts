@@ -1,4 +1,11 @@
-﻿VueInit({
+﻿import ElTableTreeColumn from "AppScript/Component/TableTreeColumn";
+import Vue from "vue";
+
+Vue.component("el-table-tree-column", ElTableTreeColumn);
+
+declare var trees;
+
+VueInit({
     data: {
         title: "测试弹出框",
         tableData: [{
@@ -43,7 +50,10 @@
             date: '2016-05-03',
             name: '王小虎222',
             address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        }],
+        model: {
+            menus: trees
+        }
     },
     methods: {
         btnClick() {

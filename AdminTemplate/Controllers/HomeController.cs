@@ -20,20 +20,29 @@ namespace AdminTemplate.Controllers
 
         #region 页面
 
+        [AllowAnonymous]
+        public ActionResult Test() => View();
+
         public ActionResult Default() => View();
 
         /// <summary>
         /// 首页
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index() => View();
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         /// <summary>
         /// 登录页
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        public ActionResult Login() => View();
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         #endregion 页面
 
@@ -75,7 +84,7 @@ namespace AdminTemplate.Controllers
         /// <returns></returns>
         public ActionResult Page(string path)
         {
-            return View("~/Views/" + path + ".cshtml");
+            return View("~/Pages/" + path + ".cshtml");
         }
     }
 }

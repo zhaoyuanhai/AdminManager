@@ -28,47 +28,38 @@ namespace AdminTemplate.Controllers
 
         #region 页面
 
-        //[Authorize(Roles = "admin")]
         public ActionResult MenuManager()
         {
             if (Request.IsAjaxRequest())
             {
-
             }
             return View();
         }
 
-        //[Authorize(Roles = "admin")]
         public ActionResult UserManager(PageingModel pageing)
         {
             if (Request.IsAjaxRequest())
             {
-
             }
             return View();
         }
 
-        //[Authorize(Roles = "admin")]
         public ActionResult AuthorityManager()
         {
             if (Request.IsAjaxRequest())
             {
-
             }
             return View();
         }
 
-        //[Authorize(Roles = "admin")]
         public ActionResult RoleManager()
         {
             if (Request.IsAjaxRequest())
             {
-
             }
             return View();
         }
 
-        //[Authorize(Roles = "admin")]
         public ActionResult UserGroupManager()
         {
             if (Request.IsAjaxRequest())
@@ -79,7 +70,6 @@ namespace AdminTemplate.Controllers
             return View();
         }
 
-        //[Authorize(Roles = "admin")]
         public ActionResult OperationManager(PageingModel pageing)
         {
             if (Request.IsAjaxRequest())
@@ -125,22 +115,18 @@ namespace AdminTemplate.Controllers
                 return JsonError("删除失败");
         }
 
-        //[Authorize(Roles = "admin")]
         public ActionResult Config()
         {
             if (Request.IsAjaxRequest())
             {
-
             }
             return View();
         }
 
-        //[Authorize(Roles = "admin")]
         public ActionResult OperationLog()
         {
             if (Request.IsAjaxRequest())
             {
-
             }
             return View();
         }
@@ -264,6 +250,20 @@ namespace AdminTemplate.Controllers
                 return JsonError(null, "用户名已存在");
         }
 
+        /// <summary>
+        /// 用户分配权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SetUserRoles(int userId, int[] roleIds)
+        {
+            if (userService.SetUserRoles(userId, roleIds))
+            {
+                return JsonSuccess();
+            }
+            else
+                return JsonError("分配权限失败");
+        }
+
         #endregion 用户接口
 
         #region 角色接口
@@ -278,6 +278,12 @@ namespace AdminTemplate.Controllers
             return JsonSuccess(datas);
         }
 
+        public ActionResult GetRoleAllList()
+        {
+            var datas = roleService.Select();
+            return JsonSuccess(datas);
+        }
+
         public ActionResult SetRole(T_Role role)
         {
             int count;
@@ -286,6 +292,15 @@ namespace AdminTemplate.Controllers
             else
                 count = roleService.Modify(role);
             return JsonSuccess(role);
+        }
+
+        public ActionResult CheckRoleName(string roleName, int? id)
+        {
+            var role = roleService.FirstOrDefault(x => x.Name == roleName && x.Id != id);
+            if (role == null)
+                return JsonSuccess();
+            else
+                return JsonError(null, "角色名称已存在");
         }
 
         public ActionResult DeleteRole(int id)

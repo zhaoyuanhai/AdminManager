@@ -1,8 +1,6 @@
 ﻿@model bool
 
-<table>
-    <tr>
-        <td>@Html.RadioButton("", true, Model) 是</td>
-        <td>@Html.RadioButton("", false, !Model) 否</td>
-    </tr>
-</table>
+<el-radio-group v-model="sizeForm.resource" size="medium">
+    <el-radio border label="是"></el-radio>
+    <el-radio border label="否"></el-radio>
+</el-radio-group>

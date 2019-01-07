@@ -1,3 +1,4 @@
+//获取和设置vue的初始参数
 (function () {
     var vueOption = {};
     //初始化vue的方法
@@ -8,6 +9,7 @@
         return vueOption;
     };
 })();
+//配置模块加载器
 require.config({
     baseUrl: '/Scripts',
     paths: {
@@ -15,12 +17,13 @@ require.config({
         axios: 'Lib/axios',
         vue: 'Lib/vue',
         ELEMENT: 'Lib/elementui',
-        'elementui': 'Lib/elementui',
+        elementui: 'Lib/elementui',
         api: 'AppScript/api',
         common: 'AppScript/common'
     }
 });
-function renderPage(Vue, jquery, ELEMENT, treeTable) {
+//渲染页面,初始化vue对象
+function renderPage(Vue, jquery, ELEMENT) {
     var vueOption = {
         el: "#v-app",
         data: {
@@ -57,17 +60,22 @@ function renderPage(Vue, jquery, ELEMENT, treeTable) {
             create: function () {
                 this.$data.dialogTitle = "添加-" + this.$data.title;
                 this.$data.dialogVisible = true;
+                if (this.$refs.modelForm) {
+                    this.$refs.modelForm.resetFields();
+                }
+                this.modelForm = {};
                 if (typeof this._create === 'function')
                     this._create.apply(this, arguments);
             },
             modify: function (model) {
                 this.$data.dialogTitle = "编辑-" + this.$data.title;
                 this.$data.dialogVisible = true;
+                if (this.$refs.modelForm) {
+                    this.$refs.modelForm.resetFields();
+                }
+                this.modelForm = model;
                 if (typeof this._modify === 'function') {
                     this._modify.apply(this, arguments);
-                }
-                else {
-                    this.modelForm = model;
                 }
             },
             remove: function () {
@@ -116,15 +124,18 @@ function renderPage(Vue, jquery, ELEMENT, treeTable) {
     var vue = new Vue($.extend(true, vueOption, window.GetVueOption()));
     window["vue"] = vue;
 }
-if (usePageJs) {
-    require(['vue',
-        'jquery',
-        'ELEMENT',
-        '/Scripts/AppScript/Component/TreeTable.js',
-        '/Scripts/Views' + pageUrl + '.js'
-    ], renderPage);
-}
-else {
-    require(['vue', 'jquery', 'ELEMENT'], renderPage);
-}
+//加载页面,如果当前页面有对应的js文件,就自动加载.
+(function () {
+    var arr = [
+        "vue",
+        "jquery",
+        "ELEMENT",
+        "/Scripts/AppScript/Component/TreeTable.js",
+        "/Scripts/AppScript/Component/DataQuery.js"
+    ];
+    if (usePageJs) {
+        arr.push('/Scripts/Views' + pageUrl + '.js');
+    }
+    require(arr, renderPage);
+})();
 //# sourceMappingURL=main.js.map

@@ -7,9 +7,9 @@
     <div slot="header" class="clearfix">
         <span>角色管理</span>
         <div class="tools-button">
-            <el-button size="mini" type="primary" @@click="createUser()">添加</el-button>
-            <el-button size="mini" type="danger" @@click="createUser()">删除</el-button>
-            <el-button size="mini" type="primary" @@click="createUser()">修改</el-button>
+            <el-button size="mini" type="primary" @@click="create()">添加</el-button>
+            <el-button size="mini" type="danger" @@click="remove()">删除</el-button>
+            <el-button size="mini" type="primary" @@click="modify()">修改</el-button>
         </div>
     </div>
     <div class="text item">
@@ -34,8 +34,8 @@
             </el-table-column>
             <el-table-column label="操作" width="300" fixed="right">
                 <template slot-scope="scope">
-                    <el-button @@click="modify" type="primary" size="mini">编辑</el-button>
-                    <el-button @@click="remove" type="danger" size="mini">删除</el-button>
+                    <el-button @@click="modify(scope.row)" type="primary" size="mini">编辑</el-button>
+                    <el-button @@click="remove(scope.row)" type="danger" size="mini">删除</el-button>
                     <el-button type="success" size="mini">分配权限</el-button>
                 </template>
             </el-table-column>
@@ -47,3 +47,26 @@
         </el-pagination>
     </div>
 </el-card>
+
+@section dialogs{
+    <el-dialog ref="menuDialog"
+               :title="dialogTitle"
+               :visible.sync="dialogVisible"
+               width="500px"
+               :before-close="handleClose">
+        <div>
+            <el-form ref="modelForm" :model="modelForm" :rules="rules" label-width="100px">
+                <el-form-item label="角色名称" prop="Name">
+                    <el-input v-model="modelForm.Name" placeholder="请输入角色名称"></el-input>
+                </el-form-item>
+                <el-form-item label="描述信息" prop="Description">
+                    <el-input type="textarea" :rows="5" v-model="modelForm.Description" placeholder="请输入描述信息"></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+        <span slot="footer" class="dialog-footer">
+            <el-button @@click="handleCancel">取 消</el-button>
+            <el-button type="primary" @@click="submit('modelForm')">确 定</el-button>
+        </span>
+    </el-dialog>
+}

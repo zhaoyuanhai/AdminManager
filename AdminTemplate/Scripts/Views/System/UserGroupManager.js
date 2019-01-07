@@ -41,7 +41,7 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
             dialogVisible: false,
             title: "用户组",
             rules: {},
-            formModel: {},
+            modelForm: {},
             formInline: {},
             tableData: []
         },
@@ -61,15 +61,16 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
         },
         methods: {
             _create: function (model) {
-                alert(3);
+                //alert(3);
             },
             _modify: function (model) {
-                alert(3);
+                //alert(3);
             },
             _remove: function (model) {
-                alert(3);
+                //alert(3);
             },
-            btnSubmit: function () {
+            _submit: function (refForm) {
+                alert(3);
             }
         }
     });
