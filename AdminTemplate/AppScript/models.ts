@@ -11,6 +11,8 @@ export interface MenuModel {
     Icon: string;
     Url: string;
     Order: number;
+    Operations: Array<OperationModel>;
+    _CreateDate: Date;
     ParentMenu: MenuModel;
 }
 

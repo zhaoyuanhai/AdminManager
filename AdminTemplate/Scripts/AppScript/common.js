@@ -27,28 +27,30 @@ define(["require", "exports"], function (require, exports) {
             if (orderFn != null) {
                 tempArr.sort(orderFn);
             }
-            function tree(arr, objArr) {
+            function tree(arr, objArr, depth) {
                 var _loop_1 = function (i_1) {
-                    var current = arr[i_1];
                     var obj = {
                         source: arr[i_1],
                         children: []
                     };
                     if (itemFactory != null) {
-                        obj = itemFactory(arr[i_1], []);
+                        obj = itemFactory(arr[i_1], [], depth);
                     }
                     objArr.push(obj);
                     var childArr = array.filter(function (x) { return x[fidName] == arr[i_1][idName]; });
                     if (orderFn != null)
                         childArr.sort(orderFn);
-                    tree(childArr, obj.children);
+                    if (childArr.length > 0) {
+                        ++depth;
+                        tree(childArr, obj.children, depth);
+                    }
                 };
                 for (var i_1 = 0; i_1 < arr.length; i_1++) {
                     _loop_1(i_1);
                 }
             }
             var objArr = [];
-            tree(tempArr, objArr);
+            tree(tempArr, objArr, 0);
             return objArr;
         };
         /**

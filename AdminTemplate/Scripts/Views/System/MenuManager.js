@@ -40,6 +40,7 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
         data: {
             dialogVisible: false,
             isMenuLoading: true,
+            operationVisible: false,
             menuForm: {
                 Id: "",
                 Title: "",
@@ -55,7 +56,8 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                 ]
             },
             menuTree: [],
-            tableData: []
+            tableData: [],
+            checkList: []
         },
         computed: {
             parentName: function () {
@@ -225,6 +227,9 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                         }
                     });
                 });
+            },
+            setOperation: function () {
+                this.operationVisible = true;
             }
         }
     });

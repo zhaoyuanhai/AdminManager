@@ -104,6 +104,8 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                         }
                     });
                 });
+            },
+            setAuthority: function () {
             }
         }
     });

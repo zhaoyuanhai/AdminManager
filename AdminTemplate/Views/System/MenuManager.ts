@@ -23,6 +23,7 @@ VueInit({
     data: {
         dialogVisible: false,
         isMenuLoading: true,
+        operationVisible: false,
         menuForm: {
             Id: "",
             Title: "",
@@ -38,7 +39,8 @@ VueInit({
             ]
         },
         menuTree: [],
-        tableData: []
+        tableData: [],
+        checkList: []
     },
     computed: {
         parentName() {
@@ -168,6 +170,9 @@ VueInit({
             target.ParentMenu = null;
             var result = await Axios.all([api.system.setMenu(menu), api.system.setMenu(target)]);
             this.$message("数据已修改");
+        },
+        setOperation() {
+            this.operationVisible = true;
         }
     }
 });

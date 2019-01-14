@@ -37,6 +37,10 @@ VueInit({
             if (result.Success) {
                 alert("ok");
             }
+        },
+
+        setAuthority() {
+
         }
     }
 });

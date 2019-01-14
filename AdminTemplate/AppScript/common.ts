@@ -14,7 +14,7 @@
     static CompileTree<T = any, M = { source: T, children: T }>(array: Array<T>, fid: any,
         idName: string,
         fidName: string,
-        itemFactory: (item: T, children: Array<M>) => M = null,
+        itemFactory: (item: T, children: Array<M>, depth: Number) => M = null,
         orderFn: (a: T, b: T) => number = null): Array<M> {
         var tempArr = [];
         for (var i = 0; i < array.length; i++) {
@@ -27,30 +27,30 @@
             tempArr.sort(orderFn);
         }
 
-        function tree(arr, objArr) {
+        function tree(arr, objArr, depth) {
 
             for (let i = 0; i < arr.length; i++) {
-                let current = arr[i];
-
                 let obj: any = {
                     source: arr[i],
                     children: []
                 }
                 if (itemFactory != null) {
-                    obj = itemFactory(arr[i], []);
+                    obj = itemFactory(arr[i], [], depth);
                 }
 
                 objArr.push(obj);
                 let childArr = array.filter(function (x) { return x[fidName] == arr[i][idName]; });
                 if (orderFn != null)
                     childArr.sort(orderFn);
-
-                tree(childArr, obj.children);
+                if (childArr.length > 0) {
+                    ++depth;
+                    tree(childArr, obj.children, depth);
+                }
             }
         }
 
         var objArr = [];
-        tree(tempArr, objArr);
+        tree(tempArr, objArr, 0);
         return objArr;
     }
 
