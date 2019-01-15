@@ -9,6 +9,9 @@ Axios.interceptors.request.use(config => {
 });
 
 class Api {
+    /**
+     * 系统请求,权限,系统用户等等....
+     */
     system = {
         /**
          * 设置菜单
@@ -36,6 +39,16 @@ class Api {
          */
         async deleteMenu(id: number): Promise<ResponseModel> {
             var result = await Axios.get<ResponseModel>("/System/DeleteMenu", { params: { id: id } })
+            return result.data;
+        },
+
+        async getMenuOperations(id: number): Promise<ResponseModel> {
+            var result = await Axios.get<ResponseModel>("/System/GetMenuOperations", { params: { id: id } });
+            return result.data;
+        },
+
+        async saveMenuOperation(id: number, operations: Array<number>) {
+            var result = await Axios.post<ResponseModel>("/System/SaveMenuOperation", { id, operations });
             return result.data;
         },
 
@@ -83,16 +96,28 @@ class Api {
             return result.data;
         },
 
+        /**
+         * 创建功能按钮
+         * @param data
+         */
         async createOperation<T = any>(data: models.OperationModel): Promise<ResponseModel<T>> {
             var result = await Axios.post("/System/CreateOperation", data);
             return result.data;
         },
 
+        /**
+         * 修改功能按钮
+         * @param data
+         */
         async modifyOperation(data: models.OperationModel) {
             var result = await Axios.post("/System/ModifyOperation", data);
             return result.data;
         },
 
+        /**
+         * 删除功能按钮
+         * @param id
+         */
         async removeOperation(id: number): Promise<ResponseModel<any>> {
             var result = await Axios.delete("/System/RemoveOperation", { params: { id } });
             return result.data;
@@ -145,6 +170,9 @@ class Api {
         }
     }
 
+    /**
+     * 针对当前页面的ajax请求
+     */
     current = {
         async get<T = any>(data?: { pageing?: models.PageingModel, condition?: models.EntityModel[] }): Promise<ResponseModel<T>> {
             let result = await Axios.get("", { params: data });
@@ -172,4 +200,4 @@ var api = new Api();
 
 export default api;
 
-export var aa = 33;
+export var ajax = Axios;

@@ -33,14 +33,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-define(["require", "exports", "api", "common", "axios"], function (require, exports, api_1, common_1, axios_1) {
+define(["require", "exports", "api", "common"], function (require, exports, api_1, common_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
         data: {
             dialogVisible: false,
-            isMenuLoading: true,
-            operationVisible: false,
+            loading: {
+                tree: true
+            },
+            treeLoading: true,
+            opDialog: {
+                visible: false,
+                title: "编辑功能"
+            },
             menuForm: {
                 Id: "",
                 Title: "",
@@ -57,7 +63,9 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
             },
             menuTree: [],
             tableData: [],
-            checkList: []
+            operationList: [],
+            checkList: [],
+            currentMenu: {}
         },
         computed: {
             parentName: function () {
@@ -74,22 +82,28 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
         },
         mounted: function () {
             return __awaiter(this, void 0, void 0, function () {
-                var data, treeData;
+                var data, opList, treeData;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4 /*yield*/, api_1.default.system.getMenuList()];
                         case 1:
                             data = _a.sent();
                             this.$data.menuList = data.Data;
+                            return [4 /*yield*/, api_1.default.system.getOperationList({ PageSize: 20 })];
+                        case 2:
+                            opList = _a.sent();
+                            this.operationList = opList.Data.Datas;
                             treeData = common_1.default.CompileTree(data.Data, null, "Id", "ParentId", function (item, arr) {
                                 return {
                                     id: item.Id,
                                     label: item.Title,
                                     icon: item.Icon,
-                                    children: arr
+                                    children: arr,
+                                    operations: item.Operations
                                 };
                             }, function (a, b) { return a.Order - b.Order; });
                             this.$data.menuTree = treeData;
+                            this.loading.tree = false;
                             return [2 /*return*/];
                     }
                 });
@@ -219,7 +233,7 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                                 target.Order = menu.Id;
                                 menu.ParentMenu = null;
                                 target.ParentMenu = null;
-                                return [4 /*yield*/, axios_1.default.all([api_1.default.system.setMenu(menu), api_1.default.system.setMenu(target)])];
+                                return [4 /*yield*/, Promise.all([api_1.default.system.setMenu(menu), api_1.default.system.setMenu(target)])];
                             case 1:
                                 result = _a.sent();
                                 this.$message("数据已修改");
@@ -228,8 +242,28 @@ define(["require", "exports", "api", "common", "axios"], function (require, expo
                     });
                 });
             },
-            setOperation: function () {
-                this.operationVisible = true;
+            setOperation: function (data) {
+                this.opDialog.visible = true;
+                this.currentMenu = data;
+                this.checkList = data.operations ? data.operations.map(function (op) { return op.Name; }) : [];
+            },
+            saveOperation: function () {
+                return __awaiter(this, void 0, void 0, function () {
+                    var ids, result;
+                    var _this = this;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                ids = this.checkList.map(function (c) { return _this.operationList.find(function (p) { return p.Name === c; }).Id; });
+                                return [4 /*yield*/, api_1.default.system.saveMenuOperation(this.currentMenu.id, ids)];
+                            case 1:
+                                result = _a.sent();
+                                this.opDialog.visible = false;
+                                this.$message("数据已修改");
+                                return [2 /*return*/];
+                        }
+                    });
+                });
             }
         }
     });

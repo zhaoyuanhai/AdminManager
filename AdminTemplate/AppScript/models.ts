@@ -42,8 +42,8 @@ export interface OperationModel {
 }
 
 export interface PageingModel<T = any> {
-    PageIndex: number;
-    PageSize: number;
+    PageIndex?: number;
+    PageSize?: number;
     PageCount?: number;
     Total?: number;
     Datas?: Array<T>

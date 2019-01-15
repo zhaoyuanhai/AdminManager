@@ -189,6 +189,17 @@ namespace AdminTemplate.Controllers
                 return JsonError("删除失败");
         }
 
+        public ActionResult GetMenuOperations(int id)
+        {
+            return null;
+        }
+
+        public ActionResult SaveMenuOperation(int id, int[] operations)
+        {
+            var b = menuService.SaveMenuOperation(id, operations);
+            return JsonSuccess();
+        }
+
         #endregion 菜单接口
 
         #region 用户接口

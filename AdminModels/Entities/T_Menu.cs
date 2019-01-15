@@ -11,6 +11,7 @@ namespace AdminModels.Entities
         public T_Menu()
         {
             this.Authorities = new Collection<T_Authority>();
+            this.Operations = new Collection<T_Operation>();
         }
 
         /// <summary>

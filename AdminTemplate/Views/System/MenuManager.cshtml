@@ -15,6 +15,7 @@
                 <el-card class="box-card">
                     <div class="grid-content">
                         <el-tree ref="menuTree"
+                                 v-loading="loading.tree"
                                  :data="menuTree"
                                  node-key="id"
                                  default-expand-all
@@ -60,13 +61,13 @@
                               size="small"
                               :row-class-name="parentClassName"
                               style="width: 100%">
-                        <el-table-column prop="Title" label="名称" width="180">
+                        <el-table-column prop="Title" label="名称" width="120">
                         </el-table-column>
-                        <el-table-column prop="Url" label="地址" width="300">
+                        <el-table-column prop="Url" label="地址" width="180">
                         </el-table-column>
                         <el-table-column label="功能按钮">
                             <template slot-scope="scope">
-                                <el-button v-for="item in scope.row.Operations">
+                                <el-button v-for="item in scope.row.Operations" size="mini">
                                     {{ item.Name }}
                                 </el-button>
                             </template>
@@ -108,22 +109,18 @@
         </span>
     </el-dialog>
 
-    <el-dialog ref="operation"
-               :visible.async="operationVisible"
-               title="功能权限"
+    <el-dialog ref="opDialog"
+               :visible.async="opDialog.visible"
+               :title="opDialog.title"
                width="80%">
         <div>
             <el-checkbox-group v-model="checkList">
-                <el-checkbox label="复选框 A"></el-checkbox>
-                <el-checkbox label="复选框 B"></el-checkbox>
-                <el-checkbox label="复选框 C"></el-checkbox>
-                <el-checkbox label="禁用" disabled></el-checkbox>
-                <el-checkbox label="选中且禁用" disabled></el-checkbox>
+                <el-checkbox v-for="item in operationList" :label="item.Name"></el-checkbox>
             </el-checkbox-group>
         </div>
         <span slot="footer" class="dialog-footer">
             <el-button>取 消</el-button>
-            <el-button type="primary">确 定</el-button>
+            <el-button type="primary" @@click="saveOperation">确 定</el-button>
         </span>
     </el-dialog>
 }

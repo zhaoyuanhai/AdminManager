@@ -1,14 +1,13 @@
-﻿import Vue from 'vue';
-import api from 'api'
+﻿import api, { ajax } from 'api'
 import Common, { Color } from 'common';
-import Axios from 'axios';
 import * as models from 'models';
 
 interface NodeData {
     id: number;
     icon: string;
     label: string;
-    children: Array<NodeData>
+    children: Array<NodeData>,
+    operations: Array<models.OperationModel>
 }
 
 interface TreeNode extends NodeData {
@@ -22,8 +21,14 @@ interface TreeNode extends NodeData {
 VueInit({
     data: {
         dialogVisible: false,
-        isMenuLoading: true,
-        operationVisible: false,
+        loading: {
+            tree: true
+        },
+        treeLoading: true,
+        opDialog: {
+            visible: false,
+            title: "编辑功能"
+        },
         menuForm: {
             Id: "",
             Title: "",
@@ -40,7 +45,9 @@ VueInit({
         },
         menuTree: [],
         tableData: [],
-        checkList: []
+        operationList: [],
+        checkList: [],
+        currentMenu: {}
     },
     computed: {
         parentName() {
@@ -58,16 +65,21 @@ VueInit({
         var data = await api.system.getMenuList();
         this.$data.menuList = data.Data;
 
+        var opList = await api.system.getOperationList({ PageSize: 20 });
+        this.operationList = opList.Data.Datas;
+
         //设置菜单列表
         var treeData = Common.CompileTree<models.MenuModel, NodeData>(data.Data, null, "Id", "ParentId", (item, arr) => {
             return {
                 id: item.Id,
                 label: item.Title,
                 icon: item.Icon,
-                children: arr
+                children: arr,
+                operations: item.Operations
             }
         }, (a, b) => a.Order - b.Order);
         this.$data.menuTree = treeData;
+        this.loading.tree = false;
     },
     methods: {
         createMenu(parentMenu: NodeData) {
@@ -168,11 +180,19 @@ VueInit({
 
             menu.ParentMenu = null;
             target.ParentMenu = null;
-            var result = await Axios.all([api.system.setMenu(menu), api.system.setMenu(target)]);
+            var result = await Promise.all([api.system.setMenu(menu), api.system.setMenu(target)]);
             this.$message("数据已修改");
         },
-        setOperation() {
-            this.operationVisible = true;
+        setOperation(data: NodeData) {
+            this.opDialog.visible = true;
+            this.currentMenu = data;
+            this.checkList = data.operations ? data.operations.map(op => op.Name) : [];
+        },
+        async saveOperation() {
+            var ids = this.checkList.map(c => this.operationList.find(p => p.Name === c).Id);
+            var result = await api.system.saveMenuOperation(this.currentMenu.id, ids);
+            this.opDialog.visible = false;
+            this.$message("数据已修改");
         }
     }
 });

@@ -44,6 +44,9 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
     });
     var Api = /** @class */ (function () {
         function Api() {
+            /**
+             * 系统请求,权限,系统用户等等....
+             */
             this.system = {
                 /**
                  * 设置菜单
@@ -91,6 +94,32 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0: return [4 /*yield*/, axios_1.default.get("/System/DeleteMenu", { params: { id: id } })];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                getMenuOperations: function (id) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.get("/System/GetMenuOperations", { params: { id: id } })];
+                                case 1:
+                                    result = _a.sent();
+                                    return [2 /*return*/, result.data];
+                            }
+                        });
+                    });
+                },
+                saveMenuOperation: function (id, operations) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var result;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, axios_1.default.post("/System/SaveMenuOperation", { id: id, operations: operations })];
                                 case 1:
                                     result = _a.sent();
                                     return [2 /*return*/, result.data];
@@ -173,6 +202,10 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                         });
                     });
                 },
+                /**
+                 * 创建功能按钮
+                 * @param data
+                 */
                 createOperation: function (data) {
                     return __awaiter(this, void 0, void 0, function () {
                         var result;
@@ -186,6 +219,10 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                         });
                     });
                 },
+                /**
+                 * 修改功能按钮
+                 * @param data
+                 */
                 modifyOperation: function (data) {
                     return __awaiter(this, void 0, void 0, function () {
                         var result;
@@ -199,6 +236,10 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                         });
                     });
                 },
+                /**
+                 * 删除功能按钮
+                 * @param id
+                 */
                 removeOperation: function (id) {
                     return __awaiter(this, void 0, void 0, function () {
                         var result;
@@ -299,6 +340,9 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
                     });
                 }
             };
+            /**
+             * 针对当前页面的ajax请求
+             */
             this.current = {
                 get: function (data) {
                     return __awaiter(this, void 0, void 0, function () {
@@ -358,6 +402,6 @@ define(["require", "exports", "axios"], function (require, exports, axios_1) {
     }());
     var api = new Api();
     exports.default = api;
-    exports.aa = 33;
+    exports.ajax = axios_1.default;
 });
 //# sourceMappingURL=api.js.map
