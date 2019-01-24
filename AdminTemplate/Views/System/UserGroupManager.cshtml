@@ -8,9 +8,9 @@
         <span>用户组管理</span>
         <div class="tools-button">
             <el-button size="mini" type="primary" @@click="create()">添加</el-button>
-            <el-button size="mini" type="danger" @@click="createUser()">删除</el-button>
-            <el-button size="mini" type="primary" @@click="createUser()">修改</el-button>
-            <el-button size="mini" type="success" @@click="createUser()">导出</el-button>
+            <el-button size="mini" type="danger" @@click="remove()">删除</el-button>
+            <el-button size="mini" type="primary" @@click="modify()">修改</el-button>
+            <el-button size="mini" type="success" @@click="downLoad()">导出</el-button>
         </div>
     </div>
     <div class="text item">
@@ -46,14 +46,11 @@
 </el-card>
 
 @section dialogs{
-    @using (ElementUI.BeginFormDialog(new MvcVueDialog.Options()
-    {
-        title = ":dialogTitle",
-        visible = ".sync:dialogVisible",
-        beforeClose = ":handleClose",
-        width = "500px"
-    }))
-    {
+    <el-dialog ref="modelDialog"
+               :title="modelDialog.title"
+               :visible.sync="modelDialog.visable"
+               :before-close="dialogClose"
+               width="500px">
         <div>
             <el-form ref="model_form" :model="modelForm" :rules="rules" label-width="100px">
                 <el-form-item label="父级组">
@@ -67,5 +64,9 @@
                 </el-form-item>
             </el-form>
         </div>
-    }
+        <span slot="footer" class="dialog-footer">
+            <el-button @@click="dialogClose(self=>self.modelDialog.visable=false)">取 消</el-button>
+            <el-button type="primary" @@click="submit">确 定</el-button>
+        </span>
+    </el-dialog>
 }

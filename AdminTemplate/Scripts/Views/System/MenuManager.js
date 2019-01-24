@@ -38,11 +38,13 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
         data: {
-            dialogVisible: false,
             loading: {
                 tree: true
             },
             treeLoading: true,
+            menuDialog: {
+                visable: false
+            },
             opDialog: {
                 visible: false,
                 title: "编辑功能"
@@ -76,7 +78,7 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
                 }
                 return "/";
             },
-            menuTitle: function () {
+            menuDialogTitle: function () {
                 return this.$data.menuForm.Id ? "编辑菜单" : "添加菜单";
             }
         },
@@ -115,45 +117,13 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
                 if (parentMenu) {
                     this.$data.menuForm.ParentId = parentMenu.id;
                 }
-                this.$data.dialogVisible = true;
+                this.$data.menuDialog.visable = true;
             },
             modifyMenu: function (parentMenu) {
                 var menu = this.$data.menuList.find(function (x) { return x.Id == parentMenu.id; });
                 menu.ParentMenu = null;
                 this.$data.menuForm = menu;
-                this.$data.dialogVisible = true;
-            },
-            removeMenu: function (menu, node) {
-                return __awaiter(this, void 0, void 0, function () {
-                    var result, data, parent_1, children, index;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4 /*yield*/, this.$confirm("确定删除此菜单及其下菜单么?", "删除菜单")];
-                            case 1:
-                                result = _a.sent();
-                                if (!(result == 'confirm')) return [3 /*break*/, 3];
-                                return [4 /*yield*/, api_1.default.system.deleteMenu(menu.id)];
-                            case 2:
-                                data = _a.sent();
-                                if (data.Success) {
-                                    parent_1 = node.parent;
-                                    children = parent_1.data.children;
-                                    index = children.findIndex(function (d) { return d.id === menu.id; });
-                                    children.splice(index, 1);
-                                    this.$message("菜单已删除");
-                                }
-                                _a.label = 3;
-                            case 3: return [2 /*return*/];
-                        }
-                    });
-                });
-            },
-            handleClose: function (done) {
-                this.$confirm('确认关闭？')
-                    .then(function (_) {
-                    done();
-                })
-                    .catch(function (_) { });
+                this.$data.menuDialog.visable = true;
             },
             btnSubmit: function () {
                 var _this = this;
@@ -195,7 +165,7 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
                                     }
                                     loading.close();
                                     this.$message("数据已修改!");
-                                    this.$data.dialogVisible = false;
+                                    this.$data.menuDialog.visable = false;
                                 }
                                 _a.label = 2;
                             case 2: return [2 /*return*/];
@@ -214,6 +184,36 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
                 if (rowIndex === 0) {
                     return 'parent-row';
                 }
+            },
+            setOperation: function (data) {
+                this.opDialog.visible = true;
+                this.currentMenu = data;
+                this.checkList = data.operations ? data.operations.map(function (op) { return op.Name; }) : [];
+            },
+            removeMenu: function (menu, node) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var result, data, parent_1, children, index;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, this.$confirm("确定删除此菜单及其下菜单么?", "删除菜单")];
+                            case 1:
+                                result = _a.sent();
+                                if (!(result == 'confirm')) return [3 /*break*/, 3];
+                                return [4 /*yield*/, api_1.default.system.deleteMenu(menu.id)];
+                            case 2:
+                                data = _a.sent();
+                                if (data.Success) {
+                                    parent_1 = node.parent;
+                                    children = parent_1.data.children;
+                                    index = children.findIndex(function (d) { return d.id === menu.id; });
+                                    children.splice(index, 1);
+                                    this.$message("菜单已删除");
+                                }
+                                _a.label = 3;
+                            case 3: return [2 /*return*/];
+                        }
+                    });
+                });
             },
             handleDrop: function (draggingNode, dropNode, dropType) {
                 return __awaiter(this, void 0, void 0, function () {
@@ -242,11 +242,6 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
                     });
                 });
             },
-            setOperation: function (data) {
-                this.opDialog.visible = true;
-                this.currentMenu = data;
-                this.checkList = data.operations ? data.operations.map(function (op) { return op.Name; }) : [];
-            },
             saveOperation: function () {
                 return __awaiter(this, void 0, void 0, function () {
                     var ids, result;
@@ -264,7 +259,7 @@ define(["require", "exports", "api", "common"], function (require, exports, api_
                         }
                     });
                 });
-            }
+            },
         }
     });
 });

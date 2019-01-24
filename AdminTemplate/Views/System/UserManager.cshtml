@@ -66,10 +66,10 @@
 
 @section dialogs{
     <el-dialog ref="menuDialog"
-               :title="dialogTitle"
-               :visible.sync="dialogVisible"
+               :title="menuDialog.title"
+               :visible.sync="menuDialog.visable"
                width="500px"
-               :before-close="handleClose">
+               :before-close="dialogClose">
         <div>
             <el-form ref="modelForm" :model="modelForm" :rules="rules" label-width="100px">
                 <el-form-item label="用户名" prop="UserName">
@@ -90,15 +90,15 @@
             </el-form>
         </div>
         <span slot="footer" class="dialog-footer">
-            <el-button @@click="handleCancel">取 消</el-button>
+            <el-button @@click="dialogClose(self=>self.menuDialog.visable=false)">取 消</el-button>
             <el-button type="primary" @@click="submit('modelForm')">确 定</el-button>
         </span>
     </el-dialog>
 
     <el-dialog ref="roleDialog"
-               :title="roleDialogTitle"
+               :title="roleDialog.title"
                :close-on-click-modal="false"
-               :visible.sync="roleDialogVisable"
+               :visible.sync="roleDialog.visable"
                width="540px">
         <div>
             <el-transfer v-model="roleModel.roles"
@@ -106,7 +106,7 @@
                          :data="roles"></el-transfer>
         </div>
         <span slot="footer" class="dialog-footer">
-            <el-button @@click="handleCancel">取 消</el-button>
+            <el-button @@click="dialogClose(self=>self.roleDialog.visable=false)">取 消</el-button>
             <el-button @@click="setRole" type="primary">确 定</el-button>
         </span>
     </el-dialog>

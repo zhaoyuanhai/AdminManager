@@ -38,6 +38,10 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
     Object.defineProperty(exports, "__esModule", { value: true });
     VueInit({
         data: {
+            modelDialog: {
+                title: "模块对象",
+                visable: false
+            },
             dialogVisible: false,
             title: "用户组",
             rules: {},
@@ -60,17 +64,17 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
             });
         },
         methods: {
-            _create: function (model) {
-                //alert(3);
+            create: function (model) {
+                this.modelDialog.visable = true;
             },
-            _modify: function (model) {
-                //alert(3);
+            modify: function (model) {
+                this.modelDialog.visable = true;
             },
-            _remove: function (model) {
-                //alert(3);
+            remove: function (model) {
+                alert(5);
             },
-            _submit: function (refForm) {
-                alert(3);
+            submit: function (refForm) {
+                alert(6);
             }
         }
     });

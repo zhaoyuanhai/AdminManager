@@ -11,26 +11,69 @@
     <script src="~/Scripts/Lib/jquery-1.10.2.js"></script>
 </head>
 <body>
-    <ul>
-        <li>原型链的原理</li>
-        <li>基于原型链的继承</li>
-        <li>变量作用域</li>
-        <li>闭包,闭包的原理</li>
-    </ul>
-    <a href="/abc/ddd">ddd</a>
-    <a href="/abc/ttt">ttt</a>
+    @*<ul>
+            <li>原型链的原理</li>
+            <li>基于原型链的继承</li>
+            <li>变量作用域</li>
+            <li>闭包,闭包的原理</li>
+        </ul>
+        <a href="/abc/ddd">ddd</a>
+        <a href="/abc/ttt">ttt</a>*@
 
     <div id="app">
-
+        <my-page ref="$base">
+            <div>{{ title }}</div>
+        </my-page>
+        <button @@click="bbb">按钮</button>
     </div>
-    <script>
-        $("a").click(function () {
-            event.stopPropagation();
-            var stateObj = { foo: "bar" };
-            history.pushState(stateObj, this.getAttribute("href"), this.getAttribute("href"));
+    @*<script>
+            $("a").click(function () {
+                event.stopPropagation();
+                var stateObj = { foo: "bar" };
+                history.pushState(stateObj, this.getAttribute("href"), this.getAttribute("href"));
 
-            return false;
+                return false;
+            });
+        </script>*@
+    <script>
+
+        Vue.component("my-page", {
+            data: function () {
+                return { title: "children" }
+            },
+            template: "<div>{{title}}</div>"
+            //template: function () {
+            //    return "<div>{{title}}</div>";
+            //}
         });
+
+        var methods= {
+            bbb: function () {
+                console.log('base')
+            },
+            $base: function () {
+                var r = {};
+                for (var name in methods) {
+                    if (name === "$base")
+                        continue;
+                    r[name] = methods[name].bind(this);
+                }
+                return r;
+            }
+        }
+
+        var baseVue = new Vue({
+            el: "#app",
+            data: {
+                title: "base"
+            },
+            methods: $.extend({}, methods, {
+                bbb: function () {
+                    console.log("ccc");
+                }
+            })
+        });
+
     </script>
 </body>
 </html>

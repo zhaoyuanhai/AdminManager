@@ -1,6 +1,7 @@
 ﻿import api, { ajax } from 'api'
 import Common, { Color } from 'common';
 import * as models from 'models';
+import Vue from 'vue';
 
 interface NodeData {
     id: number;
@@ -20,11 +21,13 @@ interface TreeNode extends NodeData {
 
 VueInit({
     data: {
-        dialogVisible: false,
         loading: {
             tree: true
         },
         treeLoading: true,
+        menuDialog: {
+            visable: false
+        },
         opDialog: {
             visible: false,
             title: "编辑功能"
@@ -57,7 +60,7 @@ VueInit({
             }
             return "/";
         },
-        menuTitle() {
+        menuDialogTitle() {
             return this.$data.menuForm.Id ? "编辑菜单" : "添加菜单";
         }
     },
@@ -87,33 +90,13 @@ VueInit({
             if (parentMenu) {
                 this.$data.menuForm.ParentId = parentMenu.id;
             }
-            this.$data.dialogVisible = true;
+            this.$data.menuDialog.visable = true;
         },
         modifyMenu(parentMenu: NodeData) {
             var menu = this.$data.menuList.find(x => x.Id == parentMenu.id);
             menu.ParentMenu = null;
             this.$data.menuForm = menu;
-            this.$data.dialogVisible = true;
-        },
-        async removeMenu(menu: NodeData, node: TreeNode) {
-            var result: any = await this.$confirm("确定删除此菜单及其下菜单么?", "删除菜单");
-            if (result == 'confirm') {
-                var data = await api.system.deleteMenu(menu.id);
-                if (data.Success) {
-                    const parent = node.parent;
-                    const children = parent.data.children;//|| parent.data;
-                    const index = children.findIndex(d => d.id === menu.id);
-                    children.splice(index, 1);
-                    this.$message("菜单已删除");
-                }
-            }
-        },
-        handleClose(done) {
-            this.$confirm('确认关闭？')
-                .then(_ => {
-                    done();
-                })
-                .catch(_ => { });
+            this.$data.menuDialog.visable = true;
         },
         btnSubmit() {
             this.$refs.menuForm.validate(async (isValid, fialFields) => {
@@ -149,7 +132,7 @@ VueInit({
                         }
                         loading.close();
                         this.$message("数据已修改!");
-                        this.$data.dialogVisible = false;
+                        this.$data.menuDialog.visable = false;
                     }
                 }
             });
@@ -163,6 +146,24 @@ VueInit({
         parentClassName({ row, rowIndex }) {
             if (rowIndex === 0) {
                 return 'parent-row';
+            }
+        },
+        setOperation(data: NodeData) {
+            this.opDialog.visible = true;
+            this.currentMenu = data;
+            this.checkList = data.operations ? data.operations.map(op => op.Name) : [];
+        },
+        async removeMenu(menu: NodeData, node: TreeNode) {
+            var result: any = await this.$confirm("确定删除此菜单及其下菜单么?", "删除菜单");
+            if (result == 'confirm') {
+                var data = await api.system.deleteMenu(menu.id);
+                if (data.Success) {
+                    const parent = node.parent;
+                    const children = parent.data.children;//|| parent.data;
+                    const index = children.findIndex(d => d.id === menu.id);
+                    children.splice(index, 1);
+                    this.$message("菜单已删除");
+                }
             }
         },
         async handleDrop(draggingNode: TreeNode, dropNode: TreeNode, dropType) {
@@ -183,16 +184,11 @@ VueInit({
             var result = await Promise.all([api.system.setMenu(menu), api.system.setMenu(target)]);
             this.$message("数据已修改");
         },
-        setOperation(data: NodeData) {
-            this.opDialog.visible = true;
-            this.currentMenu = data;
-            this.checkList = data.operations ? data.operations.map(op => op.Name) : [];
-        },
         async saveOperation() {
             var ids = this.checkList.map(c => this.operationList.find(p => p.Name === c).Id);
             var result = await api.system.saveMenuOperation(this.currentMenu.id, ids);
             this.opDialog.visible = false;
             this.$message("数据已修改");
-        }
+        },
     }
 });

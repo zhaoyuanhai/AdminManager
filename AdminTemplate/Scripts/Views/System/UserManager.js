@@ -39,12 +39,18 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
     VueInit({
         data: {
             title: "用户",
-            roleDialogTitle: "分配权限",
+            roleDialog: {
+                title: "分配权限",
+                visable: false
+            },
+            menuDialog: {
+                title: "",
+                visable: false
+            },
             tableData: [],
             query: { userName: "" },
             formInline: {},
             modelForm: {},
-            roleDialogVisable: false,
             roles: [],
             roleModel: {
                 id: 0,
@@ -117,14 +123,21 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
             });
         },
         methods: {
+            create: function () {
+                this.menuDialog.visable = true;
+            },
+            modify: function (model) {
+                this.menuDialog.visable = true;
+                this.modelForm = model;
+            },
             toBlean: function (value) {
                 return (value == undefined || value == null || value == 0) === false;
             },
             showRoleDialog: function (model) {
-                this.roleDialogTitle = model.UserName + "-分配权限";
+                this.roleDialog.title = model.UserName + "-分配权限";
                 this.roleModel.id = model.Id;
                 this.roleModel.roles = model.Roles.map(function (m) { return m.Id; });
-                this.roleDialogVisable = true;
+                this.roleDialog.visable = true;
             },
             search: function () {
                 this.$refs.dq.reload();
@@ -139,7 +152,7 @@ define(["require", "exports", "api"], function (require, exports, api_1) {
                                 result = _a.sent();
                                 if (result.Success) {
                                     this.$message.success("数据已保存");
-                                    this.roleDialogVisable = false;
+                                    this.roleDialog.visable = false;
                                     this.$refs.dq.reload();
                                 }
                                 else {

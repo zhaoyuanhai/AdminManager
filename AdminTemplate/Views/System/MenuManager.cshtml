@@ -83,10 +83,10 @@
 
 @section dialogs{
     <el-dialog ref="menuDialog"
-               :title="menuTitle"
-               :visible.sync="dialogVisible"
+               :title="menuDialogTitle"
+               :visible.sync="menuDialog.visable"
                width="500px"
-               :before-close="handleClose">
+               :before-close="dialogClose">
         <div>
             <el-form ref="menuForm" :model="menuForm" :rules="rules" label-width="100px">
                 <el-form-item label="父级菜单">
@@ -104,14 +104,15 @@
             </el-form>
         </div>
         <span slot="footer" class="dialog-footer">
-            <el-button @@click="dialogVisible = false">取 消</el-button>
+            <el-button @@click="dialogClose(self=>self.menuDialog.visable=false)">取 消</el-button>
             <el-button type="primary" @@click="btnSubmit">确 定</el-button>
         </span>
     </el-dialog>
 
     <el-dialog ref="opDialog"
-               :visible.async="opDialog.visible"
+               :visible.sync="opDialog.visible"
                :title="opDialog.title"
+               :before-close="dialogClose"
                width="80%">
         <div>
             <el-checkbox-group v-model="checkList">
@@ -119,7 +120,7 @@
             </el-checkbox-group>
         </div>
         <span slot="footer" class="dialog-footer">
-            <el-button>取 消</el-button>
+            <el-button @@click="dialogClose(self=>self.opDialog.visable=false)">取 消</el-button>
             <el-button type="primary" @@click="saveOperation">确 定</el-button>
         </span>
     </el-dialog>

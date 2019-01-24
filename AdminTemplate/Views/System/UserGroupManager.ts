@@ -2,6 +2,10 @@
 
 VueInit({
     data: {
+        modelDialog: {
+            title: "模块对象",
+            visable: false
+        },
         dialogVisible: false,
         title: "用户组",
         rules: {
@@ -18,20 +22,20 @@ VueInit({
         this.tableData = result.Data;
     },
     methods: {
-        _create(model) {
-            //alert(3);
+        create(model) {
+            this.modelDialog.visable = true;
         },
 
-        _modify(model) {
-            //alert(3);
+        modify(model) {
+            this.modelDialog.visable = true;
         },
 
-        _remove(model) {
-            //alert(3);
+        remove(model) {
+            alert(5);
         },
 
-        _submit(refForm) {
-            alert(3);
+        submit(refForm) {
+            alert(6);
         }
     }
 })

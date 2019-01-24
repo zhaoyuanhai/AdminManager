@@ -30,30 +30,44 @@ interface DataInstance {
 }
 
 type MyDatas<V> = DataInstance | ((this: V) => object);
+
 type MyMethods<V> = {
     [key: string]: (this: V, ...args: any[]) => any;
-    create?(...args): void;
-    _create?(...args): void;
+    create?(this: V, ...args): any;
+    _create?(this: V, ...args): any;
 
-    modify?(...args): void;
-    _modify?(...args): void;
+    modify?(this: V, ...args): any;
+    _modify?(this: V, ...args): any;
 
-    remove?(...args): void;
-    _remove?(...args): void;
+    remove?(this: V, ...args): any;
+    _remove?(this: V, ...args): any;
 
-    submit?(...args): void;
-    _submit?(...args): void;
+    submit?(this: V, ...args): any;
+    _submit?(this: V, ...args): any;
 
-    select?(...args): void;
+    select?(this: V, ...args): any;
 
     handleClose?(done: () => void): void;
+    dialogClose?(this: V, visable: boolean, done: () => void): void;
 };
 
+type CustomVueOption = ComponentOptions<Vue, MyDatas<Vue>, MyMethods<Vue>>;
+
 declare global {
-    var VueInit: (vueOption: ComponentOptions<Vue, MyDatas<Vue>, MyMethods<Vue>>) => void;
+    var VueInit: (vueOption: CustomVueOption) => void;
     var usePageJs: boolean;
     var pageUrl: string;
     var vue: Vue;
+
+
+    type TTTOption = {
+        data: {},
+        methods: {
+            hello(this: {}, name: string)
+        }
+    };
+
+    function TTT(t: TTTOption)
 
     interface Window {
         vue: Vue;

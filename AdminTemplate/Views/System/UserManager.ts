@@ -3,12 +3,18 @@
 VueInit({
     data: {
         title: "用户",
-        roleDialogTitle: "分配权限",
+        roleDialog: {
+            title: "分配权限",
+            visable: false
+        },
+        menuDialog: {
+            title: "",
+            visable: false
+        },
         tableData: [],
         query: { userName: "" },
         formInline: {},
         modelForm: {},
-        roleDialogVisable: false,
         roles: [],
         roleModel: {
             id: 0,
@@ -58,14 +64,21 @@ VueInit({
         });
     },
     methods: {
+        create() {
+            this.menuDialog.visable = true;
+        },
+        modify(model) {
+            this.menuDialog.visable = true;
+            this.modelForm = model;
+        },
         toBlean(value) {
             return (value == undefined || value == null || value == 0) === false;
         },
         showRoleDialog(model) {
-            this.roleDialogTitle = model.UserName + "-分配权限";
+            this.roleDialog.title = model.UserName + "-分配权限";
             this.roleModel.id = model.Id;
             this.roleModel.roles = model.Roles.map(m => m.Id);
-            this.roleDialogVisable = true;
+            this.roleDialog.visable = true;
         },
         search() {
             this.$refs.dq.reload();
@@ -74,7 +87,7 @@ VueInit({
             var result = await api.system.setUserRoles(this.roleModel.id, this.roleModel.roles);
             if (result.Success) {
                 this.$message.success("数据已保存");
-                this.roleDialogVisable = false;
+                this.roleDialog.visable = false;
                 this.$refs.dq.reload();
             } else {
                 this.$message.error(result.FirstError.Message);

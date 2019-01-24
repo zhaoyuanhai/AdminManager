@@ -65,6 +65,8 @@ define(["require", "exports", "AppScript/Component/TableTreeColumn", "vue"], fun
                     title: '标题名称',
                     message: h('i', { style: { color: "teal" } }, [btn])
                 });
+            },
+            _create: function () {
             }
         }
     });

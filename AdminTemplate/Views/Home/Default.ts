@@ -68,6 +68,9 @@ VueInit({
                 title: '标题名称',
                 message: h('i', { style: { color: "teal" } }, [btn])
             });
+        },
+        _create() {
+            
         }
     }
-})
+});
